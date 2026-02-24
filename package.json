@@ -1,0 +1,19 @@
+{
+  "name": "startup-atlas",
+  "version": "1.0.0",
+  "description": "an atlas of the most promising startups",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anuska86/startup-atlas.git"
+  },
+  "author": "Ana Sappia Rey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Anuska86/startup-atlas/issues"
+  },
+  "homepage": "https://github.com/Anuska86/startup-atlas#readme"
+}
