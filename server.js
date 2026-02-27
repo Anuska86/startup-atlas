@@ -9,6 +9,8 @@ app.listen(PORT, () =>
   console.log(`Server working on http://localhost:${PORT}`),
 );
 
+//GET filtered data
+
 app.get("/api", (req, res) => {
   let filteredData = startups;
 
@@ -31,6 +33,7 @@ app.get("/api", (req, res) => {
       return startup.continent.toLowerCase() === continent.toLowerCase();
     });
   }
+
   if (is_seeking_funding) {
     filteredData = filteredData.filter((startup) => {
       return (
@@ -46,4 +49,18 @@ app.get("/api", (req, res) => {
   }
 
   res.json(filteredData);
+});
+
+//GET params
+
+app.get("/api/:field/:term", (req, res) => {
+  const { field, term } = req.params;
+
+  const filteredDataParams = startups.filter((startup) => {
+    if (typeof startup[field] === "string") {
+      return startup[field].toLowerCase() === term.toLowerCase();
+    }
+    return false;
+  });
+  res.json(filteredDataParams);
 });
