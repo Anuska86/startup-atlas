@@ -1,4 +1,5 @@
 import express from "express";
+import {startups} from "./data/data.js"
 
 const PORT = 8000;
 
@@ -8,11 +9,9 @@ app.listen(PORT, () =>
   console.log(`Server working on http://localhost:${PORT}`),
 );
 
-const celebrity = {
-  type: "action hero",
-  name: "JSON Statham",
-};
 
-app.get("/", (req, res) => {
-  res.json(celebrity);
+
+app.get("/api", (req, res) => {
+  res.json(startups);
+  console.log(startups)
 });
