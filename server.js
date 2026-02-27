@@ -4,7 +4,9 @@ const PORT = 8000;
 
 const app = express();
 
-app.listen(PORT, () => console.log(`Server working on PORT ${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server working on http://localhost:${PORT}`),
+);
 
 const celebrity = {
   type: "action hero",

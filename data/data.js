@@ -960,9 +960,9 @@ export const startups = [
     country: "Spain",
     continent: "Europe",
     business_address: {
-      street: "48 StartUp Street",
+      street: "Lollipop street,123",
       city: "Bilbao",
-      state: "Bilbao",
+      state: "Vizcaya",
     },
     founders: [
       {
