@@ -58,7 +58,7 @@ app.get("/api/:field/:term", (req, res) => {
 
   const filteredDataParams = startups.filter((startup) => {
     if (typeof startup[field] === "string") {
-      return startup[field].toLowerCase() === term.toLowerCase();
+      return startup[field]?.toString().toLowerCase() === term.toLowerCase();
     }
     return false;
   });
