@@ -56,11 +56,16 @@ app.get("/api", (req, res) => {
 app.get("/api/:field/:term", (req, res) => {
   const { field, term } = req.params;
 
+  const allowedFields = ["country", "continent", "industry"];
+
+  if (!allowedFields.includes(field)) {
+    return res.status(400).json({
+      error: `Invalid field: '${field}'.Please use one of: ${allowedFields.join(",")} `,
+    });
+  }
+
   const filteredDataParams = startups.filter((startup) => {
-    if (typeof startup[field] === "string") {
-      return startup[field]?.toString().toLowerCase() === term.toLowerCase();
-    }
-    return false;
+    return startup[field]?.toString().toLowerCase() === term.toLowerCase();
   });
   res.json(filteredDataParams);
 });
