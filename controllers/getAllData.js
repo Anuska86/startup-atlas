@@ -1,6 +1,7 @@
 import { startups } from "../data/data.js";
 
 export const getAllData = (req, res) => {
+  console.log("eco");
   let filteredData = startups;
 
   const { industry, country, continent, is_seeking_funding, has_mvp } =
@@ -36,4 +37,6 @@ export const getAllData = (req, res) => {
       return startup.has_mvp === JSON.parse(has_mvp.toLowerCase());
     });
   }
+
+  res.json(filteredData);
 };
