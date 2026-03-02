@@ -29,16 +29,16 @@ describe("Startup Atlas - Path Parameters", () => {
     expect(res.statusCode).toBe(400);
     expect(res.body.error).toContain("Invalid field");
   });
-});
 
-//Non-exist term
+  //Non-exist term
 
-test("Success:should return an empty array if the term is not found", async () => {
-  const res = await request(app).get("/api/industry/Pizza");
+  test("Success:should return an empty array if the term is not found", async () => {
+    const res = await request(app).get("/api/industry/Pizza");
 
-  expect(res.statusCode).toBe(200); //Because the req is valid
-  expect(Array.isArray(res.body)).toBe(true); //It should be an array
-  expect(res.body.length).toBe(0); //but empty
+    expect(res.statusCode).toBe(200); //Because the req is valid
+    expect(Array.isArray(res.body)).toBe(true); //It should be an array
+    expect(res.body.length).toBe(0); //but empty
+  });
 });
 
 //getAllData QUERY PARAMETERS
