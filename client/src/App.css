@@ -17,3 +17,8 @@
   background-color: #1a1a1a;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.startup-card:hover {
+  transform: translateY(-5px);
+  border-color: #646cff;
+}
