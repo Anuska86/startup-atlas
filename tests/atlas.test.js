@@ -10,6 +10,12 @@ import { apiRouter } from "../routes/apiRoutes.js";
 const app = express();
 app.use("/api", apiRouter);
 
+app.use((req, res) => {
+  res.status(404).json({
+    message: "Endpoint not found. Please check the API documentation.",
+  });
+});
+
 describe("Startup Atlas - Path Parameters", () => {
   //Valid industry search
   test("Success: should find startups by industry", async () => {
@@ -68,5 +74,18 @@ describe("Startup Atlas - Query Parameters", () => {
     expect(
       res.body.every((startup) => startup.is_seeking_funding === false),
     ).toBe(true);
+  });
+});
+
+//404 Not Found
+
+describe("Startup Atlas - Global Error Handling", () => {
+  test("Failure: should return 404 for a non-existent endpoint", async () => {
+    const res = await request(app).get("/api/this/is/not/a/route");
+
+    expect(res.statusCode).toBe(404);
+    expect(res.body.message).toBe(
+      "Endpoint not found. Please check the API documentation.",
+    );
   });
 });
