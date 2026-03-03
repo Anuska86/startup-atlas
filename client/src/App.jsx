@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 function App() {
   const [startups, setStartups] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   //Fetching the data
   useEffect(() => {
@@ -14,16 +15,18 @@ function App() {
       .catch((err) => console.error("Error connecting to API:", err));
   }, []);
 
-  //handle the search
+  //Handle the search
 
   const handleSearch = async (e) => {
     if (e) e.preventDefault();
+    setIsLoading(true);
 
     //If search is empty, then get all the data
     if (!searchTerm) {
       const res = await fetch("http://localhost:8000/api");
       const data = await res.json();
       setStartups(data);
+      setIsLoading(false);
       return;
     }
 
@@ -37,6 +40,8 @@ function App() {
       setStartups(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Search error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -50,7 +55,8 @@ function App() {
             type="text"
             placeholder="Search by industry (e.g.AI)..."
             value={searchTerm}
-            onChange={(e) => e.key === "Enter" && handleSearch()} //For use the Enter key
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           />
           <button onClick={handleSearch}>Search</button>
         </div>
