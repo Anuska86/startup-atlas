@@ -1,3 +1,18 @@
+/*App Header*/
+
+.app-header {
+  background-color: var(--dark-bg);
+  padding: 2rem;
+  border-bottom: 2px solid var(--indigo-bloom);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
 /*Card container*/
 
 .card-container {
@@ -37,9 +52,21 @@
 
 /*Search container*/
 
+.search-container {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  max-width: 600px;
+}
+
 .search-container input {
-  border: 2px solid var(--indigo-bloom);
-  transition: all 0.3s ease;
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: 2px solid var(--electric-sapphire);
+  background: #1a1a1a;
+  color: white;
+  font-size: 1rem;
 }
 
 .search-container input:focus {
@@ -48,4 +75,14 @@
     0 0 15px var(--sky-aqua),
     inset 0 0 5px var(--sky-aqua);
   outline: none;
+}
+
+/*loader*/
+
+.loader-div,
+.no-results-p {
+  text-align: center;
+  margin-top: 50px;
+  color: var(--sky-aqua);
+  font-size: 1.2rem;
 }
