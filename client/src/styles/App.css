@@ -13,6 +13,28 @@
   gap: 20px;
 }
 
+/*Nav*/
+.view-nav {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--sky-aqua);
+  font-weight: bold;
+  padding: 8px 16px;
+  border: 1px solid var(--sky-aqua);
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  background: var(--sky-aqua);
+  color: var(--dark-bg);
+}
+
 /*Card container*/
 
 .card-container {

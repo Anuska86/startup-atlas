@@ -1,6 +1,8 @@
-import "./App.css";
+import "./styles/App.css";
+import MapPage from "./components/MapPage.jsx";
 
 import { useState, useEffect } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 
 function App() {
   const [startups, setStartups] = useState([]);
@@ -66,6 +68,14 @@ function App() {
     <div className="app-div">
       <header className="app-header">
         <h1>Startup Atlas</h1>
+        <nav className="view-nav">
+          <Link to="/" className="nav-link">
+            📋 List View
+          </Link>
+          <Link to="/map" className="nav-link">
+            🛰️ Map View
+          </Link>
+        </nav>
 
         <div className="search-container">
           <input
@@ -85,30 +95,41 @@ function App() {
       </header>
 
       <main>
-        {isLoading ? (
-          <div className="loader-div">Searching the Atlas...</div>
-        ) : (
-          <div className="card-container">
-            {startups.length > 0 ? (
-              startups.map((startup, index) => (
-                <div key={index} className="startup-card">
-                  <h2>{startup.name}</h2>
-                  <p>
-                    <strong>Industry:</strong> {startup.industry}
-                  </p>
-                  <p>
-                    <strong>Location:</strong> {startup.country},{" "}
-                    {startup.continent}
-                  </p>
+        <Routes>
+          {/* Home Route */}
+          <Route
+            path="/"
+            element={
+              isLoading ? (
+                <div className="loader-div">Searching the Atlas...</div>
+              ) : (
+                <div className="card-container">
+                  {startups.length > 0 ? (
+                    startups.map((startup, index) => (
+                      <div key={index} className="startup-card">
+                        <h2>{startup.name}</h2>
+                        <p>
+                          <strong>Industry:</strong> {startup.industry}
+                        </p>
+                        <p>
+                          <strong>Location:</strong> {startup.country},{" "}
+                          {startup.continent}
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="no-results-p">
+                      No startups found matching that criteria
+                    </p>
+                  )}
                 </div>
-              ))
-            ) : (
-              <p className="no-results-p">
-                No startups found matching that criteria
-              </p>
-            )}
-          </div>
-        )}
+              )
+            }
+          />
+
+          {/*Map Route */}
+          <Route path="/map" element={<MapPage startups={startups} />} />
+        </Routes>
       </main>
     </div>
   );
