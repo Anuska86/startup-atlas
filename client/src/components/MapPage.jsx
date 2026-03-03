@@ -1,6 +1,7 @@
 import "../styles/MapPage.css";
 
 import { useEffect, useRef } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -28,6 +29,42 @@ function MapPage({ startups, theme }) {
       mapRef.current.invalidateSize();
     }
   }, [theme]);
+
+  //Business logos
+
+  const createCustomIcon = (startup) => {
+    if (startup.name === "Quantum Mads") {
+      return L.icon({
+        iconUrl: myBusinessLogo,
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
+        popupAnchor: [0, -20],
+        className: "my-special-marker",
+      });
+    }
+
+    let SelectedIcon = BiChip; // Default
+    if (startup.industry.toLowerCase().includes("energy"))
+      SelectedIcon = BiLeaf;
+    if (startup.industry.toLowerCase().includes("fin"))
+      SelectedIcon = BiLineChart;
+    if (startup.industry.toLowerCase().includes("health"))
+      SelectedIcon = BiHeart;
+
+    // Convert React Icon to an SVG string for Leaflet
+    const iconMarkup = renderToStaticMarkup(
+      <div style={{ color: "#4cc9f0", fontSize: "24px" }}>
+        <SelectedIcon />
+      </div>,
+    );
+
+    return L.divIcon({
+      html: iconMarkup,
+      className: "industry-icon-marker",
+      iconSize: [30, 30],
+      iconAnchor: [15, 15],
+    });
+  };
 
   return (
     <div className="map-wrapper">
@@ -59,7 +96,11 @@ function MapPage({ startups, theme }) {
           spiderfyOnMaxZoom={true}
         >
           {startups.map((startup) => (
-            <Marker key={startup.id} position={[startup.lat, startup.lng]}>
+            <Marker
+              key={startup.id}
+              position={[startup.lat, startup.lng]}
+              icon={createCustomIcon(startup)}
+            >
               <Popup>
                 <div className="map-popup">
                   <h3>{startup.name}</h3>
