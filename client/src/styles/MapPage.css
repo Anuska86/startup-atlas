@@ -18,6 +18,47 @@
   background-color: #1a1a1a;
 }
 
+/*Map controls*/
+.map-controls {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/*Buttons*/
+
+/*Reset button*/
+.reset-view-btn {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  color: var(--text-color);
+  border: 1px solid rgba(76, 201, 240, 0.5);
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.reset-view-btn:hover {
+  background: rgba(76, 201, 240, 0.1);
+  border-color: #4cc9f0;
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(76, 201, 240, 0.4);
+  color: #4cc9f0;
+}
+
+.reset-view-btn:hover svg {
+  transform: rotate(180deg);
+  transition: transform 0.6s ease;
+}
+
 /* THE POPUPS: The boxes that appear when clicking a marker */
 .leaflet-popup-content-wrapper {
   background-color: var(--card-bg) !important;
