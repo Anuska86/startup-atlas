@@ -14,11 +14,19 @@ function MapPage({ startups, theme }) {
   const zoom = 3;
 
   useEffect(() => {
-    if (mapRef.current) {
+    if (mapRef.current && startups.length > 0) {
       // Small timeout
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         mapRef.current.invalidateSize();
+
+        //Calculate the bounds of the map so all the markers can be visible
+        const bounds = L.latLngBounds(startups.map((s) => [s.lat, s.lng]));
+        mapRef.current.fitBounds(bounds, {
+          padding: [50, 50],
+          animate: true,
+        });
       }, 250);
+      return () => clearTimeout(timer);
     }
   }, [theme, startups]);
 
