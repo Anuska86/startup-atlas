@@ -123,3 +123,23 @@
   color: white;
   box-shadow: 0 0 10px var(--neon-pink);
 }
+
+/*ICONS*/
+
+/*Icon Link*/
+
+.icon-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.neon-icon {
+  filter: drop-shadow(0 0 2px var(--sky-aqua));
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover .neon-icon {
+  transform: rotate(20deg);
+  filter: drop-shadow(0 0 8px var(--sky-aqua));
+}
