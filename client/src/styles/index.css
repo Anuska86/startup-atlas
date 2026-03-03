@@ -1,25 +1,25 @@
 /*BASE*/
 
-:root {
-  /*Palette*/
+/*Palette*/
 
-  :root,
-  :root[data-theme="dark"] {
-    --neon-pink: #f72585;
-    --indigo-bloom: #7209b7;
-    --electric-sapphire: #4361ee;
-    --sky-aqua: #4cc9f0;
-    --dark-bg: #0b090a;
-    --card-bg: #161a1d;
-    --text-color: #f5f3f4;
-  }
+:root,
+:root[data-theme="dark"] {
+  --neon-pink: #f72585;
+  --indigo-bloom: #7209b7;
+  --electric-sapphire: #4361ee;
+  --sky-aqua: #4cc9f0;
+  --dark-bg: #0b090a;
+  --card-bg: #161a1d;
+  --text-color: #f5f3f4;
+  --input-bg: #1a1a1a;
+}
 
-  :root[data-theme="light"] {
-    --dark-bg: #ffffff;
-    --card-bg: #f8f9fa;
-    --text-color: #213547;
-    --indigo-bloom: #4361ee;
-  }
+:root[data-theme="light"] {
+  --dark-bg: #ffffff;
+  --card-bg: #f8f9fa;
+  --text-color: #213547;
+  --indigo-bloom: #4361ee;
+  --input-bg: #eeeeee;
 }
 
 body {
@@ -28,8 +28,9 @@ body {
   min-height: 100vh;
   background-color: var(--dark-bg);
   color: var(--text-color);
-  transition: all 0.3s ease;
-
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
