@@ -54,8 +54,23 @@ function MapPage({ startups, theme }) {
 
   return (
     <div className="map-wrapper">
+      <div className="map-legend">
+        <h4>Industry Key</h4>
+        <div className="legend-item">
+          <BiLeaf className="icon energy" /> Renewable Energy
+        </div>
+        <div className="legend-item">
+          <BiLineChart className="icon fin" /> FinTech
+        </div>
+        <div className="legend-item">
+          <BiHeart className="icon health" /> HealthTech
+        </div>
+        <div className="legend-item">
+          <BiChip className="icon tech" /> Technology / AI
+        </div>
+      </div>
       <MapContainer
-        key={theme} // THIS IS VITAL: It forces the map to redraw when theme changes
+        key={theme}
         center={center}
         zoom={zoom}
         ref={mapRef}
