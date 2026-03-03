@@ -1,5 +1,7 @@
 import "../styles/MapPage.css";
 
+import { useEffect, useRef } from "react";
+
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -16,15 +18,15 @@ let DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
-function MapPage({ startups }) {
-  const theme = window.matchMedia("(prefers-color-scheme:light)").matches;
-
-  const tileUrl =
-    theme === "light"
-      ? "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" // Positron (Light/Silver)
-      : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"; // Dark Matter
-
+function MapPage({ startups, theme }) {
   const center = [20, 0]; //The center of the world
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.invalidateSize();
+    }
+  }, [theme]);
 
   return (
     <div className="map-wrapper">
@@ -32,11 +34,24 @@ function MapPage({ startups }) {
         className="markercluster-map"
         center={center}
         zoom={2}
+        ref={mapRef}
         style={{ height: "70vh", width: "100%" }}
       >
+        {/* LIGHT TILES LAYER */}
         <TileLayer
-          url={tileUrl}
-          attribution="&copy; OpenStreetMap contributors &copy; CARTO"
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution="&copy; CARTO"
+          opacity={theme === "light" ? 1 : 0}
+          className="map-tile-layer"
+          zIndex={theme === "light" ? 10 : 1} // Bring to front when active
+        />
+        {/* DARK TILES LAYER */}
+        <TileLayer
+          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          attribution="&copy; CARTO"
+          opacity={theme === "dark" ? 1 : 0}
+          className="map-tile-layer"
+          zIndex={theme === "dark" ? 10 : 1} // Bring to front when active
         />
         <MarkerClusterGroup
           chunkedLoading // Optimization for many markers

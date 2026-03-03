@@ -163,7 +163,10 @@ function App() {
           />
 
           {/*Map Route */}
-          <Route path="/map" element={<MapPage startups={startups} />} />
+          <Route
+            path="/map"
+            element={<MapPage startups={startups} theme={theme} />}
+          />
         </Routes>
       </main>
     </div>
