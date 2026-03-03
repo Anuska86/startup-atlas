@@ -2,7 +2,7 @@ import "./styles/App.css";
 import MapPage from "./components/MapPage.jsx";
 
 import { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, NavLink } from "react-router-dom";
 
 function App() {
   const [startups, setStartups] = useState([]);
@@ -89,10 +89,20 @@ function App() {
           </button>
         </div>
         <nav className="view-nav">
-          <Link to="/" className="nav-link">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
             📋 List View
-          </Link>
-          <Link to="/map" className="nav-link icon-link">
+          </NavLink>
+          <NavLink
+            to="/map"
+            className={({ isActive }) =>
+              isActive ? "nav-link icon-link active" : "nav-link icon-link"
+            }
+          >
             <svg
               viewBox="0 0 24 24"
               width="20"
@@ -109,7 +119,7 @@ function App() {
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
             </svg>
             Map View
-          </Link>
+          </NavLink>
         </nav>
 
         <div className="search-container">

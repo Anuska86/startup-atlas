@@ -36,12 +36,24 @@
   padding: 8px 16px;
   border: 1px solid var(--sky-aqua);
   border-radius: 20px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .nav-link:hover {
   background: var(--sky-aqua);
   color: var(--dark-bg);
+}
+
+.nav-link.active {
+  background-color: var(--sky-aqua);
+  color: var(--dark-bg);
+  box-shadow: 0 0 15px var(--sky-aqua);
+  border-color: var(--sky-aqua);
+}
+
+.nav-link.active .neon-icon {
+  stroke: var(--dark-bg);
+  filter: none;
 }
 
 /*Card container*/
