@@ -24,29 +24,22 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 function MapPage({ startups, theme }) {
-  const center = [20, 0]; //The center of the world
+  const center = [20, 0]; // center of the map
+  const zoom = 15;
   const mapRef = useRef(null);
 
   //recheck the size of the map and redraw the tiles
   useEffect(() => {
     if (mapRef.current) {
-      mapRef.current.invalidateSize();
+      setTimeout(() => {
+        mapRef.current.invalidateSize();
+      }, 100);
     }
-  }, [theme]);
+  }, [theme, startups]);
 
   //Business logos
 
   const createCustomIcon = (startup) => {
-    if (startup.name === "Quantum Mads") {
-      return L.icon({
-        iconUrl: QMLogo,
-        iconSize: [40, 40],
-        iconAnchor: [20, 20],
-        popupAnchor: [0, -20],
-        className: "my-special-marker",
-      });
-    }
-
     let SelectedIcon = BiChip; // Default
     const industry = startup.industry?.toLowerCase() || "";
 
@@ -56,7 +49,15 @@ function MapPage({ startups, theme }) {
 
     // Convert React Icon to an SVG string for Leaflet
     const iconMarkup = renderToStaticMarkup(
-      <div style={{ color: "#4cc9f0", fontSize: "24px" }}>
+      <div
+        style={{
+          color: "#4cc9f0",
+          fontSize: "24px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <SelectedIcon />
       </div>,
     );
@@ -65,7 +66,8 @@ function MapPage({ startups, theme }) {
       html: iconMarkup,
       className: "industry-icon-marker",
       iconSize: [30, 30],
-      iconAnchor: [15, 15],
+      iconAnchor: [16, 16],
+      popupAnchor: [0, -16],
     });
   };
 
@@ -74,7 +76,7 @@ function MapPage({ startups, theme }) {
       <MapContainer
         className="markercluster-map"
         center={center}
-        zoom={2}
+        zoom={zoom}
         ref={mapRef}
         style={{ height: "70vh", width: "100%" }}
       >

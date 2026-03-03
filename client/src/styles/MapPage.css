@@ -91,28 +91,6 @@
 
 /*Logos*/
 
-.my-special-marker {
-  border-radius: 50%;
-  border: 3px solid var(--neon-pink);
-  background: white;
-  animation: pulse-red 2s infinite;
-}
-
-@keyframes pulse-red {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(247, 37, 133, 0.7);
-  }
-  70% {
-    transform: scale(1.1);
-    box-shadow: 0 0 0 15px rgba(247, 37, 133, 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(247, 37, 133, 0);
-  }
-}
-
 /* General industry icons */
 .industry-icon-marker {
   background: rgba(255, 255, 255, 0.9);
@@ -122,4 +100,10 @@
   align-items: center;
   border: 2px solid var(--indigo-bloom);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.industry-icon-marker:hover {
+  transform: scale(1.2);
+  border-color: var(--neon-pink);
 }
