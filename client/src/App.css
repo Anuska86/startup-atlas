@@ -34,3 +34,18 @@
 .startup-card strong {
   color: var(--neon-pink);
 }
+
+/*Search container*/
+
+.search-container input {
+  border: 2px solid var(--indigo-bloom);
+  transition: all 0.3s ease;
+}
+
+.search-container input:focus {
+  border-color: var(--sky-aqua);
+  box-shadow:
+    0 0 15px var(--sky-aqua),
+    inset 0 0 5px var(--sky-aqua);
+  outline: none;
+}
