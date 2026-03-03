@@ -22,6 +22,7 @@ function MapPage({ startups, theme }) {
   const center = [20, 0]; //The center of the world
   const mapRef = useRef(null);
 
+  //recheck the size of the map and redraw the tiles
   useEffect(() => {
     if (mapRef.current) {
       mapRef.current.invalidateSize();
