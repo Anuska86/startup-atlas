@@ -113,7 +113,7 @@
 .map-legend {
   position: absolute;
   bottom: 20px;
-  right: 20px;
+  right: 28px;
   z-index: 1000;
   background: var(--card-bg);
   padding: 15px;
