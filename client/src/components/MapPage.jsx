@@ -1,7 +1,11 @@
 import "../styles/MapPage.css";
+import QMLogo from "../assets/qm.png";
 
 import { useEffect, useRef } from "react";
+
 import { renderToStaticMarkup } from "react-dom/server";
+
+import { BiChip, BiLeaf, BiLineChart, BiHeart } from "react-icons/bi";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -35,7 +39,7 @@ function MapPage({ startups, theme }) {
   const createCustomIcon = (startup) => {
     if (startup.name === "Quantum Mads") {
       return L.icon({
-        iconUrl: myBusinessLogo,
+        iconUrl: QMLogo,
         iconSize: [40, 40],
         iconAnchor: [20, 20],
         popupAnchor: [0, -20],
@@ -44,12 +48,11 @@ function MapPage({ startups, theme }) {
     }
 
     let SelectedIcon = BiChip; // Default
-    if (startup.industry.toLowerCase().includes("energy"))
-      SelectedIcon = BiLeaf;
-    if (startup.industry.toLowerCase().includes("fin"))
-      SelectedIcon = BiLineChart;
-    if (startup.industry.toLowerCase().includes("health"))
-      SelectedIcon = BiHeart;
+    const industry = startup.industry?.toLowerCase() || "";
+
+    if (industry.includes("energy")) SelectedIcon = BiLeaf;
+    if (industry.includes("fin")) SelectedIcon = BiLineChart;
+    if (industry.includes("health")) SelectedIcon = BiHeart;
 
     // Convert React Icon to an SVG string for Leaflet
     const iconMarkup = renderToStaticMarkup(
