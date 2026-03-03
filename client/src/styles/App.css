@@ -1,7 +1,7 @@
 /*App Header*/
 
 .app-header {
-  background-color: var(--dark-bg);
+  background-color: var(--card-bg);
   padding: 1rem 2rem;
   border-bottom: 2px solid var(--indigo-bloom);
   position: sticky;
@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .header-top {
@@ -57,24 +58,25 @@
 
 .startup-card {
   background-color: var(--card-bg);
-  border: 1px solid var(--indigo-bloom);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   color: var(--text-color);
   border-radius: 12px;
   padding: 20px;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .startup-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-5px);
   border-color: var(--sky-aqua);
-  box-shadow: 0 10px 30px rgba(76, 201, 240, 0.2);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
 .startup-card h2 {
   color: var(--sky-aqua);
-  margin-top: 0;
+  font-weight: 800;
 }
 
 .startup-card strong {
@@ -94,18 +96,15 @@
   flex: 1;
   padding: 12px 20px;
   border-radius: 30px;
-  border: 2px solid var(--electric-sapphire);
+  border: 2px solid #e0e0e0;
   background: var(--input-bg);
   color: var(--text-color);
   font-size: 1rem;
 }
 
 .search-container input:focus {
-  border-color: var(--sky-aqua);
-  box-shadow:
-    0 0 15px var(--sky-aqua),
-    inset 0 0 5px var(--sky-aqua);
-  outline: none;
+  border-color: var(--indigo-bloom);
+  box-shadow: 0 0 8px rgba(90, 24, 154, 0.2);
 }
 
 /*loader*/
