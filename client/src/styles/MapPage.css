@@ -1,4 +1,4 @@
-/*Map Wrapper*/
+/* THE CONTAINER */
 
 .map-wrapper {
   padding: 20px;
@@ -11,12 +11,19 @@
   background-color: var(--dark-bg);
 }
 
-/*Leaflet popup*/
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  background-color: #1a1a1a;
+}
 
+/* THE POPUPS: The boxes that appear when clicking a marker */
 .leaflet-popup-content-wrapper {
   background-color: var(--card-bg) !important;
   color: white !important;
-  border: 1px solid var(--neon-pink);
+  border: 1px solid var(--neon-pink) !important;
+  border-radius: 12px;
 }
 
 .leaflet-popup-tip {
@@ -27,16 +34,10 @@
 .leaflet-container a.leaflet-popup-close-button {
   color: var(--sky-aqua) !important;
   font-weight: bold;
+  padding: 8px 12px 0 0;
 }
 
-.leaflet-container {
-  height: 100%;
-  width: 100%;
-  border-radius: 12px;
-}
-
-/*Map popup*/
-
+/* POPUP CONTENT: Styling the text/links inside the box */
 .map-popup h3 {
   margin: 0 0 5px 0;
   color: var(--sky-aqua);
@@ -53,4 +54,32 @@
   color: var(--neon-pink);
   text-decoration: none;
   font-weight: bold;
+}
+
+/* MARKER CLUSTERS: The grouped circles */
+
+/* Small Clusters (Blue) */
+.marker-cluster-small {
+  background-color: rgba(67, 97, 238, 0.2) !important;
+}
+.marker-cluster-small div {
+  background-color: var(--electric-sapphire) !important;
+  color: white !important;
+}
+
+/* Medium & Large Clusters (Pink) */
+.marker-cluster-medium,
+.marker-cluster-large {
+  background-color: rgba(247, 37, 133, 0.2) !important;
+}
+.marker-cluster-medium div,
+.marker-cluster-large div {
+  background-color: var(--neon-pink) !important;
+  color: white !important;
+}
+
+/* Common Cluster Text Style */
+.marker-cluster div {
+  font-weight: bold;
+  font-family: inherit;
 }

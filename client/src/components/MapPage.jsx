@@ -17,6 +17,12 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 function MapPage({ startups }) {
+  const isLightMode = window.matchMedia("(prefers-color-scheme:light)").matches;
+
+  const tileUrl = isLightMode
+    ? "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+    : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+
   const center = [20, 0]; //The center of the world
 
   return (
@@ -27,8 +33,8 @@ function MapPage({ startups }) {
         style={{ height: "70vh", width: "100%" }}
       >
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url={tileUrl}
+          attribution="&copy; OpenStreetMap contributors &copy; CARTO"
         />
         <MarkerClusterGroup
           chunkedLoading // Optimization for many markers
