@@ -24,6 +24,11 @@
   border: 1px solid var(--neon-pink);
 }
 
+.leaflet-container a.leaflet-popup-close-button {
+  color: var(--sky-aqua) !important;
+  font-weight: bold;
+}
+
 .leaflet-container {
   height: 100%;
   width: 100%;
