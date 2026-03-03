@@ -1,25 +1,19 @@
+/*BASE*/
+
 :root {
+  /*Palette*/
+
+  --neon-pink: #f72585;
+  --indigo-bloom: #7209b7;
+  --electric-sapphire: #4361ee;
+  --sky-aqua: #4cc9f0;
+  --dark-bg: #0b090a;
+  --card-bg: #161a1d;
+
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  color-scheme: dark;
+  color: #f5f3f4;
+  background-color: var(--dark-bg);
 }
 
 body {
@@ -28,24 +22,33 @@ body {
   min-height: 100vh;
 }
 
+/*Typhography*/
+
 h1 {
   font-size: 3.2em;
-  line-height: 1.1;
+  background: linear-gradient(90deg, var(--neon-pink), var(--sky-aqua));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
 }
+
+/*Buttons*/
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: none;
   padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  font-weight: 600;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--indigo-bloom);
+  color: white;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.3s ease;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: var(--neon-pink);
+  box-shadow: 0 0 15px var(--neon-pink);
 }
 button:focus,
 button:focus-visible {
