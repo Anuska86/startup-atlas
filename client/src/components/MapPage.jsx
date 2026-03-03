@@ -24,7 +24,7 @@ function MapPage({ startups, theme }) {
 
   const handleResetView = () => {
     if (mapRef.current) {
-      mapRef.current.setView(startCenter, startZoom, {
+      mapRef.current.setView(center, zoom, {
         animate: true,
         duration: 1.5,
       });
