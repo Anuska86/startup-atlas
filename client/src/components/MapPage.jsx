@@ -90,7 +90,7 @@ function MapPage({ startups, theme }) {
               fontSize: "1.2rem",
             }}
           />
-          Restore Initial View
+          <span> Restore Initial View</span>
         </button>
       </div>
       <div className="map-wrapper">

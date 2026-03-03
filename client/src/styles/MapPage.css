@@ -4,11 +4,14 @@
   padding: 20px;
   border: 2px solid var(--indigo-bloom);
   border-radius: 15px;
-  margin: 20px;
+  position: relative;
+  width: calc(100% - 40px);
+  margin: 20px auto;
   height: 75vh;
   overflow: hidden;
   box-shadow: 0 0 25px rgba(114, 9, 183, 0.4);
   background-color: var(--dark-bg);
+  z-index: 1;
 }
 
 .leaflet-container {
@@ -128,6 +131,11 @@
   font-weight: bold;
   font-family: inherit;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.markercluster-map {
+  height: 100% !important;
+  width: 100% !important;
 }
 
 /*Logos*/
