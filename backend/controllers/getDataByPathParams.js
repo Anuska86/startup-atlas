@@ -12,7 +12,10 @@ export const getDataByParams = (req, res) => {
   }
 
   const filteredDataParams = startups.filter((startup) => {
-    return startup[field]?.toString().toLowerCase() === term.toLowerCase();
+    const value = startup[field]?.toString().toLowerCase();
+    const search = term.toLowerCase();
+    return value && value.includes(search);
   });
+
   res.json(filteredDataParams);
 };
