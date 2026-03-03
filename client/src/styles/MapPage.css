@@ -60,7 +60,7 @@
 
 /* Small Clusters (Blue) */
 .marker-cluster-small {
-  background-color: rgba(67, 97, 238, 0.2) !important;
+  background-color: rgba(63, 55, 201, 0.15) !important;
 }
 .marker-cluster-small div {
   background-color: var(--electric-sapphire) !important;
@@ -70,7 +70,7 @@
 /* Medium & Large Clusters (Pink) */
 .marker-cluster-medium,
 .marker-cluster-large {
-  background-color: rgba(247, 37, 133, 0.2) !important;
+  background-color: rgba(63, 55, 201, 0.15) !important;
 }
 .marker-cluster-medium div,
 .marker-cluster-large div {
@@ -82,4 +82,5 @@
 .marker-cluster div {
   font-weight: bold;
   font-family: inherit;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }

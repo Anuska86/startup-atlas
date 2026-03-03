@@ -17,11 +17,12 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 function MapPage({ startups }) {
-  const isLightMode = window.matchMedia("(prefers-color-scheme:light)").matches;
+  const theme = window.matchMedia("(prefers-color-scheme:light)").matches;
 
-  const tileUrl = isLightMode
-    ? "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-    : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+  const tileUrl =
+    theme === "light"
+      ? "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" // Positron (Light/Silver)
+      : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"; // Dark Matter
 
   const center = [20, 0]; //The center of the world
 

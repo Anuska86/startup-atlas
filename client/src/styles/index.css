@@ -15,11 +15,11 @@
 }
 
 :root[data-theme="light"] {
-  --dark-bg: #f0f2f5;
+  --dark-bg: #f8f9fa;
   --card-bg: #ffffff;
-  --text-color: #1a1c1e;
-  --indigo-bloom: #5a189a;
-  --sky-aqua: #0077b6;
+  --text-color: #2b2d42;
+  --indigo-bloom: #3f37c9;
+  --sky-aqua: #4895ef;
   --input-bg: #ffffff;
 }
 
