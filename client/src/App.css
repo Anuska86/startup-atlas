@@ -86,3 +86,18 @@
   color: var(--sky-aqua);
   font-size: 1.2rem;
 }
+
+/*Reset button*/
+
+.reset-btn {
+  background-color: transparent;
+  border: 1px solid var(--neon-pink);
+  color: var(--neon-pink);
+  margin-left: 5px;
+}
+
+.reset-btn:hover {
+  background-color: var(--neon-pink);
+  color: white;
+  box-shadow: 0 0 10px var(--neon-pink);
+}

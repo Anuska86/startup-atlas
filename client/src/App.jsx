@@ -45,6 +45,23 @@ function App() {
     }
   };
 
+  //Reset the search bar
+
+  const handleReset = async () => {
+    setSearchTerm("");
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("http://localhost:8000/api");
+      const data = await res.json();
+      setStartups(data);
+    } catch (error) {
+      console.error("Error resetting atlas:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="app-div">
       <header className="app-header">
@@ -59,6 +76,11 @@ function App() {
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           />
           <button onClick={handleSearch}>Search</button>
+          {searchTerm && (
+            <button className="reset-btn" onClick={handleReset}>
+              X Clear
+            </button>
+          )}
         </div>
       </header>
 
