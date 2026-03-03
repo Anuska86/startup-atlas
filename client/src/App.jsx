@@ -8,6 +8,21 @@ function App() {
   const [startups, setStartups] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [theme, setTheme] = useState(
+    window.matchMedia("(prefers-color-scheme: light)").matches
+      ? "light"
+      : "dark",
+  );
+
+  //Screen mode
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
   //Fetching the data
   useEffect(() => {
@@ -67,7 +82,12 @@ function App() {
   return (
     <div className="app-div">
       <header className="app-header">
-        <h1>Startup Atlas</h1>
+        <div className="header-top">
+          <h1>Startup Atlas</h1>
+          <button className="theme-btn" onClick={toggleTheme}>
+            {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+          </button>
+        </div>
         <nav className="view-nav">
           <Link to="/" className="nav-link">
             📋 List View

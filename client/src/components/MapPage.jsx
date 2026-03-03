@@ -28,6 +28,7 @@ function MapPage({ startups }) {
   return (
     <div className="map-wrapper">
       <MapContainer
+        className="markercluster-map"
         center={center}
         zoom={2}
         style={{ height: "70vh", width: "100%" }}

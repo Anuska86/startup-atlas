@@ -3,23 +3,34 @@
 :root {
   /*Palette*/
 
-  --neon-pink: #f72585;
-  --indigo-bloom: #7209b7;
-  --electric-sapphire: #4361ee;
-  --sky-aqua: #4cc9f0;
-  --dark-bg: #0b090a;
-  --card-bg: #161a1d;
+  :root,
+  :root[data-theme="dark"] {
+    --neon-pink: #f72585;
+    --indigo-bloom: #7209b7;
+    --electric-sapphire: #4361ee;
+    --sky-aqua: #4cc9f0;
+    --dark-bg: #0b090a;
+    --card-bg: #161a1d;
+    --text-color: #f5f3f4;
+  }
 
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color-scheme: dark;
-  color: #f5f3f4;
-  background-color: var(--dark-bg);
+  :root[data-theme="light"] {
+    --dark-bg: #ffffff;
+    --card-bg: #f8f9fa;
+    --text-color: #213547;
+    --indigo-bloom: #4361ee;
+  }
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--dark-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 /*Typhography*/
@@ -66,4 +77,20 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/*Theme button*/
+
+.theme-btn {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--indigo-bloom) !important;
+  font-size: 0.9rem;
+  padding: 8px 15px;
+  box-shadow: none;
+}
+
+.theme-btn:hover {
+  border-color: var(--neon-pink) !important;
+  box-shadow: 0 0 10px var(--neon-pink);
 }
