@@ -54,13 +54,17 @@
 }
 
 .intro-content h2 {
-  font-size: 2rem;
-  color: var(--sky-aqua);
+  font-size: 2.2rem;
+  color: var(--electric-sapphire);
   margin-bottom: 20px;
 }
 
 [data-theme="light"] .intro-content h2 {
   color: #0077b6;
+}
+
+[data-theme="dark"] .intro-content h2 {
+  color: var(--sky-aqua);
 }
 
 .intro-content p {
@@ -196,9 +200,22 @@
 
 .stat-card {
   background: var(--card-bg);
-  padding: 20px;
-  border-radius: 15px;
+  padding: 30px;
+  border-radius: 20px;
   border: 1px solid var(--border-color);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--sky-aqua);
+}
+
+[data-theme="light"] .stat-card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .stat-card h3 {
