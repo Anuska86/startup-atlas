@@ -10,6 +10,7 @@ function HomePage({ startups }) {
 
   return (
     <div className="home-container">
+      {/* SECTION 1: HERO (Top) */}
       <section className="hero-section">
         <BiRocket className="hero-icon" />
         <h1>Explore the Global Startup Ecosystem</h1>
@@ -28,20 +29,35 @@ function HomePage({ startups }) {
         </div>
       </section>
 
-      <div className="stats-grid">
-        <div className="stat-card">
-          <h3>{totalStartups}</h3>
-          <p>Companies Tracked</p>
+      {/* SECTION 2: INTRODUCTION (Middle) */}
+      <section className="intro-section">
+        <div className="intro-content">
+          <h2>Your Window into Global Innovations</h2>
+          <p>
+            The Startup Atlas is a live data visualization project designed to
+            track emerging tech hubs across the globe. From Silicon Valley to
+            Singapore, we map the industries shaping our future.
+          </p>
         </div>
-        <div className="stat-card">
-          <h3>{industries}</h3>
-          <p>Unique Industries</p>
+      </section>
+
+      {/* SECTION 3: STATS (Bottom) */}
+      <section className="stats-section">
+        <div className="stats-grid">
+          <div className="stat-card">
+            <h3>{totalStartups}</h3>
+            <p>Companies Tracked</p>
+          </div>
+          <div className="stat-card">
+            <h3>{industries}</h3>
+            <p>Unique Industries</p>
+          </div>
+          <div className="stat-card">
+            <h3>Global</h3>
+            <p>5+ Continents</p>
+          </div>
         </div>
-        <div className="stat-card">
-          <h3>Global</h3>
-          <p>5+ Continents</p>
-        </div>
-      </div>
+      </section>
     </div>
   );
 }
