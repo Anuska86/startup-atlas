@@ -15,14 +15,14 @@ function HomePage({ startups }) {
         <h1>Explore the Global Startup Ecosystem</h1>
         <p>
           Discover {totalStartups} innovative companies across {industries}{" "}
-          industries worldide{" "}
+          industries worlwide{" "}
         </p>
 
         <div className="home-actions">
-          <Link to="/map" className="home-btn-primary">
+          <Link to="/map" className="home-btn primary">
             <BiMapAlt /> Launch Interactive Map
           </Link>
-          <Link to="/list" className="home-btn-secundary">
+          <Link to="/list" className="home-btn secondary">
             <BiListUl /> Browse List
           </Link>
         </div>
