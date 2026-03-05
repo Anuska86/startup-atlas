@@ -1,4 +1,5 @@
 import "./styles/App.css";
+import HomePage from "./components/HomePage.jsx";
 import MapPage from "./components/MapPage.jsx";
 
 import { useState, useEffect } from "react";
@@ -91,6 +92,15 @@ function App() {
         <nav className="view-nav">
           <NavLink
             to="/"
+            end
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            🏠 Home
+          </NavLink>
+          <NavLink
+            to="/list"
             className={({ isActive }) =>
               isActive ? "nav-link active" : "nav-link"
             }
@@ -142,8 +152,12 @@ function App() {
       <main>
         <Routes>
           {/* Home Route */}
+
+          <Route path="/" element={<HomePage startups={startups} />}></Route>
+
+          {/* Startups List Route */}
           <Route
-            path="/"
+            path="/list"
             element={
               isLoading ? (
                 <div className="loader-div">Searching the Atlas...</div>
@@ -172,7 +186,7 @@ function App() {
             }
           />
 
-          {/*Map Route */}
+          {/*Startups Map Route */}
           <Route
             path="/map"
             element={<MapPage startups={startups} theme={theme} />}
