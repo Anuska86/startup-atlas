@@ -20,10 +20,10 @@ function HomePage({ startups }) {
 
         <div className="home-actions">
           <Link to="/map" className="home-btn primary">
-            <BiMapAlt /> Launch Interactive Map
+            <BiMapAlt size={24} /> Launch Interactive Map
           </Link>
           <Link to="/list" className="home-btn secondary">
-            <BiListUl /> Browse List
+            <BiListUl size={24} /> Browse List
           </Link>
         </div>
       </section>
