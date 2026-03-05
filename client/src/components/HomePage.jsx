@@ -34,10 +34,25 @@ function HomePage({ startups }) {
         <div className="intro-content">
           <h2>Your Window into Global Innovations</h2>
           <p>
-            The Startup Atlas is a live data visualization project designed to
-            track emerging tech hubs across the globe. From Silicon Valley to
-            Singapore, we map the industries shaping our future.
+            The Startup Atlas tracks emerging tech hubs across the globe,
+            mapping the industries shaping our future.
           </p>
+        </div>
+
+        <div className="features-highlights">
+          <div className="feature-item">
+            <div className="feature-dot purple"></div>
+
+            <span>Real-time Data</span>
+          </div>
+          <div className="feature-item">
+            <div className="feature-dot blue"></div>
+            <span>Global Coverage</span>
+          </div>
+          <div className="feature-item">
+            <div className="feature-dot pink"></div>
+            <span>Industry Insights</span>
+          </div>
         </div>
       </section>
 

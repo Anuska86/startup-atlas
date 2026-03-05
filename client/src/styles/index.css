@@ -6,6 +6,8 @@
 :root[data-theme="dark"] {
   --neon-pink: #f72585;
   --indigo-bloom: #7209b7;
+  --neon-purple: #b5179e;
+  --neon-purple-light: #bc59ff;
   --electric-sapphire: #4361ee;
   --sky-aqua: #4cc9f0;
   --dark-bg: #0b090a;
@@ -19,6 +21,8 @@
   --card-bg: #ffffff;
   --text-color: #2b2d42;
   --indigo-bloom: #3f37c9;
+  --neon-purple: #7209b7;
+  --neon-purple-light: #3f37c9;
   --sky-aqua: #4895ef;
   --input-bg: #ffffff;
 }
@@ -66,19 +70,6 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 /*Theme button*/
