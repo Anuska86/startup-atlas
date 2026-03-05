@@ -27,6 +27,8 @@
   margin-bottom: 20px;
 }
 
+/*Home actions*/
+
 .home-actions {
   display: flex;
   gap: 20px;
@@ -36,30 +38,39 @@
 
 /*Buttons*/
 
-.home-btn {
+a.home-btn {
+  text-decoration: none !important;
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 15px 30px;
+  padding: 14px 28px;
   border-radius: 12px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: transform 0.3s ease;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
-
-.home-btn.primary {
+/*Map Link*/
+a.home-btn.primary {
   background: var(--neon-purple);
-  color: white;
-  box-shadow: 0 0 15px rgba(114, 9, 183, 0.5);
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(114, 9, 183, 0.3);
 }
 
-.home-btn.secondary {
+a.home-btn:hover {
+  transform: translateY(-3px);
+  text-decoration: none !important;
+}
+
+/*List Link*/
+
+a.home-btn.secondary {
+  background: rgba(76, 201, 240, 0.1);
   border: 1px solid var(--sky-aqua);
-  color: var(--sky-aqua);
+  color: var(--sky-aqua) !important;
 }
 
-.home-btn:hover {
-  transform: translateY(-5px);
+a.home-btn.secondary:hover {
+  background: var(--sky-aqua);
+  color: var(--dark-bg) !important;
 }
 
 /*Stats*/
@@ -73,9 +84,26 @@
   max-width: 800px;
 }
 
+/*Stats Cards*/
+
 .stat-card {
   background: var(--card-bg);
   padding: 20px;
   border-radius: 15px;
   border: 1px solid var(--border-color);
+}
+
+.stat-card h3 {
+  font-size: 2.5rem;
+  margin: 0;
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px rgba(255, 0, 84, 0.3);
+}
+
+.stat-card p {
+  margin: 5px 0 0;
+  opacity: 0.8;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
 }
