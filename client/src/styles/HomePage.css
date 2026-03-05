@@ -38,46 +38,50 @@
 
 /*Buttons*/
 
-a.home-btn {
+.home-actions a.home-btn {
+  box-sizing: border-box;
   text-decoration: none !important;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   padding: 14px 28px;
   border-radius: 12px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  min-width: 220px;
+  height: 54px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-a.home-btn:hover {
-  transform: translateY(-3px);
-  text-decoration: none !important;
-}
 /*Map Link*/
-a.home-btn.primary {
-  background: var(--neon-purple);
+.home-actions a.home-btn.primary {
+  background: var(--neon-purple) !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 15px rgba(114, 9, 183, 0.3);
+  border: 1px solid #bc59ff !important;
+  box-shadow:
+    0 0 10px rgba(188, 89, 255, 0.4),
+    0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-a.home-btn.primary:hover {
-  background-color: #9d02d7 !important;
+.home-actions a.home-btn.primary:hover {
+  background: #9d02d7 !important;
   transform: translateY(-3px);
-  box-shadow: 0 0 20px rgba(114, 9, 183, 0.6);
-  text-decoration: none !important;
+  box-shadow: 0 0 20px rgba(188, 89, 255, 0.6);
+  border-color: #d18cff !important;
 }
 
 /*List Link*/
 
-a.home-btn.secondary {
-  background: rgba(76, 201, 240, 0.1);
-  border: 1px solid var(--sky-aqua);
+.home-actions a.home-btn.secondary {
+  background: rgba(76, 201, 240, 0.05) !important;
+  border: 1px solid var(--sky-aqua) !important;
   color: var(--sky-aqua) !important;
 }
-
-a.home-btn.secondary:hover {
-  background: var(--sky-aqua);
+.home-actions a.home-btn.secondary:hover {
+  background: var(--sky-aqua) !important;
   color: var(--dark-bg) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(76, 201, 240, 0.4);
 }
 
 /*Stats*/
