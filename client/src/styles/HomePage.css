@@ -63,11 +63,17 @@
     0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
+[data-theme="light"] .home-actions a.home-btn.primary {
+  background: var(--neon-purple) !important;
+  color: #bc59ff !important;
+}
+
 .home-actions a.home-btn.primary:hover {
   background: #9d02d7 !important;
   transform: translateY(-3px);
   box-shadow: 0 0 20px rgba(188, 89, 255, 0.6);
   border-color: #d18cff !important;
+  color: #ffffff !important;
 }
 
 /*List Link*/
@@ -77,6 +83,13 @@
   border: 1px solid var(--sky-aqua) !important;
   color: var(--sky-aqua) !important;
 }
+
+[data-theme="light"] .home-actions a.home-btn.secondary {
+  background: rgba(76, 201, 240, 0.1) !important;
+  color: #0077b6 !important;
+  border-color: #0077b6 !important;
+}
+
 .home-actions a.home-btn.secondary:hover {
   background: var(--sky-aqua) !important;
   color: var(--dark-bg) !important;
