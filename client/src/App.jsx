@@ -1,9 +1,10 @@
 import "./styles/App.css";
 import HomePage from "./components/HomePage.jsx";
 import MapPage from "./components/MapPage.jsx";
+import ListPage from "./components/ListPage.jsx";
 
 import { useState, useEffect } from "react";
-import { Routes, Route, Link, NavLink } from "react-router-dom";
+import { Routes, Route, Link, NavLink, useLocation } from "react-router-dom";
 
 function App() {
   const [startups, setStartups] = useState([]);
@@ -14,6 +15,8 @@ function App() {
       ? "light"
       : "dark",
   );
+
+  const location = useLocation();
 
   //Screen mode
 
@@ -132,21 +135,23 @@ function App() {
           </NavLink>
         </nav>
 
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search by industry (e.g.AI)..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-          />
-          <button onClick={handleSearch}>Search</button>
-          {searchTerm && (
-            <button className="reset-btn" onClick={handleReset}>
-              X Clear
-            </button>
-          )}
-        </div>
+        {location.pathname !== "/" && (
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Search by industry (e.g.AI)..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            />
+            <button onClick={handleSearch}>Search</button>
+            {searchTerm && (
+              <button className="reset-btn" onClick={handleReset}>
+                X Clear
+              </button>
+            )}
+          </div>
+        )}
       </header>
 
       <main>
@@ -158,32 +163,7 @@ function App() {
           {/* Startups List Route */}
           <Route
             path="/list"
-            element={
-              isLoading ? (
-                <div className="loader-div">Searching the Atlas...</div>
-              ) : (
-                <div className="card-container">
-                  {startups.length > 0 ? (
-                    startups.map((startup, index) => (
-                      <div key={index} className="startup-card">
-                        <h2>{startup.name}</h2>
-                        <p>
-                          <strong>Industry:</strong> {startup.industry}
-                        </p>
-                        <p>
-                          <strong>Location:</strong> {startup.country},{" "}
-                          {startup.continent}
-                        </p>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="no-results-p">
-                      No startups found matching that criteria
-                    </p>
-                  )}
-                </div>
-              )
-            }
+            element={<ListPage startups={startups} isLoading={isLoading} />}
           />
 
           {/*Startups Map Route */}
