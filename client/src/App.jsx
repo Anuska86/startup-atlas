@@ -5,6 +5,7 @@ import ListPage from "./components/ListPage.jsx";
 
 import { useState, useEffect } from "react";
 import { Routes, Route, Link, NavLink, useLocation } from "react-router-dom";
+import { BiSearch } from "react-icons/bi";
 
 function App() {
   const [startups, setStartups] = useState([]);
@@ -138,13 +139,17 @@ function App() {
         {location.pathname !== "/" && (
           <div className="search-container">
             <input
+              id="search-input"
               type="text"
               placeholder="Search by industry (e.g.AI)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
-            <button onClick={handleSearch}>Search</button>
+            <button className="search-btn" onClick={handleSearch}>
+              <BiSearch size={20} />
+              <span>Search</span>
+            </button>
             {searchTerm && (
               <button className="reset-btn" onClick={handleReset}>
                 X Clear
