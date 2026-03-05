@@ -14,6 +14,7 @@
   --card-bg: #161a1d;
   --text-color: #f5f3f4;
   --input-bg: #1a1a1a;
+  --border-color: rgba(255, 255, 255, 0.1);
 }
 
 :root[data-theme="light"] {
@@ -22,9 +23,10 @@
   --text-color: #2b2d42;
   --indigo-bloom: #3f37c9;
   --neon-purple: #7209b7;
-  --neon-purple-light: #3f37c9;
+  --neon-purple-light: #bc59ff;
   --sky-aqua: #4895ef;
   --input-bg: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.1);
 }
 
 body {

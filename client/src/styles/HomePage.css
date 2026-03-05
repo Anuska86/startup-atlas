@@ -12,7 +12,13 @@
 /*Hero section*/
 
 .hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
   max-width: 900px;
+  margin: 0 auto;
   animation: fadeInDown 1s ease-out;
 }
 
@@ -29,7 +35,8 @@
   font-size: 4rem;
   color: var(--neon-pink);
   filter: drop-shadow(0 0 10px var(--neon-pink));
-  margin-bottom: 20px;
+  margin: 0 auto 20px auto;
+  display: block;
 }
 
 /*Intro section*/
@@ -127,7 +134,8 @@
 
 [data-theme="light"] .home-actions a.home-btn.primary {
   background: var(--neon-purple) !important;
-  color: #bc59ff !important;
+  color: #ffffff !important;
+  border-color: #5a189a !important;
 }
 
 .home-actions a.home-btn.primary:hover {
@@ -146,7 +154,7 @@
 }
 
 [data-theme="light"] .home-actions a.home-btn.secondary {
-  background: rgba(76, 201, 240, 0.1) !important;
+  background: rgba(0, 119, 182, 0.05) !important;
   color: #0077b6 !important;
   border-color: #0077b6 !important;
 }
@@ -160,12 +168,18 @@
 
 /*Stats*/
 
+.stats-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding-bottom: 40px;
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-top: auto;
-  margin-bottom: 40px;
   width: 100%;
   max-width: 800px;
 }

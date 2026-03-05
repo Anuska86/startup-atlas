@@ -16,7 +16,7 @@ function HomePage({ startups }) {
         <h1>Explore the Global Startup Ecosystem</h1>
         <p>
           Discover {totalStartups} innovative companies across {industries}{" "}
-          industries worlwide{" "}
+          industries worldwide{" "}
         </p>
 
         <div className="home-actions">
