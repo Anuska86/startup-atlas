@@ -137,6 +137,15 @@ function App() {
     }
   };
 
+  //Checking if some data is filtering
+
+  const isFiltering =
+    searchTerm !== "" ||
+    filters.industry !== "All" ||
+    filters.continent !== "All" ||
+    filters.is_seeking_funding !== false ||
+    filters.has_mvp !== false;
+
   return (
     <div className="app-div">
       <header className="app-header">
@@ -205,6 +214,14 @@ function App() {
                 </button>
               )}
             </div>
+            {isFiltering && (
+              <div className="results-count-bar">
+                <p>
+                  Found <strong>{filteredStartups.length}</strong>{" "}
+                  {filteredStartups.length === 1 ? "startup" : "startups"}
+                </p>
+              </div>
+            )}
 
             <div className="filter-bar">
               {/* Industry Select */}
@@ -258,12 +275,7 @@ function App() {
           </div>
         )}
       </header>
-      <div className="results-count-bar">
-        <p>
-          Found <strong>{filteredStartups.length}</strong>{" "}
-          {filteredStartups.length === 1 ? "startup" : "startups"}
-        </p>
-      </div>
+
       <main>
         <Routes>
           {/* Home Route */}
