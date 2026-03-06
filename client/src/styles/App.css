@@ -151,6 +151,11 @@
   outline: none;
 }
 
+.filter-bar select:hover {
+  border-color: var(--sky-aqua);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
 .checkbox-label {
   display: flex;
   align-items: center;
