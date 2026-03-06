@@ -14,6 +14,7 @@ import {
   BiRocket,
   BiMoon,
   BiSun,
+  BiX,
 } from "react-icons/bi";
 
 function App() {
@@ -200,7 +201,7 @@ function App() {
               </button>
               {searchTerm && (
                 <button className="reset-btn" onClick={handleReset}>
-                  X Clear
+                  <BiX size={20} /> Clear
                 </button>
               )}
             </div>
