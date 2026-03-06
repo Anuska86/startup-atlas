@@ -49,7 +49,8 @@
 .startup-card h2 {
   color: var(--sky-aqua);
   font-size: 1.5rem;
-  margin: 0;
+  margin: 2px;
+  text-align: center;
 }
 
 .founded-year {
