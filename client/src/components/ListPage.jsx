@@ -15,7 +15,8 @@ function ListPage({ startups, isLoading }) {
           <div key={index} className="startup-card">
             <h2>{startup.name}</h2>
             <span className="founded-year">
-              <BiCalendarAlt /> {startup.founded}
+              <BiCalendarAlt size={26} />
+              Founded in: {startup.founded}
             </span>
 
             <div className="card-details">
