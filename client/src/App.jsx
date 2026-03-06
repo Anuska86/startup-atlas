@@ -180,7 +180,7 @@ function App() {
         </nav>
 
         {location.pathname !== "/" && (
-          <>
+          <div className="header-controls">
             <div className="search-container">
               <input
                 id="search-input"
@@ -250,7 +250,7 @@ function App() {
                 🚀 Has MVP
               </label>
             </div>
-          </>
+          </div>
         )}
       </header>
 
