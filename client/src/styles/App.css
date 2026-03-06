@@ -40,6 +40,9 @@
 }
 
 .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   text-decoration: none;
   color: var(--sky-aqua);
   font-weight: bold;
@@ -61,7 +64,7 @@
   border-color: var(--sky-aqua);
 }
 
-.nav-link.active .neon-icon {
+.nav-link.active {
   stroke: var(--dark-bg);
   filter: none;
 }
@@ -203,20 +206,16 @@
   gap: 8px;
 }
 
-.nav-link:hover {
-  transform: rotate(20deg);
-  filter: drop-shadow(0 0 8px var(--sky-aqua));
-}
-
 .nav-link svg,
 .checkbox-label svg {
+  display: block;
   transition: all 0.3s ease;
   filter: drop-shadow(0 0 2px var(--sky-aqua));
 }
 
 .nav-link.active svg {
-  filter: drop-shadow(0 0 8px var(--sky-aqua));
-  transform: scale(1.1);
+  filter: none;
+  stroke: var(--dark-bg);
 }
 
 .checkbox-label:hover svg {
