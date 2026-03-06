@@ -181,6 +181,28 @@
   height: 16px;
 }
 
+/*Results count*/
+
+.results-count-bar {
+  max-width: 1200px;
+  margin: 15px auto 5px;
+  padding: 0 2rem;
+  text-align: left;
+}
+
+.results-count-bar p {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+}
+
+.results-count-bar strong {
+  color: var(--sky-aqua);
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+  font-size: 1.1rem;
+}
+
 /*Reset button*/
 
 .reset-btn {

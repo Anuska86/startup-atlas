@@ -258,7 +258,12 @@ function App() {
           </div>
         )}
       </header>
-
+      <div className="results-count-bar">
+        <p>
+          Found <strong>{filteredStartups.length}</strong>{" "}
+          {filteredStartups.length === 1 ? "startup" : "startups"}
+        </p>
+      </div>
       <main>
         <Routes>
           {/* Home Route */}
