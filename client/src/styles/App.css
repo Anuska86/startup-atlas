@@ -117,6 +117,49 @@
   box-shadow: 0 4px 12px rgba(114, 9, 183, 0.2);
 }
 
+/*Filter bar*/
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 10px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-bar select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  outline: none;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--text-color);
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.checkbox-label:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.checkbox-label input {
+  accent-color: var(--neon-pink);
+  width: 16px;
+  height: 16px;
+}
+
 /*Reset button*/
 
 .reset-btn {

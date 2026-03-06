@@ -11,13 +11,50 @@ function App() {
   const [startups, setStartups] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const location = useLocation();
+
+  //Theme
   const [theme, setTheme] = useState(
     window.matchMedia("(prefers-color-scheme: light)").matches
       ? "light"
       : "dark",
   );
 
-  const location = useLocation();
+  //Filters
+  const [filters, setFilters] = useState({
+    industry: "All",
+    continent: "All",
+    is_seeking_funding: false,
+    has_mvp: false,
+  });
+
+  const uniqueIndustries = [
+    "All",
+    ...new Set(startups.map((startup) => startup.industry)),
+  ];
+  const uniqueContinents = [
+    "All",
+    ...new Set(startups.map((startup) => startup.continent)),
+  ];
+
+  const filteredStartups = startups.filter((startup) => {
+    const matchSearch =
+      startup.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      startup.industry.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchIndustry =
+      filters.industry === "All" || startup.industry === filters.industry;
+    const matchContinent =
+      filters.continent === "All" || startup.continent === filters.continent;
+    const matchFunding =
+      !filters.is_seeking_funding || startup.is_seeking_funding;
+    const matchMVP = !filters.has_mvp || startup.has_mvp;
+
+    return (
+      matchSearch && matchIndustry && matchContinent && matchFunding && matchMVP
+    );
+  });
 
   //Screen mode
 
@@ -71,6 +108,12 @@ function App() {
 
   const handleReset = async () => {
     setSearchTerm("");
+    setFilters({
+      industry: "All",
+      continent: "All",
+      is_seeking_funding: false,
+      has_mvp: false,
+    });
     setIsLoading(true);
 
     try {
@@ -137,25 +180,77 @@ function App() {
         </nav>
 
         {location.pathname !== "/" && (
-          <div className="search-container">
-            <input
-              id="search-input"
-              type="text"
-              placeholder="Search by industry (e.g.AI)..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            />
-            <button className="search-btn" onClick={handleSearch}>
-              <BiSearch size={20} />
-              <span>Search</span>
-            </button>
-            {searchTerm && (
-              <button className="reset-btn" onClick={handleReset}>
-                X Clear
+          <>
+            <div className="search-container">
+              <input
+                id="search-input"
+                type="text"
+                placeholder="Search by industry (e.g.AI)..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              />
+              <button className="search-btn" onClick={handleSearch}>
+                <BiSearch size={20} />
+                <span>Search</span>
               </button>
-            )}
-          </div>
+              {searchTerm && (
+                <button className="reset-btn" onClick={handleReset}>
+                  X Clear
+                </button>
+              )}
+            </div>
+
+            <div className="filter-bar">
+              {/* Industry Select */}
+              <select
+                onChange={(e) =>
+                  setFilters({ ...filters, industry: e.target.value })
+                }
+              >
+                {uniqueIndustries.map((ind) => (
+                  <option key={ind} value={ind}>
+                    {ind}
+                  </option>
+                ))}
+              </select>
+
+              {/* Continent Select */}
+              <select
+                onChange={(e) =>
+                  setFilters({ ...filters, continent: e.target.value })
+                }
+              >
+                {uniqueContinents.map((con) => (
+                  <option key={con} value={con}>
+                    {con}
+                  </option>
+                ))}
+              </select>
+              {/* Checkboxes */}
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  onChange={(e) =>
+                    setFilters({
+                      ...filters,
+                      is_seeking_funding: e.target.checked,
+                    })
+                  }
+                />
+                💰 Seeking Funding
+              </label>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  onChange={(e) =>
+                    setFilters({ ...filters, has_mvp: e.target.checked })
+                  }
+                />
+                🚀 Has MVP
+              </label>
+            </div>
+          </>
         )}
       </header>
 
@@ -168,13 +263,15 @@ function App() {
           {/* Startups List Route */}
           <Route
             path="/list"
-            element={<ListPage startups={startups} isLoading={isLoading} />}
+            element={
+              <ListPage startups={filteredStartups} isLoading={isLoading} />
+            }
           />
 
           {/*Startups Map Route */}
           <Route
             path="/map"
-            element={<MapPage startups={startups} theme={theme} />}
+            element={<MapPage startups={filteredStartups} theme={theme} />}
           />
         </Routes>
       </main>
