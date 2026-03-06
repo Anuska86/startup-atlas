@@ -874,7 +874,11 @@ export const startups = [
     },
     lat: 43.263,
     lng: -2.935,
-    founders: [{ name: "Javier González", role: "CEO" }],
+    founders: [
+      { name: "Javier González", role: "CEO" },
+      { name: "Jon Ander Oribe", role: "CTO" },
+      { name: "Rodrigo Asensio", role: "Quantum engineer" },
+    ],
     employees: 12,
     website: "https://quantum-mads.com/",
     mission_statement: "Pioneering the quantum transition",
