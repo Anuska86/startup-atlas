@@ -269,7 +269,11 @@ function App() {
           <Route
             path="/list"
             element={
-              <ListPage startups={filteredStartups} isLoading={isLoading} />
+              <ListPage
+                startups={filteredStartups}
+                isLoading={isLoading}
+                onReset={handleReset}
+              />
             }
           />
 

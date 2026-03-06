@@ -1,9 +1,9 @@
 import React from "react";
 import "../styles/ListPage.css";
 
-import { BiLinkExternal, BiCalendarAlt } from "react-icons/bi";
+import { BiLinkExternal, BiCalendarAlt, BiGhost } from "react-icons/bi";
 
-function ListPage({ startups, isLoading }) {
+function ListPage({ startups, isLoading, onReset }) {
   if (isLoading) {
     return <div className="loader-div">Searching the Atlas...</div>;
   }
@@ -51,7 +51,17 @@ function ListPage({ startups, isLoading }) {
           </div>
         ))
       ) : (
-        <p className="no-results-p">No startups found matching that criteria</p>
+        <div className="no-results-container">
+          <BiGhost size={75} className="no-results-icon" />
+          <h3>No Startups Found</h3>
+          <p>
+            Try adjusting your filters or search terms to find what you're
+            looking for.
+          </p>
+          <button className="reset-btn-simple" onClick={onReset}>
+            Reset All Filters
+          </button>
+        </div>
       )}
     </div>
   );
