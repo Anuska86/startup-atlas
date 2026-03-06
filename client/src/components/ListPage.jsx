@@ -13,11 +13,19 @@ function ListPage({ startups, isLoading }) {
       {startups.length > 0 ? (
         startups.map((startup, index) => (
           <div key={index} className="startup-card">
-            <h2>{startup.name}</h2>
-            <span className="founded-year">
-              <BiCalendarAlt size={26} />
-              Founded in: {startup.founded}
-            </span>
+            <div className="card-right-info">
+              {startup.is_seeking_funding && (
+                <div className="funding-badge">Seeking Funding </div>
+              )}
+              <div className="founded-year">
+                <BiCalendarAlt size={26} />
+                Founded : {startup.founded}
+              </div>
+            </div>
+
+            <div className="card-header">
+              <h2>{startup.name}</h2>
+            </div>
 
             <div className="card-details">
               <p>
