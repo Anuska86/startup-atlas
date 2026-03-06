@@ -203,12 +203,22 @@
   gap: 8px;
 }
 
-.neon-icon {
-  filter: drop-shadow(0 0 2px var(--sky-aqua));
-  transition: transform 0.3s ease;
-}
-
-.nav-link:hover .neon-icon {
+.nav-link:hover {
   transform: rotate(20deg);
   filter: drop-shadow(0 0 8px var(--sky-aqua));
+}
+
+.nav-link svg,
+.checkbox-label svg {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 2px var(--sky-aqua));
+}
+
+.nav-link.active svg {
+  filter: drop-shadow(0 0 8px var(--sky-aqua));
+  transform: scale(1.1);
+}
+
+.checkbox-label:hover svg {
+  filter: drop-shadow(0 0 5px var(--neon-pink));
 }

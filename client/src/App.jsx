@@ -5,7 +5,14 @@ import ListPage from "./components/ListPage.jsx";
 
 import { useState, useEffect } from "react";
 import { Routes, Route, Link, NavLink, useLocation } from "react-router-dom";
-import { BiSearch } from "react-icons/bi";
+import {
+  BiSearch,
+  BiHomeAlt,
+  BiListUl,
+  BiMapAlt,
+  BiDollarCircle,
+  BiRocket,
+} from "react-icons/bi";
 
 function App() {
   const [startups, setStartups] = useState([]);
@@ -144,7 +151,7 @@ function App() {
               isActive ? "nav-link active" : "nav-link"
             }
           >
-            🏠 Home
+            <BiHomeAlt size={20} /> Home
           </NavLink>
           <NavLink
             to="/list"
@@ -152,7 +159,7 @@ function App() {
               isActive ? "nav-link active" : "nav-link"
             }
           >
-            📋 List View
+            <BiListUl size={20} /> List View
           </NavLink>
           <NavLink
             to="/map"
@@ -160,22 +167,7 @@ function App() {
               isActive ? "nav-link icon-link active" : "nav-link icon-link"
             }
           >
-            <svg
-              viewBox="0 0 24 24"
-              width="20"
-              height="20"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="neon-icon"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-            </svg>
-            Map View
+            <BiMapAlt size={20} /> Map View
           </NavLink>
         </nav>
 
@@ -238,7 +230,7 @@ function App() {
                     })
                   }
                 />
-                💰 Seeking Funding
+                <BiDollarCircle size={20} /> Seeking Funding
               </label>
               <label className="checkbox-label">
                 <input
@@ -247,7 +239,7 @@ function App() {
                     setFilters({ ...filters, has_mvp: e.target.checked })
                   }
                 />
-                🚀 Has MVP
+                <BiRocket size={20} /> Has MVP
               </label>
             </div>
           </div>
