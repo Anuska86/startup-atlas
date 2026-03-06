@@ -12,6 +12,8 @@ import {
   BiMapAlt,
   BiDollarCircle,
   BiRocket,
+  BiMoon,
+  BiSun,
 } from "react-icons/bi";
 
 function App() {
@@ -140,7 +142,17 @@ function App() {
         <div className="header-top">
           <h1>Startup Atlas</h1>
           <button className="theme-btn" onClick={toggleTheme}>
-            {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+            {theme === "light" ? (
+              <>
+                <BiMoon size={18} />
+                <span>Dark Mode</span>
+              </>
+            ) : (
+              <>
+                <BiSun size={18} />
+                <span>Light Mode</span>
+              </>
+            )}
           </button>
         </div>
         <nav className="view-nav">
