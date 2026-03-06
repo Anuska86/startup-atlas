@@ -20,13 +20,14 @@
 [data-theme="light"] {
   --dark-bg: #f8f9fa;
   --card-bg: #efedf6;
-  --text-color: #2b2d42;
+  --text-color: #1a1c2c;
+  --text-secondary: #52577a;
   --indigo-bloom: #3f37c9;
   --neon-purple: #7209b7;
   --neon-purple-light: #bc59ff;
-  --sky-aqua: #4895ef;
+  --sky-aqua: #0077b6;
   --input-bg: #ffffff;
-  --border-color: rgba(0, 0, 0, 0.05);
+  --border-color: rgba(0, 0, 0, 0.1);
   --intro-bg: #f0f4f8;
 }
 
