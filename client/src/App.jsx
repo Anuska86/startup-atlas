@@ -48,8 +48,8 @@ function App() {
     const matchContinent =
       filters.continent === "All" || startup.continent === filters.continent;
     const matchFunding =
-      !filters.is_seeking_funding || startup.is_seeking_funding;
-    const matchMVP = !filters.has_mvp || startup.has_mvp;
+      filters.is_seeking_funding === false ? true : startup.is_seeking_funding;
+    const matchMVP = filters.has_mvp === false ? true : startup.has_mvp;
 
     return (
       matchSearch && matchIndustry && matchContinent && matchFunding && matchMVP
