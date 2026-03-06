@@ -27,10 +27,15 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+.startup-card.clickable {
+  cursor: pointer;
+}
+
 .startup-card:hover {
   transform: translateY(-5px);
   border-color: var(--sky-aqua);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+  transition: all 0.3s ease;
 }
 
 .startup-card strong {
@@ -118,6 +123,12 @@
 .card-details strong {
   color: var(--neon-pink);
   font-weight: 600;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 /* Website Link Button */

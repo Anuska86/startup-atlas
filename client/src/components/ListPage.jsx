@@ -2,8 +2,11 @@ import React from "react";
 import "../styles/ListPage.css";
 
 import { BiLinkExternal, BiCalendarAlt, BiGhost } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 function ListPage({ startups, isLoading, onReset }) {
+  const navigate = useNavigate();
+
   if (isLoading) {
     return <div className="loader-div">Searching the Atlas...</div>;
   }
@@ -11,8 +14,12 @@ function ListPage({ startups, isLoading, onReset }) {
   return (
     <div className="card-container">
       {startups.length > 0 ? (
-        startups.map((startup, index) => (
-          <div key={index} className="startup-card">
+        startups.map((startup) => (
+          <div
+            key={startup.id}
+            className="startup-card clickable"
+            onClick={() => navigate(`/startup/${startup.id}`)}
+          >
             <div className="card-right-info">
               {startup.is_seeking_funding && (
                 <div className="funding-badge">Seeking Funding </div>
@@ -43,6 +50,7 @@ function ListPage({ startups, isLoading, onReset }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="visit-website-btn"
+                onClick={(e) => e.stopPropagation()}
               >
                 {" "}
                 Visit Website <BiLinkExternal />

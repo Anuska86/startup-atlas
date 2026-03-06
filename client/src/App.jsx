@@ -2,6 +2,7 @@ import "./styles/App.css";
 import HomePage from "./components/HomePage.jsx";
 import MapPage from "./components/MapPage.jsx";
 import ListPage from "./components/ListPage.jsx";
+import StartupDetails from "./components/StartupDetails.jsx";
 
 import { useState, useEffect } from "react";
 import { Routes, Route, Link, NavLink, useLocation } from "react-router-dom";
@@ -298,6 +299,12 @@ function App() {
           <Route
             path="/map"
             element={<MapPage startups={filteredStartups} theme={theme} />}
+          />
+
+          {/*Startup Details*/}
+          <Route
+            path="/startup/:id"
+            element={<StartupDetails startups={startups} theme={theme} />}
           />
         </Routes>
       </main>
