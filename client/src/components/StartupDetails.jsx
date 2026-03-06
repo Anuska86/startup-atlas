@@ -10,6 +10,7 @@ import {
   BiDollarCircle,
   BiCheckShield,
   BiMap,
+  BiCalendarAlt,
 } from "react-icons/bi";
 
 function StartupDetails({ startups }) {
@@ -50,9 +51,14 @@ function StartupDetails({ startups }) {
           </div>
           <div className="details-meta">
             <span>
-              <BiMap /> {startup.country}, {startup.continent}
+              <BiMap className="meta-icon map-pin-color" /> {startup.country},{" "}
+              {startup.continent}
             </span>
-            <span>Founded: {startup.founded}</span>
+            <span>
+              {" "}
+              <BiCalendarAlt className="meta-icon calendar-color" />
+              Founded: {startup.founded}
+            </span>
           </div>
         </div>
 
@@ -71,14 +77,21 @@ function StartupDetails({ startups }) {
               <h4>Industry Stats</h4>
               <ul>
                 <li>
-                  <strong>Industry:</strong> {startup.industry}
+                  <span>
+                    <BiCheckShield /> <strong>Industry:</strong>
+                  </span>{" "}
+                  {startup.industry}
                 </li>
                 <li>
-                  <strong>Stage:</strong>{" "}
+                  <span>
+                    <BiRocket /> <strong>Stage:</strong>
+                  </span>
                   {startup.has_mvp ? "Post-MVP" : "Pre-MVP"}
                 </li>
                 <li>
-                  <strong>Investment:</strong>{" "}
+                  <span>
+                    <BiDollarCircle /> <strong>Investment:</strong>
+                  </span>
                   {startup.is_seeking_funding ? "Open" : "Closed"}
                 </li>
               </ul>

@@ -2,8 +2,7 @@
 
 /*Palette*/
 
-:root,
-:root[data-theme="dark"] {
+:root {
   --neon-pink: #f72585;
   --indigo-bloom: #7209b7;
   --neon-purple: #b5179e;
@@ -18,7 +17,7 @@
   --intro-bg: rgba(255, 255, 255, 0.03);
 }
 
-:root[data-theme="light"] {
+[data-theme="light"] {
   --dark-bg: #f8f9fa;
   --card-bg: #efedf6;
   --text-color: #2b2d42;
