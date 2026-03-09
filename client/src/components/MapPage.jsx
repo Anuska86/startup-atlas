@@ -1,14 +1,7 @@
 import "../styles/MapPage.css";
 import { useEffect, useRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import {
-  BiChip,
-  BiLeaf,
-  BiLineChart,
-  BiHeart,
-  BiRefresh,
-  BiGlobe,
-} from "react-icons/bi";
+import { BiChip, BiLeaf, BiLineChart, BiHeart } from "react-icons/bi";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -19,17 +12,6 @@ function MapPage({ startups, theme }) {
 
   const center = [30, -15];
   const zoom = 3;
-
-  //Reset the map view
-
-  const handleResetView = () => {
-    if (mapRef.current) {
-      mapRef.current.setView(center, zoom, {
-        animate: true,
-        duration: 1.5,
-      });
-    }
-  };
 
   //Render the map
   useEffect(() => {
@@ -91,16 +73,6 @@ function MapPage({ startups, theme }) {
   return (
     <div className="map-page-container">
       <div className="map-wrapper">
-        <button className="floating-reset-btn" onClick={handleResetView}>
-          <BiRefresh
-            style={{
-              marginRight: "8px",
-              verticalAlign: "middle",
-              fontSize: "1.2rem",
-            }}
-          />
-          <span> Restore Initial View</span>
-        </button>
         <div className="map-legend">
           <h4>Industry Key</h4>
           <div className="legend-item">
