@@ -272,29 +272,7 @@ export const startups = [
     is_seeking_funding: false,
     has_mvp: true,
   },
-  {
-    id: 37,
-    name: "Pasqal",
-    industry: "Quantum",
-    founded: 2019,
-    country: "France",
-    continent: "Europe",
-    business_address: {
-      street: "Avenue Emile Baudot",
-      city: "Palaiseau",
-      state: "Paris",
-    },
-    lat: 48.714,
-    lng: 2.221,
-    founders: [{ name: "Georges-Olivier Reymond", role: "CEO" }],
-    employees: 280,
-    website: "https://pasqal.com",
-    mission_statement: "Quantum computing from neutral atoms.",
-    description:
-      "Building programmable quantum simulators for industrial applications.",
-    is_seeking_funding: true,
-    has_mvp: true,
-  },
+
   {
     id: 12,
     name: "Zolar",
@@ -824,6 +802,30 @@ export const startups = [
     is_seeking_funding: false,
     has_mvp: true,
   },
+  {
+    id: 35,
+    name: "Pasqal",
+    industry: "Quantum",
+    founded: 2019,
+    country: "France",
+    continent: "Europe",
+    business_address: {
+      street: "Avenue Emile Baudot",
+      city: "Palaiseau",
+      state: "Paris",
+    },
+    lat: 48.714,
+    lng: 2.221,
+    founders: [{ name: "Georges-Olivier Reymond", role: "CEO" }],
+    employees: 280,
+    website: "https://pasqal.com",
+    mission_statement: "Quantum computing from neutral atoms.",
+    description:
+      "Building programmable quantum simulators for industrial applications.",
+    is_seeking_funding: true,
+    has_mvp: true,
+  },
+
   {
     id: 36,
     name: "Sword Health",

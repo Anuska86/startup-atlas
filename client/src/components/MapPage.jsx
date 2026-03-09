@@ -90,8 +90,8 @@ function MapPage({ startups, theme }) {
 
   return (
     <div className="map-page-container">
-      <div className="map-controls">
-        <button className="reset-view-btn" onClick={handleResetView}>
+      <div className="map-wrapper">
+        <button className="floating-reset-btn" onClick={handleResetView}>
           <BiRefresh
             style={{
               marginRight: "8px",
@@ -101,8 +101,6 @@ function MapPage({ startups, theme }) {
           />
           <span> Restore Initial View</span>
         </button>
-      </div>
-      <div className="map-wrapper">
         <div className="map-legend">
           <h4>Industry Key</h4>
           <div className="legend-item">
