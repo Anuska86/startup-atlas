@@ -18,7 +18,7 @@ import L from "leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
 function MapPage({ startups, theme }) {
-  const [map, setMap] = useState(null);
+  const mapRef = useRef(null);
   const location = useLocation();
   const hasFlown = useRef(false);
 
@@ -26,37 +26,33 @@ function MapPage({ startups, theme }) {
   const zoom = 3;
 
   useEffect(() => {
-    if (!map) return;
+    const mapInstance = mapRef.current;
+    if (!mapInstance) return;
 
     // 1. Force Leaflet to recalculate its container size
-    map.invalidateSize();
+    mapInstance.invalidateSize();
 
     const flyToCoords = location.state?.flyTo;
 
     setTimeout(() => {
       if (flyToCoords && !hasFlown.current) {
         // If we have a specific destination, go there
-        map.setView(flyToCoords, 14, {
+        mapInstance.setView(flyToCoords, 14, {
           animate: false,
         });
         hasFlown.current = true; //DONE
 
         // Optional: Clear the state so it doesn't fly there again on re-render
         window.history.replaceState({}, document.title);
-        return;
-      }
-      // 2. Decide where to move the camera
-
-      if (startups.length > 0 && !flyToCoords) {
-        // Otherwise, show all startups
+      } else if (startups.length > 0 && !flyToCoords && !hasFlown.current) {
+        // VIEW ALL
         const bounds = L.latLngBounds(startups.map((s) => [s.lat, s.lng]));
-        map.fitBounds(bounds, {
-          padding: [50, 50],
-          animate: true,
-        });
+        mapInstance.fitBounds(bounds, { padding: [50, 50] });
       }
-    }, 50);
-  }, [map, theme, startups, location.state]);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [theme, startups, location.state]);
 
   const createCustomIcon = (startup) => {
     let SelectedIcon = BiChip;
@@ -140,7 +136,7 @@ function MapPage({ startups, theme }) {
           key={theme}
           center={center}
           zoom={zoom}
-          whenCreated={(mapInstance) => setMap(mapInstance)}
+          ref={mapRef}
           style={{ height: "100%", width: "100%" }} // Ensure it fills the wrapper
         >
           <TileLayer
