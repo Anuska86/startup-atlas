@@ -52,6 +52,7 @@ function ListPage({ startups, isLoading, onReset }) {
               to="/map"
               state={{ flyTo: [startup.lat, startup.lng] }}
               className="view-on-map-link"
+              onClick={(e) => e.stopPropagation()}
             >
               <BiMapAlt size={22} /> View on Map
             </Link>

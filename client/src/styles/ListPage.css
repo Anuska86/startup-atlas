@@ -139,7 +139,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin: 15px 0;
+  margin: 5px 0 15px 0;
   font-weight: 600;
   transition: all 0.2s ease;
 }

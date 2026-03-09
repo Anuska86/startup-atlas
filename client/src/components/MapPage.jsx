@@ -35,8 +35,8 @@ function MapPage({ startups, theme }) {
     // 2. Decide where to move the camera
     if (flyToCoords) {
       // If we have a specific destination, go there
-      mapRef.current.flyTo(flyToCoords, 14, {
-        duration: 2,
+      mapRef.current.setView(flyToCoords, 14, {
+        duration: 1.5,
         animate: true,
       });
 
