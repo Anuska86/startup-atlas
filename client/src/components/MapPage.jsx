@@ -1,6 +1,6 @@
 import "../styles/MapPage.css";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { useLocation } from "react-router-dom";
 
