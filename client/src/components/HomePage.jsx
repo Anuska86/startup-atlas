@@ -1,10 +1,37 @@
 import "../styles/HomePage.css";
 
+import React, { useMemo } from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+} from "recharts";
 import { Link } from "react-router-dom";
 import { BiRocket, BiMapAlt, BiListUl } from "react-icons/bi";
 
 function HomePage({ startups }) {
   const totalStartups = startups.length;
+
+  //chartData
+  const chartData = useMemo(() => {
+    const counts = startups.reduce((acc, startup) => {
+      acc[startup.industry] = (acc[startup.industry] || 0) + 1;
+      return acc;
+    }, {});
+
+    return Object.keys(counts)
+      .map((key) => ({
+        name: key,
+        value: counts[key],
+      }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 5); //Top 5
+  }, [startups]);
+
   const industries = [...new Set(startups.map((startup) => startup.industry))]
     .length;
 
@@ -56,7 +83,49 @@ function HomePage({ startups }) {
         </div>
       </section>
 
-      {/* SECTION 3: STATS (Bottom) */}
+      {/* SECTION 3: CHARTS */}
+      <section className="industry-distribution">
+        <h3>Top Industry Distribution</h3>
+        <div className="chart-wrapper">
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart
+              data={chartData}
+              layout="vertical"
+              margin={{ left: 30, right: 30 }}
+            >
+              <XAxis type="number" hide />
+              <YAxis
+                dataKey="name"
+                type="category"
+                axisLine={false}
+                tickLine={false}
+                tick={{ fill: "var(--text-color)", fontSize: 12 }}
+                width={100}
+              />
+              <Tooltip
+                cursor={{ fill: "transparent" }}
+                contentStyle={{
+                  backgroundColor: "var(--card-bg)",
+                  border: "1px solid var(--sky-aqua)",
+                  borderRadius: "10px",
+                }}
+              />
+              <Bar dataKey="value" radius={[0, 10, 10, 0]} barSize={20}>
+                {chartData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      index % 2 === 0 ? "var(--sky-aqua)" : "var(--neon-purple)"
+                    }
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </section>
+
+      {/* SECTION 4: STATS (Bottom) */}
       <section className="stats-section">
         <div className="stats-grid">
           <div className="stat-card">
