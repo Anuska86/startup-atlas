@@ -134,6 +134,20 @@
 /*Map link*/
 .view-on-map-link {
   color: var(--neon-pink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 15px 0;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.view-on-map-link:hover {
+  filter: brightness(1.2);
+  text-decoration: underline;
+  transform: translateY(-1px);
 }
 
 /* Website Link Button */
