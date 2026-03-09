@@ -52,13 +52,18 @@ function MapPage({ startups, theme }) {
   const createCustomIcon = (startup) => {
     let SelectedIcon = BiChip;
     const industry = startup.industry?.toLowerCase() || "";
-    if (industry.includes("energy")) SelectedIcon = BiLeaf;
-    if (industry.includes("fin")) SelectedIcon = BiLineChart;
-    if (industry.includes("health")) SelectedIcon = BiHeart;
-    if (industry.includes("quantum")) SelectedIcon = BiChip;
-    if (industry.includes("ai")) SelectedIcon = BiChip;
-    if (industry.includes("saas")) SelectedIcon = BiLineChart;
-    if (industry.includes("agriculture")) SelectedIcon = BiLeaf;
+
+    if (industry.includes("energy") || industry.includes("agriculture")) {
+      SelectedIcon = BiLeaf;
+    } else if (industry.includes("fin") || industry.includes("saas")) {
+      SelectedIcon = BiLineChart;
+    } else if (industry.includes("health")) {
+      SelectedIcon = BiHeart;
+    } else if (industry.includes("ai") || industry.includes("quantum")) {
+      SelectedIcon = BiChip;
+    } else {
+      SelectedIcon = BiChip; // Default
+    }
 
     const iconMarkup = renderToStaticMarkup(
       <div
@@ -101,16 +106,16 @@ function MapPage({ startups, theme }) {
         <div className="map-legend">
           <h4>Industry Key</h4>
           <div className="legend-item">
-            <BiLeaf className="icon energy" /> Renewable Energy
+            <BiLeaf className="icon energy" /> Energy & Agriculture
           </div>
           <div className="legend-item">
-            <BiLineChart className="icon fin" /> FinTech
+            <BiLineChart className="icon fin" /> FinTech & SaaS
           </div>
           <div className="legend-item">
             <BiHeart className="icon health" /> HealthTech
           </div>
           <div className="legend-item">
-            <BiChip className="icon tech" /> Technology / AI
+            <BiChip className="icon tech" /> AI, Quantum & Tech
           </div>
         </div>
         <MapContainer
