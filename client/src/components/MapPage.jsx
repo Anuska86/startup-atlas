@@ -1,6 +1,6 @@
 import "../styles/MapPage.css";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { useLocation } from "react-router-dom";
 
@@ -18,39 +18,45 @@ import L from "leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
 function MapPage({ startups, theme }) {
-  const mapRef = useRef(null);
+  const [map, setMap] = useState(null);
   const location = useLocation();
+  const hasFlown = useRef(false);
 
   const center = [30, -15];
   const zoom = 3;
 
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (!map) return;
 
     // 1. Force Leaflet to recalculate its container size
-    mapRef.current.invalidateSize();
+    map.invalidateSize();
 
     const flyToCoords = location.state?.flyTo;
 
-    // 2. Decide where to move the camera
-    if (flyToCoords) {
-      // If we have a specific destination, go there
-      mapRef.current.setView(flyToCoords, 14, {
-        duration: 1.5,
-        animate: true,
-      });
+    setTimeout(() => {
+      if (flyToCoords && !hasFlown.current) {
+        // If we have a specific destination, go there
+        map.setView(flyToCoords, 14, {
+          animate: false,
+        });
+        hasFlown.current = true; //DONE
 
-      // Optional: Clear the state so it doesn't fly there again on re-render
-      window.history.replaceState({}, document.title);
-    } else if (startups.length > 0) {
-      // Otherwise, show all startups
-      const bounds = L.latLngBounds(startups.map((s) => [s.lat, s.lng]));
-      mapRef.current.fitBounds(bounds, {
-        padding: [50, 50],
-        animate: true,
-      });
-    }
-  }, [theme, startups, location.state]);
+        // Optional: Clear the state so it doesn't fly there again on re-render
+        window.history.replaceState({}, document.title);
+        return;
+      }
+      // 2. Decide where to move the camera
+
+      if (startups.length > 0 && !flyToCoords) {
+        // Otherwise, show all startups
+        const bounds = L.latLngBounds(startups.map((s) => [s.lat, s.lng]));
+        map.fitBounds(bounds, {
+          padding: [50, 50],
+          animate: true,
+        });
+      }
+    }, 50);
+  }, [map, theme, startups, location.state]);
 
   const createCustomIcon = (startup) => {
     let SelectedIcon = BiChip;
@@ -91,11 +97,9 @@ function MapPage({ startups, theme }) {
     });
   };
 
-  //Reset the map view
-
   const handleResetView = () => {
-    if (mapRef.current) {
-      mapRef.current.setView(center, zoom, {
+    if (map) {
+      map.setView(center, zoom, {
         animate: true,
         duration: 1.5,
       });
@@ -136,7 +140,7 @@ function MapPage({ startups, theme }) {
           key={theme}
           center={center}
           zoom={zoom}
-          ref={mapRef}
+          whenCreated={(mapInstance) => setMap(mapInstance)}
           style={{ height: "100%", width: "100%" }} // Ensure it fills the wrapper
         >
           <TileLayer
