@@ -131,6 +131,11 @@
   display: block;
 }
 
+/*Map link*/
+.view-on-map-link {
+  color: var(--neon-pink);
+}
+
 /* Website Link Button */
 .visit-website-btn {
   display: flex;

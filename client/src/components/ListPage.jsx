@@ -1,8 +1,13 @@
 import React from "react";
 import "../styles/ListPage.css";
 
-import { BiLinkExternal, BiCalendarAlt, BiGhost } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import {
+  BiLinkExternal,
+  BiCalendarAlt,
+  BiGhost,
+  BiMapAlt,
+} from "react-icons/bi";
+import { useNavigate, Link } from "react-router-dom";
 
 function ListPage({ startups, isLoading, onReset }) {
   const navigate = useNavigate();
@@ -43,6 +48,13 @@ function ListPage({ startups, isLoading, onReset }) {
                 {startup.continent}
               </p>
             </div>
+            <Link
+              to="/map"
+              state={{ flyTo: [startup.lat, startup.lng] }}
+              className="view-on-map-link"
+            >
+              <BiMapAlt size={26} /> View on Map
+            </Link>
 
             {startup.website && (
               <a

@@ -1,6 +1,9 @@
 import "../styles/MapPage.css";
+
 import { useEffect, useRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { useLocation } from "react-router-dom";
+
 import {
   BiChip,
   BiLeaf,
@@ -8,6 +11,7 @@ import {
   BiHeart,
   BiRefresh,
 } from "react-icons/bi";
+
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -15,27 +19,38 @@ import MarkerClusterGroup from "react-leaflet-cluster";
 
 function MapPage({ startups, theme }) {
   const mapRef = useRef(null);
+  const location = useLocation();
 
   const center = [30, -15];
   const zoom = 3;
 
-  //Render the map
   useEffect(() => {
-    if (mapRef.current && startups.length > 0) {
-      // Small timeout
-      const timer = setTimeout(() => {
-        mapRef.current.invalidateSize();
+    if (!mapRef.current) return;
 
-        //Calculate the bounds of the map so all the markers can be visible
-        const bounds = L.latLngBounds(startups.map((s) => [s.lat, s.lng]));
-        mapRef.current.fitBounds(bounds, {
-          padding: [50, 50],
-          animate: true,
-        });
-      }, 250);
-      return () => clearTimeout(timer);
+    // 1. Force Leaflet to recalculate its container size
+    mapRef.current.invalidateSize();
+
+    const flyToCoords = location.state?.flyTo;
+
+    // 2. Decide where to move the camera
+    if (flyToCoords) {
+      // If we have a specific destination, go there
+      mapRef.current.flyTo(flyToCoords, 14, {
+        duration: 2,
+        animate: true,
+      });
+
+      // Optional: Clear the state so it doesn't fly there again on re-render
+      window.history.replaceState({}, document.title);
+    } else if (startups.length > 0) {
+      // Otherwise, show all startups
+      const bounds = L.latLngBounds(startups.map((s) => [s.lat, s.lng]));
+      mapRef.current.fitBounds(bounds, {
+        padding: [50, 50],
+        animate: true,
+      });
     }
-  }, [theme, startups]);
+  }, [theme, startups, location.state]);
 
   const createCustomIcon = (startup) => {
     let SelectedIcon = BiChip;
