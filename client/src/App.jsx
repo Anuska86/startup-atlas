@@ -3,21 +3,10 @@ import HomePage from "./components/HomePage.jsx";
 import MapPage from "./components/MapPage.jsx";
 import ListPage from "./components/ListPage.jsx";
 import StartupDetails from "./components/StartupDetails.jsx";
-import Header from "./components/Header.jsx"
+import Header from "./components/Header.jsx";
 
 import { useState, useEffect } from "react";
 import { Routes, Route, Link, NavLink, useLocation } from "react-router-dom";
-import {
-  BiSearch,
-  BiHomeAlt,
-  BiListUl,
-  BiMapAlt,
-  BiDollarCircle,
-  BiRocket,
-  BiMoon,
-  BiSun,
-  BiX,
-} from "react-icons/bi";
 
 function App() {
   const [startups, setStartups] = useState([]);
@@ -150,6 +139,21 @@ function App() {
 
   return (
     <div className="app-div">
+      <Header
+        theme={theme}
+        toggleTheme={toggleTheme}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        handleSearch={handleSearch}
+        handleReset={handleReset}
+        filters={filters}
+        setFilters={setFilters}
+        uniqueIndustries={uniqueIndustries}
+        uniqueContinents={uniqueContinents}
+        filteredCount={filteredStartups.length}
+        isFiltering={isFiltering}
+        filteredStartups={filteredStartups}
+      />
       <main>
         <Routes>
           {/* Home Route */}

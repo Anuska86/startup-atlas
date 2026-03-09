@@ -99,8 +99,8 @@ function Header({
           {isFiltering && (
             <div className="results-count-bar">
               <p>
-                Found <strong>{filteredStartups.length}</strong>{" "}
-                {filteredStartups.length === 1 ? "startup" : "startups"}
+                Found <strong>{filteredCount}</strong>{" "}
+                {filteredCount === 1 ? "startup" : "startups"}
               </p>
             </div>
           )}
