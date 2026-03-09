@@ -13,8 +13,27 @@ import {
 import { Link } from "react-router-dom";
 import { BiRocket, BiMapAlt, BiListUl } from "react-icons/bi";
 
+const ChartSkeleton = () => (
+  <div className="skeleton-container">
+    {[1, 2, 3, 4, 5].map((n) => (
+      <div key={n} className="skeleton-row">
+        <div className="skeleton-label"></div>
+        <div className="skeleton-bar-wrapper">
+          <div
+            className="skeleton-bar"
+            style={{ width: `${100 - n * 15}%` }}
+          ></div>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
 function HomePage({ startups }) {
   const totalStartups = startups.length;
+  const isLoading = startups.length === 0;
+  const industries = [...new Set(startups.map((startup) => startup.industry))]
+    .length;
 
   //chartData
   const chartData = useMemo(() => {
@@ -31,9 +50,6 @@ function HomePage({ startups }) {
       .sort((a, b) => b.value - a.value)
       .slice(0, 5); //Top 5
   }, [startups]);
-
-  const industries = [...new Set(startups.map((startup) => startup.industry))]
-    .length;
 
   return (
     <div className="home-container">
@@ -87,41 +103,47 @@ function HomePage({ startups }) {
       <section className="industry-distribution">
         <h3>Top Industry Distribution</h3>
         <div className="chart-wrapper">
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart
-              data={chartData}
-              layout="vertical"
-              margin={{ left: 30, right: 30 }}
-            >
-              <XAxis type="number" hide />
-              <YAxis
-                dataKey="name"
-                type="category"
-                axisLine={false}
-                tickLine={false}
-                tick={{ fill: "var(--text-color)", fontSize: 12 }}
-                width={100}
-              />
-              <Tooltip
-                cursor={{ fill: "transparent" }}
-                contentStyle={{
-                  backgroundColor: "var(--card-bg)",
-                  border: "1px solid var(--sky-aqua)",
-                  borderRadius: "10px",
-                }}
-              />
-              <Bar dataKey="value" radius={[0, 10, 10, 0]} barSize={20}>
-                {chartData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={
-                      index % 2 === 0 ? "var(--sky-aqua)" : "var(--neon-purple)"
-                    }
-                  />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+          {isLoading ? (
+            <ChartSkeleton />
+          ) : (
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart
+                data={chartData}
+                layout="vertical"
+                margin={{ left: 30, right: 30 }}
+              >
+                <XAxis type="number" hide />
+                <YAxis
+                  dataKey="name"
+                  type="category"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: "var(--text-color)", fontSize: 12 }}
+                  width={100}
+                />
+                <Tooltip
+                  cursor={{ fill: "transparent" }}
+                  contentStyle={{
+                    backgroundColor: "var(--card-bg)",
+                    border: "1px solid var(--sky-aqua)",
+                    borderRadius: "10px",
+                  }}
+                />
+                <Bar dataKey="value" radius={[0, 10, 10, 0]} barSize={20}>
+                  {chartData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={
+                        index % 2 === 0
+                          ? "var(--sky-aqua)"
+                          : "var(--neon-purple)"
+                      }
+                    />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          )}
         </div>
       </section>
 
