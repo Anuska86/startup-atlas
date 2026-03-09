@@ -1,7 +1,13 @@
 import "../styles/MapPage.css";
 import { useEffect, useRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { BiChip, BiLeaf, BiLineChart, BiHeart } from "react-icons/bi";
+import {
+  BiChip,
+  BiLeaf,
+  BiLineChart,
+  BiHeart,
+  BiRefresh,
+} from "react-icons/bi";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -70,8 +76,32 @@ function MapPage({ startups, theme }) {
     });
   };
 
+  //Reset the map view
+
+  const handleResetView = () => {
+    if (mapRef.current) {
+      mapRef.current.setView(center, zoom, {
+        animate: true,
+        duration: 1.5,
+      });
+    }
+  };
+
   return (
     <div className="map-page-container">
+      <div className="map-internal-controls">
+        <button className="reset-view-btn" onClick={handleResetView}>
+          <BiRefresh
+            style={{
+              marginRight: "8px",
+              verticalAlign: "middle",
+              fontSize: "1.2rem",
+            }}
+          />
+          <span> Restore Initial View</span>
+        </button>
+      </div>
+
       <div className="map-wrapper">
         <div className="map-legend">
           <h4>Industry Key</h4>

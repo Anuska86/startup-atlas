@@ -16,7 +16,6 @@ import {
   BiMoon,
   BiSun,
   BiX,
-  BiRefresh,
 } from "react-icons/bi";
 
 function App() {
@@ -148,17 +147,6 @@ function App() {
     filters.is_seeking_funding !== false ||
     filters.has_mvp !== false;
 
-  //Reset the map view
-
-  const handleResetView = () => {
-    if (mapRef.current) {
-      mapRef.current.setView(center, zoom, {
-        animate: true,
-        duration: 1.5,
-      });
-    }
-  };
-
   return (
     <div className="app-div">
       <header className="app-header">
@@ -285,16 +273,6 @@ function App() {
                 <BiRocket size={20} /> Has MVP
               </label>
             </div>
-            <button className="reset-view-btn" onClick={handleResetView}>
-              <BiRefresh
-                style={{
-                  marginRight: "8px",
-                  verticalAlign: "middle",
-                  fontSize: "1.2rem",
-                }}
-              />
-              <span> Restore Initial View</span>
-            </button>
           </div>
         )}
       </header>
