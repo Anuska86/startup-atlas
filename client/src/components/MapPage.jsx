@@ -55,6 +55,10 @@ function MapPage({ startups, theme }) {
     if (industry.includes("energy")) SelectedIcon = BiLeaf;
     if (industry.includes("fin")) SelectedIcon = BiLineChart;
     if (industry.includes("health")) SelectedIcon = BiHeart;
+    if (industry.includes("quantum")) SelectedIcon = BiChip;
+    if (industry.includes("ai")) SelectedIcon = BiChip;
+    if (industry.includes("saas")) SelectedIcon = BiLineChart;
+    if (industry.includes("agriculture")) SelectedIcon = BiLeaf;
 
     const iconMarkup = renderToStaticMarkup(
       <div
