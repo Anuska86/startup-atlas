@@ -139,6 +139,7 @@ function MapPage({ startups, theme }) {
       className: "industry-icon-marker",
       iconSize: [30, 30],
       iconAnchor: [15, 15],
+      popupAnchor: [0, -25],
     });
   };
 
