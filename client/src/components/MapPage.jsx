@@ -57,6 +57,8 @@ function MapPage({ startups, theme }) {
       // VIEW ALL
       const bounds = L.latLngBounds(startups.map((s) => [s.lat, s.lng]));
       map.fitBounds(bounds, { padding: [50, 50] });
+    } else if (startups.length === 0 && !flyToCoords) {
+      map.setView(center, zoom);
     }
   }, [map, theme, startups, location.state]);
 
