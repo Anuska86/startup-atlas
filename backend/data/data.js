@@ -15,6 +15,7 @@ export const startups = [
     lng: 18.101,
     founders: [{ name: "Peter Carlsson", role: "CEO" }],
     employees: 5000,
+    category: "Enterprise",
     website: "https://northvolt.com",
     mission_statement: "Building the world's greenest battery.",
     description:
@@ -38,6 +39,7 @@ export const startups = [
     lng: -122.419,
     founders: [{ name: "Sam Altman", role: "CEO" }],
     employees: 1000,
+    category: "Scale-up",
     website: "https://openai.com",
     mission_statement: "Ensuring AGI benefits all of humanity.",
     description:
@@ -61,6 +63,7 @@ export const startups = [
     lng: -6.237,
     founders: [{ name: "Patrick Collison", role: "CEO" }],
     employees: 7000,
+    category: "Enterprise",
     website: "https://stripe.com",
     mission_statement: "Increasing the GDP of the internet.",
     description:
@@ -84,6 +87,7 @@ export const startups = [
     lng: -46.692,
     founders: [{ name: "Andre Glezer", role: "CEO" }],
     employees: 150,
+    category: "Growth Stage",
     website: "https://agrolend.pt",
     mission_statement: "Revolutionizing agribusiness credit in Brazil.",
     description: "Fintech platform providing sustainable loans to farmers.",
@@ -106,6 +110,7 @@ export const startups = [
     lng: 2.371,
     founders: [{ name: "Arthur Mensch", role: "CEO" }],
     employees: 60,
+    category: "Growth Stage",
     website: "https://mistral.ai",
     mission_statement: "Frontier AI in open-source.",
     description:
@@ -129,6 +134,7 @@ export const startups = [
     lng: -71.082,
     founders: [{ name: "Bob Mumgaard", role: "CEO" }],
     employees: 500,
+    category: "Scale-up",
     website: "https://cfs.energy",
     mission_statement: "Clean, limitless fusion energy.",
     description:
@@ -152,6 +158,7 @@ export const startups = [
     lng: 151.209,
     founders: [{ name: "Melanie Perkins", role: "CEO" }],
     employees: 4000,
+    category: "Enterprise",
     website: "https://canva.com",
     mission_statement: "Empowering the world to design.",
     description: "Visual communication platform enabling design for everyone.",
@@ -174,6 +181,7 @@ export const startups = [
     lng: -122.403,
     founders: [{ name: "Aravind Srinivas", role: "CEO" }],
     employees: 50,
+    category: "Early Stage",
     website: "https://perplexity.ai",
     mission_statement: "The conversational search engine.",
     description:
@@ -197,6 +205,7 @@ export const startups = [
     lng: 24.832,
     founders: [{ name: "Jan Goetz", role: "CEO" }],
     employees: 300,
+    category: "Growth Stage",
     website: "https://meetiqm.com",
     mission_statement: "European superconducting quantum hardware.",
     description: "Providing high-speed hardware for supercomputing centers.",
@@ -215,6 +224,7 @@ export const startups = [
     lng: -71.101,
     founders: [{ name: "Andee Wallace", role: "CEO" }],
     employees: 25,
+    category: "Early Stage",
     website: "https://robigo.bio",
     mission_statement: "Engineering biopesticides to protect crops.",
     description:
@@ -242,6 +252,7 @@ export const startups = [
       { name: "Jon Ander Oribe", role: "CTO" },
     ],
     employees: 12,
+    category: "Early Stage",
     website: "https://quantum-mads.com/",
     mission_statement: "Pioneering the quantum transition",
     description:
@@ -265,6 +276,7 @@ export const startups = [
     lng: -122.145,
     founders: [{ name: "Jeremy O'Brien", role: "CEO" }],
     employees: 565,
+    category: "Scale-up",
     website: "https://psiquantum.com",
     mission_statement: "Building the first useful quantum computer.",
     description:
@@ -289,6 +301,7 @@ export const startups = [
     lng: 13.418,
     founders: [{ name: "Alex Melzer", role: "CEO" }],
     employees: 400,
+    category: "Growth Stage",
     website: "https://zolar.de",
     mission_statement: "A solar system on every roof.",
     description:
@@ -312,6 +325,7 @@ export const startups = [
     lng: -74.005,
     founders: [{ name: "Clement Delangue", role: "CEO" }],
     employees: 200,
+    category: "Growth Stage",
     website: "https://huggingface.co",
     mission_statement: "The GitHub for Machine Learning.",
     description: "Open-source platform for collaborative AI model development.",
@@ -334,6 +348,7 @@ export const startups = [
     lng: -74.001,
     founders: [{ name: "Assaf Rappaport", role: "CEO" }],
     employees: 900,
+    category: "Scale-up",
     website: "https://wiz.io",
     mission_statement: "Securing the cloud infrastructure.",
     description:
@@ -357,6 +372,7 @@ export const startups = [
     lng: -122.413,
     founders: [{ name: "Alexandr Wang", role: "CEO" }],
     employees: 600,
+    category: "Scale-up",
     website: "https://scale.com",
     mission_statement: "Accelerating AI development with high-quality data.",
     description:
@@ -380,6 +396,7 @@ export const startups = [
     lng: 13.421,
     founders: [{ name: "Simone Strey", role: "CEO" }],
     employees: 250,
+    category: "Growth Stage",
     website: "https://plantix.net",
     mission_statement: "The mobile crop doctor.",
     description:
@@ -403,6 +420,7 @@ export const startups = [
     lng: -122.393,
     founders: [{ name: "Ali Ghodsi", role: "CEO" }],
     employees: 5000,
+    category: "Enterprise",
     website: "https://databricks.com",
     mission_statement: "Data and AI on a single platform.",
     description:
@@ -426,6 +444,7 @@ export const startups = [
     lng: 13.434,
     founders: [{ name: "Mario Kohle", role: "CEO" }],
     employees: 1000,
+    category: "Scale-up",
     website: "https://enpal.de",
     mission_statement: "Solar energy for everyone.",
     description: "Residential solar-as-a-service provider in Europe.",
@@ -448,6 +467,7 @@ export const startups = [
     lng: -122.401,
     founders: [{ name: "Dario Amodei", role: "CEO" }],
     employees: 300,
+    category: "Growth Stage",
     website: "https://anthropic.com",
     mission_statement: "AI safety and research company.",
     description:
@@ -471,6 +491,7 @@ export const startups = [
     lng: -0.024,
     founders: [{ name: "Nikolay Storonsky", role: "CEO" }],
     employees: 6000,
+    category: "Enterprise",
     website: "https://revolut.com",
     mission_statement: "One app, all things money.",
     description:
@@ -494,6 +515,7 @@ export const startups = [
     lng: 34.776,
     founders: [{ name: "Tomer Tzach", role: "CEO" }],
     employees: 100,
+    category: "Growth Stage",
     website: "https://cropx.com",
     mission_statement: "Digital farming for food security.",
     description:
@@ -517,6 +539,7 @@ export const startups = [
     lng: -122.161,
     founders: [{ name: "Mustafa Suleyman", role: "CEO" }],
     employees: 50,
+    category: "Early Stage",
     website: "https://inflection.ai",
     mission_statement: "A personal AI for everyone.",
     description:
@@ -540,6 +563,7 @@ export const startups = [
     lng: 106.802,
     founders: [{ name: "Moses Lo", role: "CEO" }],
     employees: 800,
+    category: "Scale-up",
     website: "https://xendit.co",
     mission_statement: "Payments infrastructure for SE Asia.",
     description:
@@ -563,6 +587,7 @@ export const startups = [
     lng: -0.137,
     founders: [{ name: "Raj Hazra", role: "CEO" }],
     employees: 630,
+    category: "Scale-up",
     website: "https://quantinuum.com",
     mission_statement: "Accelerating quantum for drug discovery.",
     description:
@@ -586,6 +611,7 @@ export const startups = [
     lng: -122.394,
     founders: [{ name: "Ilya Sutskever", role: "Chief Scientist" }],
     employees: 10,
+    category: "Early Stage",
     website: "https://ssi.inc",
     mission_statement: "Focusing solely on safe superintelligence.",
     description:
@@ -609,6 +635,7 @@ export const startups = [
     lng: 34.811,
     founders: [{ name: "Didier Toubia", role: "CEO" }],
     employees: 120,
+    category: "Growth Stage",
     website: "https://aleph-farms.com",
     mission_statement: "Cultivating delicious steaks.",
     description:
@@ -632,6 +659,7 @@ export const startups = [
     lng: -76.942,
     founders: [{ name: "Peter Chapman", role: "CEO" }],
     employees: 400,
+    category: "Growth Stage",
     website: "https://ionq.com",
     mission_statement: "Building the best quantum computers.",
     description:
@@ -655,6 +683,7 @@ export const startups = [
     lng: 13.682,
     founders: [{ name: "Nils Aldag", role: "CEO" }],
     employees: 500,
+    category: "Growth Stage",
     website: "https://sunfire.de",
     mission_statement: "Making fossil fuels a thing of the past.",
     description: "Leading electrolyzer manufacturer producing green hydrogen.",
@@ -677,6 +706,7 @@ export const startups = [
     lng: -3.6841,
     founders: [{ name: "Ivan Cabezuela", role: "CEO" }],
     employees: 80,
+    category: "Growth Stage",
     website: "https://www.samara.energy",
     mission_statement:
       "Helping households transition to a sustainable energy model.",
@@ -701,6 +731,7 @@ export const startups = [
     lng: -3.6896,
     founders: [{ name: "Álvaro Martínez Higes", role: "CEO" }],
     employees: 50,
+    category: "Early Stage",
     website: "https://www.luzia.com",
     mission_statement: "Bringing the power of AI to everyone via WhatsApp.",
     description:
@@ -724,6 +755,7 @@ export const startups = [
     lng: 2.1634,
     founders: [{ name: "Victor Canivell", role: "CEO" }],
     employees: 40,
+    category: "Early Stage",
     website: "https://www.qilimanjaro.tech",
     mission_statement: "Developing next-generation quantum computers.",
     description:
@@ -747,6 +779,7 @@ export const startups = [
     lng: 2.1744,
     founders: [{ name: "Marc Coloma", role: "CEO" }],
     employees: 150,
+    category: "Growth Stage",
     website: "https://www.heurafoods.com",
     mission_statement:
       "Changing the food system for a more sustainable future.",
@@ -771,6 +804,7 @@ export const startups = [
     lng: -3.6922,
     founders: [{ name: "Antonio Berga", role: "Co-Founder" }],
     employees: 60,
+    category: "Growth Stage",
     website: "https://www.embat.io",
     mission_statement: "Automating corporate treasury and finance operations.",
     description:
@@ -794,6 +828,7 @@ export const startups = [
     lng: -3.6845,
     founders: [{ name: "Clemente Sardiña", role: "CEO" }],
     employees: 25,
+    category: "Early Stage",
     website: "https://cysae.com/en/",
     mission_statement:
       "Your shield in the digital world through LegalTech and Fintech expertise.",
@@ -818,6 +853,7 @@ export const startups = [
     lng: 2.221,
     founders: [{ name: "Georges-Olivier Reymond", role: "CEO" }],
     employees: 280,
+    category: "Growth Stage",
     website: "https://pasqal.com",
     mission_statement: "Quantum computing from neutral atoms.",
     description:
@@ -845,6 +881,7 @@ export const startups = [
       { name: "Márcio Colunas", role: "CSO" },
     ],
     employees: 1500,
+    category: "Scale-up",
     website: "https://swordhealth.com/",
     mission_statement: "To free 2 billion people from physical pain.",
     description:
@@ -871,6 +908,7 @@ export const startups = [
       { name: "Kari Kivelä", role: "Co-Founder" },
     ],
     employees: 500,
+    category: "Growth Stage",
     website: "https://ouraring.com/",
     mission_statement: "To empower every person to own their health.",
     description:
@@ -897,6 +935,7 @@ export const startups = [
       { name: "Fredrik Nylander", role: "CTO" },
     ],
     employees: 1000,
+    category: "Scale-up",
     website: "https://www.kry.se/",
     mission_statement:
       "Making healthcare accessible and affordable for everyone.",
@@ -924,6 +963,7 @@ export const startups = [
       { name: "Charles Gorintin", role: "CTO" },
     ],
     employees: 600,
+    category: "Scale-up",
     website: "https://alan.com/",
     mission_statement: "Building the healthcare partner of the future.",
     description:
@@ -950,6 +990,7 @@ export const startups = [
       { name: "Özlem Türeci", role: "CMO" },
     ],
     employees: 5000,
+    category: "Enterprise",
     website: "https://www.biontech.com/",
     mission_statement: "Translating science into survival.",
     description:
