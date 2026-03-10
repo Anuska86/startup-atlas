@@ -1,5 +1,7 @@
 import "../styles/MapPage.css";
 
+import { getCategoryColor } from "../utils/helpers.js";
+
 import { useEffect, useState, useRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { useLocation } from "react-router-dom";
@@ -123,11 +125,12 @@ function MapPage({ startups, theme }) {
     const iconMarkup = renderToStaticMarkup(
       <div
         style={{
-          color: "#4cc9f0",
+          color: getCategoryColor(startup.category),
           fontSize: "24px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          filter: "drop-shadow(0 0 2px rgba(0,0,0,0.5))",
         }}
       >
         <SelectedIcon />
