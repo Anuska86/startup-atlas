@@ -178,7 +178,7 @@
   transition: transform 0.6s ease;
 }
 
-/*Logos*/
+/*Icons*/
 
 /* General industry icons */
 .industry-icon-marker {
@@ -189,12 +189,33 @@
   align-items: center;
   border: 2px solid var(--indigo-bloom);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease;
+  transition: margin-top 0.3s ease;
 }
 
 .industry-icon-marker:hover {
   transform: scale(1.2);
   border-color: var(--neon-pink);
+}
+
+/*Jumping icons*/
+
+.jumping-marker-active {
+  animation: marker-jump 0.5s ease-in-out 3 !important;
+  z-index: 9999 !important;
+}
+
+@keyframes marker-jump {
+  0%,
+  100% {
+    margin-top: 0;
+    filter: drop-shadow(0 0 0px rgba(76, 201, 240, 0));
+  }
+  50% {
+    margin-top: -25px; /* The 'Jump' */
+    filter: drop-shadow(
+      0 15px 10px rgba(0, 0, 0, 0.3)
+    ); /* Adds a shadow on the 'ground' */
+  }
 }
 
 /*Map Legend*/

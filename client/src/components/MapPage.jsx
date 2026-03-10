@@ -27,32 +27,73 @@ function MapPage({ startups, theme }) {
   const zoom = 3;
 
   useEffect(() => {
-    console.log("Map Instance Status:", map ? "Ready" : "Null");
-    console.log("FlyTo Coords:", location.state?.flyTo);
-
     if (!map) return;
 
     // 1. Force Leaflet to recalculate its container size
     map.invalidateSize();
 
     const flyToCoords = location.state?.flyTo;
+    const targetId = location.state?.startupId;
 
     if (flyToCoords && !hasFlown.current) {
-      console.log("Attempting to fly to:", flyToCoords);
+      console.group("Map Navigation Debug");
+      console.log("1. Target Coordinates:", flyToCoords);
+      console.log("2. Target Startup ID:", targetId);
 
       // If we have a specific destination, go there
-      const timer = setTimeout(() => {
-        map.flyTo(flyToCoords, 14, {
-          animate: true,
-          duration: 1.5,
+
+      map.flyTo(flyToCoords, 14, {
+        animate: true,
+        duration: 1.5,
+      });
+
+      const jumpTimer = setTimeout(() => {
+        let markerFound = false;
+
+        map.eachLayer((layer) => {
+          // Check if this layer is the marker we want
+
+          if (layer instanceof L.Marker && layer.options.id === targetId) {
+            markerFound = true;
+            const iconElement = layer.getElement(); //Get the DOM element
+
+            console.log("3. Marker Layer Found:", layer);
+            console.log(
+              "4. DOM Element Status:",
+              iconElement ? "Visible" : "Not in DOM (Cluster?)",
+            );
+
+            if (iconElement) {
+              console.log("5. Success! Adding jump class.");
+              iconElement.classList.add("jumping-marker-active");
+
+              //Remove class after jumps
+
+              setTimeout(() => {
+                iconElement.classList.remove("jumping-marker-active");
+              }, 2000);
+            } else {
+              console.warn(
+                "Target marker is likely hidden inside a Cluster. Animation cannot run.",
+              );
+            }
+          }
         });
-        hasFlown.current = true; //DONE
 
-        //Clear the state so it doesn't fly there again on re-render
-        window.history.replaceState({}, document.title);
-      }, 100);
+        if (!markerFound) {
+          console.error("6. Error: No marker found with ID:", targetId);
+        }
+        console.groupEnd();
+      }, 1700); //Wait for flight (1.5s)
 
-      return () => clearTimeout(timer);
+      hasFlown.current = true; //DONE
+
+      //Clear the state so it doesn't fly there again on re-render
+      window.history.replaceState({}, document.title);
+
+      return () => {
+        clearTimeout(jumpTimer);
+      };
     } else if (startups.length > 0 && !flyToCoords && !hasFlown.current) {
       // VIEW ALL
       const bounds = L.latLngBounds(startups.map((s) => [s.lat, s.lng]));
@@ -97,7 +138,6 @@ function MapPage({ startups, theme }) {
       className: "industry-icon-marker",
       iconSize: [30, 30],
       iconAnchor: [15, 15],
-      popupAnchor: [0, -15],
     });
   };
 
@@ -160,6 +200,7 @@ function MapPage({ startups, theme }) {
             {startups.map((startup) => (
               <Marker
                 key={startup.id}
+                id={startup.id}
                 position={[startup.lat, startup.lng]}
                 icon={createCustomIcon(startup)}
               >

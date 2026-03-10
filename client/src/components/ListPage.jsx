@@ -50,7 +50,10 @@ function ListPage({ startups, isLoading, onReset }) {
             </div>
             <Link
               to="/map"
-              state={{ flyTo: [startup.lat, startup.lng] }}
+              state={{
+                flyTo: [startup.lat, startup.lng],
+                startupId: startup.id,
+              }}
               className="view-on-map-link"
               onClick={(e) => e.stopPropagation()}
             >
