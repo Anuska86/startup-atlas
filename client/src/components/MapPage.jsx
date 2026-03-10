@@ -55,6 +55,7 @@ function MapPage({ startups, theme }) {
 
           if (layer instanceof L.Marker && layer.options.id === targetId) {
             markerFound = true;
+            layer.openPopup();
             const iconElement = layer.getElement(); //Get the DOM element
 
             console.log("3. Marker Layer Found:", layer);
