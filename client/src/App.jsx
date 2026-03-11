@@ -26,6 +26,7 @@ function App() {
   const [filters, setFilters] = useState({
     industry: "All",
     continent: "All",
+    category: "All",
     is_seeking_funding: false,
     has_mvp: false,
   });
@@ -38,6 +39,10 @@ function App() {
     "All",
     ...new Set(startups.map((startup) => startup.continent)),
   ];
+  const uniqueCategories = [
+    "All",
+    ...new Set(startups.map((startup) => startup.category)),
+  ];
 
   const filteredStartups = startups.filter((startup) => {
     const matchSearch =
@@ -46,10 +51,16 @@ function App() {
 
     const matchIndustry =
       filters.industry === "All" || startup.industry === filters.industry;
+
     const matchContinent =
       filters.continent === "All" || startup.continent === filters.continent;
+
+    const matchCategory =
+      filters.category === "All" || startup.category === filters.category;
+
     const matchFunding =
       filters.is_seeking_funding === false ? true : startup.is_seeking_funding;
+
     const matchMVP = filters.has_mvp === false ? true : startup.has_mvp;
 
     return (
@@ -112,6 +123,7 @@ function App() {
     setFilters({
       industry: "All",
       continent: "All",
+      category: "All",
       is_seeking_funding: false,
       has_mvp: false,
     });
@@ -134,6 +146,7 @@ function App() {
     searchTerm !== "" ||
     filters.industry !== "All" ||
     filters.continent !== "All" ||
+    filters.category !== "All" ||
     filters.is_seeking_funding !== false ||
     filters.has_mvp !== false;
 
@@ -150,6 +163,7 @@ function App() {
         setFilters={setFilters}
         uniqueIndustries={uniqueIndustries}
         uniqueContinents={uniqueContinents}
+        uniqueCategories={uniqueCategories}
         filteredCount={filteredStartups.length}
         isFiltering={isFiltering}
         filteredStartups={filteredStartups}

@@ -24,6 +24,7 @@ function Header({
   setFilters,
   uniqueIndustries,
   uniqueContinents,
+  uniqueCategories,
   filteredCount,
   isFiltering,
 }) {
@@ -108,12 +109,13 @@ function Header({
           <div className="filter-bar">
             {/* Industry Select */}
             <select
+              value={filters.industry}
               onChange={(e) =>
                 setFilters({ ...filters, industry: e.target.value })
               }
             >
-              {uniqueIndustries.map((ind) => (
-                <option key={ind} value={ind}>
+              {uniqueIndustries.map((ind, i) => (
+                <option key={`ind-${ind}-${i}`} value={ind}>
                   {ind}
                 </option>
               ))}
@@ -121,16 +123,31 @@ function Header({
 
             {/* Continent Select */}
             <select
+              value={filters.continent}
               onChange={(e) =>
                 setFilters({ ...filters, continent: e.target.value })
               }
             >
-              {uniqueContinents.map((con) => (
-                <option key={con} value={con}>
+              {uniqueContinents.map((con, i) => (
+                <option key={`con-${con}-${i}`} value={con}>
                   {con}
                 </option>
               ))}
             </select>
+
+            <select
+              value={filters.category}
+              onChange={(e) =>
+                setFilters({ ...filters, category: e.target.value })
+              }
+            >
+              {uniqueCategories.map((cat, i) => (
+                <option key={`cat-${cat}-${i}`} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
+
             {/* Checkboxes */}
             <label className="checkbox-label">
               <input
