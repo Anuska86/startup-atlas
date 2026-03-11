@@ -186,13 +186,13 @@ function MapPage({ startups, theme }) {
           </div>
         </div>
         <MapContainer
-          key={theme}
           center={center}
           zoom={zoom}
           ref={setMap}
           style={{ height: "100%", width: "100%" }} // Ensure it fills the wrapper
         >
           <TileLayer
+            key={theme}
             url={
               theme === "light"
                 ? "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
