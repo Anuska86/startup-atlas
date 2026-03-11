@@ -1,4 +1,6 @@
 import "./styles/App.css";
+import { startups as fallbackData } from "./data/data.js";
+
 import HomePage from "./components/HomePage.jsx";
 import MapPage from "./components/MapPage.jsx";
 import ListPage from "./components/ListPage.jsx";
@@ -6,7 +8,7 @@ import StartupDetails from "./components/StartupDetails.jsx";
 import Header from "./components/Header.jsx";
 
 import { useState, useEffect } from "react";
-import { Routes, Route, Link, NavLink, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 function App() {
   const [startups, setStartups] = useState([]);
@@ -64,7 +66,12 @@ function App() {
     const matchMVP = filters.has_mvp === false ? true : startup.has_mvp;
 
     return (
-      matchSearch && matchIndustry && matchContinent && matchFunding && matchMVP
+      matchSearch &&
+      matchIndustry &&
+      matchContinent &&
+      matchCategory &&
+      matchFunding &&
+      matchMVP
     );
   });
 
@@ -78,15 +85,25 @@ function App() {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
-  //Fetching the data
+  //Fetching the data: First the Express Backend
   useEffect(() => {
     fetch("http://localhost:8000/api")
-      .then((res) => res.json())
-      .then((data) => setStartups(data))
-      .catch((err) => console.error("Error connecting to API:", err));
+      .then((res) => {
+        if (!res.ok) throw new Error("Server not reached");
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Connected to Express Server");
+        setStartups(data);
+      })
+      .catch((err) => {
+        console.warn("Using local data.js fallback");
+        setStartups(fallbackData);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
-  //Handle the search
+  //Handle the search: fist from the server, else fallback
 
   const handleSearch = async (e) => {
     if (e) e.preventDefault();
@@ -94,23 +111,38 @@ function App() {
 
     //If search is empty, then get all the data
     if (!searchTerm) {
-      const res = await fetch("http://localhost:8000/api");
-      const data = await res.json();
-      setStartups(data);
+      try {
+        const res = await fetch("http://localhost:8000/api");
+        const data = await res.json();
+        setStartups(data);
+      } catch (error) {
+        setStartups(fallbackData);
+      }
+
       setIsLoading(false);
       return;
     }
 
-    //Flexible path
+    //Try Express Search
 
     try {
       const res = await fetch(
         `http://localhost:8000/api/industry/${searchTerm}`,
       );
+
+      if (!res.ok) throw new Error();
       const data = await res.json();
       setStartups(Array.isArray(data) ? data : []);
     } catch (error) {
-      console.error("Search error:", error);
+      //Vercel fallback Search: data.js
+
+      console.log("Searching locally...");
+      const filtered = fallbackData.filter(
+        (s) =>
+          s.industry.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          s.name.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+      setStartups(filtered);
     } finally {
       setIsLoading(false);
     }
@@ -131,10 +163,13 @@ function App() {
 
     try {
       const res = await fetch("http://localhost:8000/api");
+      if (!res.ok) throw new Error();
+
       const data = await res.json();
       setStartups(data);
     } catch (error) {
       console.error("Error resetting atlas:", error);
+      setStartups(fallbackData);
     } finally {
       setIsLoading(false);
     }

@@ -216,7 +216,7 @@ function MapPage({ startups, theme }) {
                       <strong>{startup.industry}</strong>
                     </p>
                     <p>
-                      {startup.business_address.city}, {startup.country}
+                      {startup.city}, {startup.country}
                     </p>
                     <a href={startup.website} target="_blank" rel="noreferrer">
                       Visit Website

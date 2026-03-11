@@ -125,6 +125,56 @@
   padding-top: 30px;
 }
 
+/*Founders Section*/
+
+.founders-section {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.founders-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--neon-pink);
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.founders-display {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.founders-display::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--sky-aqua);
+}
+
+.founders-text {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Light Mode*/
+[data-theme="light"] .founders-display {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 /* Sidebar & Stats */
 .info-box {
   background: rgba(255, 255, 255, 0.03);

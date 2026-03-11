@@ -11,6 +11,7 @@ import {
   BiCheckShield,
   BiMap,
   BiCalendarAlt,
+  BiUserVoice,
 } from "react-icons/bi";
 
 function StartupDetails({ startups }) {
@@ -51,8 +52,8 @@ function StartupDetails({ startups }) {
           </div>
           <div className="details-meta">
             <span>
-              <BiMap className="meta-icon map-pin-color" /> {startup.country},{" "}
-              {startup.continent}
+              <BiMap className="meta-icon map-pin-color" /> {startup.city},{" "}
+              {startup.country}
             </span>
             <span>
               {" "}
@@ -71,6 +72,18 @@ function StartupDetails({ startups }) {
                 "The Atlas is currently gathering more description data for this startup."}
             </p>
           </div>
+          {/* Founders Section */}
+          <section className="info-section founders-section">
+            <h3>
+              <BiUserVoice /> Leadership
+            </h3>
+            <div className="founders-display">
+              <p className="founders-text">
+                {startup.founders ||
+                  "Information currently being updated by the Atlas team."}
+              </p>
+            </div>
+          </section>
 
           <div className="details-sidebar">
             <div className="info-box">
