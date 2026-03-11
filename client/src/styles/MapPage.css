@@ -102,6 +102,7 @@
 .map-popup p {
   margin: 2px 0;
   font-size: 0.9rem;
+  color: var(--text-secondary) !important;
 }
 
 .map-popup a {
