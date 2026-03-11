@@ -27,6 +27,7 @@ function Header({
   uniqueCategories,
   filteredCount,
   isFiltering,
+  isFilterActive,
 }) {
   const location = useLocation();
 
@@ -98,7 +99,7 @@ function Header({
                 </button>
               )}
             </div>
-            {isFiltering && (
+            {isFilterActive && (
               <div className="results-count-bar">
                 <p>
                   Found <strong>{filteredCount}</strong>{" "}

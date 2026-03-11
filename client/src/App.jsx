@@ -75,6 +75,15 @@ function App() {
     );
   });
 
+  //Are checkbox active
+
+  const isFilterActive =
+    filters.industry !== "All" ||
+    filters.continent !== "All" ||
+    filters.category !== "All" ||
+    filters.is_seeking_funding !== false ||
+    filters.has_mvp !== false;
+
   //Screen mode
 
   useEffect(() => {
@@ -205,6 +214,7 @@ function App() {
         uniqueCategories={uniqueCategories}
         filteredCount={filteredStartups.length}
         isFiltering={isFiltering}
+        isFilterActive={isFilterActive}
         filteredStartups={filteredStartups}
         showFilters={isSearchPage}
       />
