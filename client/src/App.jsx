@@ -185,6 +185,10 @@ function App() {
     filters.is_seeking_funding !== false ||
     filters.has_mvp !== false;
 
+  //Checking if the users in on searchable pages
+  const isSearchPage =
+    location.pathname === "/map" || location.pathname === "/list";
+
   return (
     <div className="app-div">
       <Header
@@ -202,6 +206,7 @@ function App() {
         filteredCount={filteredStartups.length}
         isFiltering={isFiltering}
         filteredStartups={filteredStartups}
+        showFilters={isSearchPage}
       />
       <main>
         <Routes>

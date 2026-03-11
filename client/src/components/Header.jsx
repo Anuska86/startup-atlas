@@ -76,103 +76,104 @@ function Header({
         </NavLink>
       </nav>
 
-      {location.pathname !== "/" && (
-        <div className="header-controls">
-          <div className="search-container">
-            <input
-              id="search-input"
-              type="text"
-              placeholder="Search by industry (e.g.AI)..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            />
-            <button className="search-btn" onClick={handleSearch}>
-              <BiSearch size={20} />
-              <span>Search</span>
-            </button>
-            {searchTerm && (
-              <button className="reset-btn" onClick={handleReset}>
-                <BiX size={20} /> Clear
+      {location.pathname !== "/" &&
+        !location.pathname.startsWith("/startup/") && (
+          <div className="header-controls">
+            <div className="search-container">
+              <input
+                id="search-input"
+                type="text"
+                placeholder="Search by industry (e.g.AI)..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              />
+              <button className="search-btn" onClick={handleSearch}>
+                <BiSearch size={20} />
+                <span>Search</span>
               </button>
-            )}
-          </div>
-          {isFiltering && (
-            <div className="results-count-bar">
-              <p>
-                Found <strong>{filteredCount}</strong>{" "}
-                {filteredCount === 1 ? "startup" : "startups"}
-              </p>
+              {searchTerm && (
+                <button className="reset-btn" onClick={handleReset}>
+                  <BiX size={20} /> Clear
+                </button>
+              )}
             </div>
-          )}
+            {isFiltering && (
+              <div className="results-count-bar">
+                <p>
+                  Found <strong>{filteredCount}</strong>{" "}
+                  {filteredCount === 1 ? "startup" : "startups"}
+                </p>
+              </div>
+            )}
 
-          <div className="filter-bar">
-            {/* Industry Select */}
-            <select
-              value={filters.industry}
-              onChange={(e) =>
-                setFilters({ ...filters, industry: e.target.value })
-              }
-            >
-              {uniqueIndustries.map((ind, i) => (
-                <option key={`ind-${ind}-${i}`} value={ind}>
-                  {ind}
-                </option>
-              ))}
-            </select>
-
-            {/* Continent Select */}
-            <select
-              value={filters.continent}
-              onChange={(e) =>
-                setFilters({ ...filters, continent: e.target.value })
-              }
-            >
-              {uniqueContinents.map((con, i) => (
-                <option key={`con-${con}-${i}`} value={con}>
-                  {con}
-                </option>
-              ))}
-            </select>
-
-            <select
-              value={filters.category}
-              onChange={(e) =>
-                setFilters({ ...filters, category: e.target.value })
-              }
-            >
-              {uniqueCategories.map((cat, i) => (
-                <option key={`cat-${cat}-${i}`} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-
-            {/* Checkboxes */}
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
+            <div className="filter-bar">
+              {/* Industry Select */}
+              <select
+                value={filters.industry}
                 onChange={(e) =>
-                  setFilters({
-                    ...filters,
-                    is_seeking_funding: e.target.checked,
-                  })
+                  setFilters({ ...filters, industry: e.target.value })
                 }
-              />
-              <BiDollarCircle size={20} /> Seeking Funding
-            </label>
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
+              >
+                {uniqueIndustries.map((ind, i) => (
+                  <option key={`ind-${ind}-${i}`} value={ind}>
+                    {ind}
+                  </option>
+                ))}
+              </select>
+
+              {/* Continent Select */}
+              <select
+                value={filters.continent}
                 onChange={(e) =>
-                  setFilters({ ...filters, has_mvp: e.target.checked })
+                  setFilters({ ...filters, continent: e.target.value })
                 }
-              />
-              <BiRocket size={20} /> Has MVP
-            </label>
+              >
+                {uniqueContinents.map((con, i) => (
+                  <option key={`con-${con}-${i}`} value={con}>
+                    {con}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                value={filters.category}
+                onChange={(e) =>
+                  setFilters({ ...filters, category: e.target.value })
+                }
+              >
+                {uniqueCategories.map((cat, i) => (
+                  <option key={`cat-${cat}-${i}`} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+
+              {/* Checkboxes */}
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  onChange={(e) =>
+                    setFilters({
+                      ...filters,
+                      is_seeking_funding: e.target.checked,
+                    })
+                  }
+                />
+                <BiDollarCircle size={20} /> Seeking Funding
+              </label>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  onChange={(e) =>
+                    setFilters({ ...filters, has_mvp: e.target.checked })
+                  }
+                />
+                <BiRocket size={20} /> Has MVP
+              </label>
+            </div>
           </div>
-        </div>
-      )}
+        )}
     </header>
   );
 }
