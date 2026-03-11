@@ -83,6 +83,13 @@
   background-color: var(--neon-pink) !important;
   color: white !important;
 }
+/*Fade when the theme changes*/
+
+.leaflet-tile-pane {
+  transition:
+    filter 0.5s ease-in-out,
+    opacity 0.5s ease-in-out;
+}
 
 /* POPUP CONTENT: Styling the text/links inside the box */
 .map-popup h3 {
