@@ -22,9 +22,9 @@ An interactive full-stack dashboard and mapping tool designed to visualize the g
 
 The Startup Atlas features a fully responsive design with integrated Dark and Light mode support to ensure readability in any environment.
 
-| Dark Mode (Dashboard)            | Light Mode (Dashboard)            |
-| -------------------------------- | --------------------------------- |
-| ![Home Dark](./public/HomeD.png) | ![Home Light](./public/HomeL.png) |
+| Dark Mode (Dashboard)                    | Light Mode (Dashboard)                    |
+| ---------------------------------------- | ----------------------------------------- |
+| ![Home Dark](./client//public/HomeD.png) | ![Home Light](./client//public/HomeL.png) |
 
 🗺️ Interactive Exploration
 
@@ -33,17 +33,17 @@ The mapping system uses Leaflet and Marker Clustering to visualize the global st
 - **Global Overview:** View startups distributed across continents.
 - **Precision Zoom:** Deep dive into specific tech hubs with custom industry icons.
 
-| Map View (Light)                | Detailed Hub Zoom                  |
-| ------------------------------- | ---------------------------------- |
-| ![Map Light](./public/MapL.png) | ![Map Zoom](./public/MapZoomL.png) |
+| Map View (Light)                       | Detailed Hub Zoom                         |
+| -------------------------------------- | ----------------------------------------- |
+| ![Map Light](./client/public/MapL.png) | ![Map Zoom](./client/public/MapZoomL.png) |
 
 🔍 Intelligence & Data:
 
 The platform provides a streamlined list view for quick filtering and a comprehensive details page for deep-dives into startup leadership and mission.
 
-| List Analytics                   | Startup Intelligence                      |
-| -------------------------------- | ----------------------------------------- |
-| ![List View](./public/ListL.png) | ![Startup Details](./public/DetailsD.png) |
+| List Analytics                          | Startup Intelligence                             |
+| --------------------------------------- | ------------------------------------------------ |
+| ![List View](./client/public/ListL.png) | ![Startup Details](./client/public/DetailsD.png) |
 
 🛠️ Tech Stack:
 
