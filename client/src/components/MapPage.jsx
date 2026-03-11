@@ -38,10 +38,6 @@ function MapPage({ startups, theme }) {
     const targetId = location.state?.startupId;
 
     if (flyToCoords && !hasFlown.current) {
-      console.group("Map Navigation Debug");
-      console.log("1. Target Coordinates:", flyToCoords);
-      console.log("2. Target Startup ID:", targetId);
-
       // If we have a specific destination, go there
 
       map.flyTo(flyToCoords, 14, {
@@ -60,14 +56,7 @@ function MapPage({ startups, theme }) {
             layer.openPopup();
             const iconElement = layer.getElement(); //Get the DOM element
 
-            console.log("3. Marker Layer Found:", layer);
-            console.log(
-              "4. DOM Element Status:",
-              iconElement ? "Visible" : "Not in DOM (Cluster?)",
-            );
-
             if (iconElement) {
-              console.log("5. Success! Adding jump class.");
               iconElement.classList.add("jumping-marker-active");
 
               //Remove class after jumps
@@ -75,18 +64,14 @@ function MapPage({ startups, theme }) {
               setTimeout(() => {
                 iconElement.classList.remove("jumping-marker-active");
               }, 2000);
-            } else {
-              console.warn(
-                "Target marker is likely hidden inside a Cluster. Animation cannot run.",
-              );
             }
+            e;
           }
         });
 
         if (!markerFound) {
-          console.error("6. Error: No marker found with ID:", targetId);
+          //console.error("6. Error: No marker found with ID:", targetId);
         }
-        console.groupEnd();
       }, 1700); //Wait for flight (1.5s)
 
       hasFlown.current = true; //DONE
