@@ -104,6 +104,9 @@ function Header({
                   Found <strong>{filteredCount}</strong>{" "}
                   {filteredCount === 1 ? "startup" : "startups"}
                 </p>
+                <button className="reset-all-filters-btn" onClick={handleReset}>
+                  <BiX size={18} /> Reset All Filters
+                </button>
               </div>
             )}
 

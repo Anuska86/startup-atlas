@@ -258,6 +258,8 @@
   }
 }
 
+/*BUTTONS*/
+
 /*Reset button*/
 
 .reset-btn {
@@ -276,4 +278,29 @@
   background-color: var(--neon-pink);
   color: white;
   box-shadow: 0 0 10px var(--neon-pink);
+}
+
+/*Reset filters button*/
+
+.reset-all-filters-btn {
+  background: none;
+  border: 1px solid var(--sky-aqua);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  margin-left: 6px;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+}
+
+.reset-all-filters-btn:hover {
+  opacity: 1;
+  background: #ff4d4d;
+  color: white;
+  border-color: #ff4d4d;
 }
