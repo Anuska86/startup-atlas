@@ -218,6 +218,17 @@ function MapPage({ startups, theme }) {
                     <p>
                       {startup.city}, {startup.country}
                     </p>
+                    {/* Growth and MVP Tags */}
+                    <div className="popup-tags">
+                      {startup.category && (
+                        <span className="startup-tag growth">
+                          {startup.category}
+                        </span>
+                      )}
+                      {startup.has_mvp && (
+                        <span className="startup-tag mvp">MVP</span>
+                      )}
+                    </div>
                     <a href={startup.website} target="_blank" rel="noreferrer">
                       Visit Website
                     </a>
