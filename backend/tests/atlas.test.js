@@ -24,7 +24,7 @@ describe("Startup Atlas - Path Parameters", () => {
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
 
-    expect(res.body.some((startup) => startup.name === "TechNova AI")).toBe(
+    expect(res.body.some((startup) => startup.name === "Mistral AI")).toBe(
       true,
     );
   });

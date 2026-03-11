@@ -22,9 +22,9 @@ An interactive full-stack dashboard and mapping tool designed to visualize the g
 
 The Startup Atlas features a fully responsive design with integrated Dark and Light mode support to ensure readability in any environment.
 
-| Dark Mode (Dashboard)                    | Light Mode (Dashboard)                    |
-| ---------------------------------------- | ----------------------------------------- |
-| ![Home Dark](./client//public/HomeD.png) | ![Home Light](./client//public/HomeL.png) |
+| Dark Mode (Dashboard)                   | Light Mode (Dashboard)                   |
+| --------------------------------------- | ---------------------------------------- |
+| ![Home Dark](./client/public/HomeD.png) | ![Home Light](./client/public/HomeL.png) |
 
 🗺️ Interactive Exploration
 
@@ -53,7 +53,8 @@ The platform provides a streamlined list view for quick filtering and a comprehe
 - Icons: React Icons (Bi-prefix)
 - Styling: Custom CSS3 with Dark/Light mode support
 
-🧪 Testing
+🧪 Testing:
+
 The backend is covered by a comprehensive suite of integration tests using Jest and Supertest. These tests ensure API reliability and strict data validation.
 
 Key Test Coverage:
@@ -70,6 +71,8 @@ To run the tests:
 
 cd server
 npm test
+
+![Jest Test](./client/public/jest-test.png)
 
 🚧 Work in Progress:
 
