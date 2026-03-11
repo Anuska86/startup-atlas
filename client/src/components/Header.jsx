@@ -153,9 +153,11 @@ function Header({
               </select>
 
               {/* Checkboxes */}
+              {/* Seeking Funding Checkbox */}
               <label className="checkbox-label">
                 <input
                   type="checkbox"
+                  checked={filters.is_seeking_funding}
                   onChange={(e) =>
                     setFilters({
                       ...filters,
@@ -165,9 +167,11 @@ function Header({
                 />
                 <BiDollarCircle size={20} /> Seeking Funding
               </label>
+              {/* Has MVP Checkbox */}
               <label className="checkbox-label">
                 <input
                   type="checkbox"
+                  checked={filters.has_mvp}
                   onChange={(e) =>
                     setFilters({ ...filters, has_mvp: e.target.checked })
                   }
