@@ -29,7 +29,7 @@ function MapPage({ startups, theme }) {
   const zoom = 3;
 
   useEffect(() => {
-    if (!map) return;
+    if (!map || !map.getContainer()) return;
 
     // 1. Force Leaflet to recalculate its container size
     map.invalidateSize();
