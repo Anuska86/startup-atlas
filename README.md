@@ -53,6 +53,24 @@ The platform provides a streamlined list view for quick filtering and a comprehe
 - Icons: React Icons (Bi-prefix)
 - Styling: Custom CSS3 with Dark/Light mode support
 
+🧪 Testing
+The backend is covered by a comprehensive suite of integration tests using Jest and Supertest. These tests ensure API reliability and strict data validation.
+
+Key Test Coverage:
+
+- Path Parameter Validation: Verifies dynamic routing for industries and prevents invalid field access with 400 Bad Request responses.
+
+- Complex Query Filtering: Ensures multiple filters (e.g., industry=AI&has_mvp=true) return correct, narrowed-down results.
+
+Boolean Logic Handling: Confirms the API correctly parses string-based query booleans into functional database logic.
+
+- Global Error Handling: Validates custom 404 Not Found responses for non-existent endpoints.
+
+To run the tests:
+
+cd server
+npm test
+
 🚧 Work in Progress:
 
 I am currently transitioning the data architecture from a static local environment to a live Supabase backend.
