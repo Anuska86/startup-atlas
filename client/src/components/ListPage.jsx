@@ -29,14 +29,14 @@ function ListPage({ startups, isLoading, onReset }) {
               {startup.is_seeking_funding && (
                 <div className="funding-badge">Seeking Funding </div>
               )}
-              <div className="founded-year">
-                <BiCalendarAlt size={26} />
-                Founded : {startup.founded}
-              </div>
             </div>
 
             <div className="card-header">
               <h2>{startup.name}</h2>
+            </div>
+            <div className="founded-year">
+              <BiCalendarAlt size={18} />
+              Founded : {startup.founded}
             </div>
 
             <div className="card-details">
