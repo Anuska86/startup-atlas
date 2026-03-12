@@ -46,39 +46,40 @@
 
 .card-header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 12px;
-  padding-right: 120px;
+  margin-bottom: 15px;
+  padding-right: 0;
+  gap: 5px;
 }
 
 .startup-card h2 {
   color: var(--sky-aqua);
-  font-size: 1.5rem;
-  margin: 2px;
-  text-align: center;
+  font-size: 1.4rem;
+  margin: 0;
+  margin-top: 5px;
+  text-align: left;
+  line-height: 1.2;
 }
 
 .card-right-info {
   position: absolute;
   top: 0;
   right: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
+  z-index: 10;
 }
 
 .founded-year {
-  margin-right: 15px;
-  font-size: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 4px 8px;
+  font-size: 0.8rem;
+  color: var(--text-color);
+  background: transparent;
+  padding: 0;
+  margin: 0;
   border-radius: 6px;
   display: flex;
   align-items: center;
-  gap: 5px;
-  opacity: 0.6;
+  gap: 6px;
+  opacity: 0.7;
 }
 .funding-badge {
   background: var(--neon-pink);
