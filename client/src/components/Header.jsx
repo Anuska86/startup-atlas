@@ -35,7 +35,7 @@ function Header({
     <header className="app-header">
       <div className="header-top">
         <h1>Startup Atlas</h1>
-        <button className="theme-btn" onClick={toggleTheme}>
+        <button className="theme-btn" onClick={toggleTheme} aria-label="theme-btn">
           {theme === "light" ? (
             <>
               <BiMoon size={18} />
