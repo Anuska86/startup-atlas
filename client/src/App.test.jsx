@@ -1,13 +1,14 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import App from "./App";
+import { vi } from "vitest";
 
 // 1. Mocking the global fetch API
-global.fetch = jest.fn();
+global.fetch = vi.fn();
 
 describe("App Component Logic", () => {
   beforeEach(() => {
-    fetch.mockClear();
+    vi.clearAllMocks();
   });
 
   test("renders Header and main navigation", async () => {
@@ -21,13 +22,19 @@ describe("App Component Logic", () => {
         <App />
       </MemoryRouter>,
     );
-
-    // Fixed: changed getByTest to getByText
-    const titleElement = screen.getByText(/Startup Atlas/i);
-    expect(titleElement).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.getByRole("heading", { name: /Startup Atlas/i }),
+      ).toBeInTheDocument();
+    });
   });
 
-  test("toggles theme between light and dark", () => {
+  test("toggles theme between light and dark", async () => {
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => [],
+    });
+
     render(
       <MemoryRouter>
         <App />
@@ -39,26 +46,28 @@ describe("App Component Logic", () => {
     const initialTheme = document.documentElement.getAttribute("data-theme");
 
     fireEvent.click(themeBtn);
-
-    const newTheme = document.documentElement.getAttribute("data-theme");
-    expect(newTheme).not.toBe(initialTheme);
+    await waitFor(() => {
+      const newTheme = document.documentElement.getAttribute("data-theme");
+      expect(newTheme).not.toBe(initialTheme);
+    });
   });
 
   test("uses fallback data when server fetch fails", async () => {
     fetch.mockRejectedValueOnce(new Error("Server Down"));
 
     render(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={["/list"]}>
         <App />
       </MemoryRouter>,
     );
 
-    await waitFor(() => {
-      // Logic checks if either Zolar or Canva (from your fallback data) appears
-      expect(
-        screen.queryByText(/Zolar/i) || screen.queryByText(/Canva/i),
-      ).toBeInTheDocument();
-    });
+    const fallbackItem = await screen.findByText(
+      /Zolar/i,
+      {},
+      { timeout: 3000 },
+    );
+
+    expect(fallbackItem).toBeInTheDocument();
   });
 
   test("filtering by 'Has MVP' checkbox updates the displayed results", async () => {
