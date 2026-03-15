@@ -35,7 +35,11 @@ function Header({
     <header className="app-header">
       <div className="header-top">
         <h1>Startup Atlas</h1>
-        <button className="theme-btn" onClick={toggleTheme}>
+        <button
+          className="theme-btn"
+          onClick={toggleTheme}
+          aria-label="theme-btn"
+        >
           {theme === "light" ? (
             <>
               <BiMoon size={18} />
@@ -157,6 +161,7 @@ function Header({
               {/* Seeking Funding Checkbox */}
               <label className="checkbox-label">
                 <input
+                  id="seeking-funding"
                   type="checkbox"
                   checked={filters.is_seeking_funding}
                   onChange={(e) =>
@@ -171,6 +176,7 @@ function Header({
               {/* Has MVP Checkbox */}
               <label className="checkbox-label">
                 <input
+                  id="has-mvp"
                   type="checkbox"
                   checked={filters.has_mvp}
                   onChange={(e) =>
