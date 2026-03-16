@@ -61,8 +61,10 @@ function App() {
 
   const filteredStartups = startups.filter((startup) => {
     const matchSearch =
-      startup.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      startup.industry.toLowerCase().includes(searchTerm.toLowerCase());
+      (startup.name?.toLowerCase() || "").includes(searchTerm.toLowerCase()) ||
+      (startup.industry?.toLowerCase() || "").includes(
+        searchTerm.toLowerCase(),
+      );
 
     const matchIndustry =
       filters.industry === "All" || startup.industry === filters.industry;
