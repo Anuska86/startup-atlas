@@ -36,16 +36,28 @@ function App() {
 
   const uniqueIndustries = [
     "All",
-    ...new Set(startups.map((startup) => startup.industry)),
-  ];
+    ...new Set(
+      startups
+        .map((s) => s.industry)
+        .filter((value) => value && value.trim() !== ""),
+    ),
+  ].sort();
   const uniqueContinents = [
     "All",
-    ...new Set(startups.map((startup) => startup.continent)),
-  ];
+    ...new Set(
+      startups
+        .map((s) => s.continent)
+        .filter((value) => value && value.trim() !== ""),
+    ),
+  ].sort();
   const uniqueCategories = [
     "All",
-    ...new Set(startups.map((startup) => startup.category)),
-  ];
+    ...new Set(
+      startups
+        .map((s) => s.category)
+        .filter((value) => value && value.trim() !== ""),
+    ),
+  ].sort();
 
   const filteredStartups = startups.filter((startup) => {
     const matchSearch =
