@@ -1,5 +1,6 @@
 import "./styles/App.css";
 import { startups as fallbackData } from "./data/data.js";
+import { supabase } from "./supabaseClient.js";
 
 import HomePage from "./components/HomePage.jsx";
 import MapPage from "./components/MapPage.jsx";
@@ -94,25 +95,32 @@ function App() {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
-  //Fetching the data: First the Express Backend
+  //Initial Fetch: first supabase, then fallback data.js
+
   useEffect(() => {
-    fetch("http://localhost:8000/api")
-      .then((res) => {
-        if (!res.ok) throw new Error("Server not reached");
-        return res.json();
-      })
-      .then((data) => {
-        console.log("Connected to Express Server");
+    const getInitialData = async () => {
+      setIsLoading(true);
+      try {
+        const { data, error } = await supabase.from("startups").select("*");
+
+        if (error) throw error;
+
+        console.log("🚀 Supabase Success! Data found:", data);
         setStartups(data);
-      })
-      .catch((err) => {
-        console.warn("Using local data.js fallback");
+      } catch (error) {
+        console.warn(
+          "Supabase unreacheable.Using local data.js fallback",
+          error,
+        );
         setStartups(fallbackData);
-      })
-      .finally(() => setIsLoading(false));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getInitialData();
   }, []);
 
-  //Handle the search: fist from the server, else fallback
+  //Handle the search: fist supabase, else fallback data
 
   const handleSearch = async (e) => {
     if (e) e.preventDefault();
@@ -120,32 +128,23 @@ function App() {
 
     //If search is empty, then get all the data
     if (!searchTerm) {
-      try {
-        const res = await fetch("http://localhost:8000/api");
-        const data = await res.json();
-        setStartups(data);
-      } catch (error) {
-        setStartups(fallbackData);
-      }
-
-      setIsLoading(false);
+      handleReset();
       return;
     }
 
-    //Try Express Search
+    //Search name OR industry for the search term
 
     try {
-      const res = await fetch(
-        `http://localhost:8000/api/industry/${searchTerm}`,
+      const { data, error } = (await supabase.from("startups").select("*")).or(
+        `name.ilike.%${searchTerm}%,industry.ilike.%${searchTerm}%`,
       );
 
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      setStartups(Array.isArray(data) ? data : []);
+      if (error) throw error;
+      setStartups(data);
     } catch (error) {
       //Vercel fallback Search: data.js
 
-      console.log("Searching locally...");
+      console.log("Supabase search failed, searching locally...");
       const filtered = fallbackData.filter(
         (s) =>
           s.industry.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -171,10 +170,10 @@ function App() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/api");
-      if (!res.ok) throw new Error();
+      const { data, error } = await supabase.from("startups").select("*");
 
-      const data = await res.json();
+      if (error) throw new Error();
+
       setStartups(data);
     } catch (error) {
       console.error("Error resetting atlas:", error);
