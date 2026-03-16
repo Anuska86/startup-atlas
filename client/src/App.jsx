@@ -106,6 +106,7 @@ function App() {
         if (error) throw error;
 
         console.log("🚀 Supabase Success! Data found:", data);
+        setStartups(data);
       } catch (error) {
         console.warn(
           "Supabase unreacheable.Using local data.js fallback",
@@ -119,7 +120,7 @@ function App() {
     getInitialData();
   }, []);
 
-  //Handle the search: fist from the server, else fallback
+  //Handle the search: fist supabase, else fallback data
 
   const handleSearch = async (e) => {
     if (e) e.preventDefault();
@@ -127,32 +128,23 @@ function App() {
 
     //If search is empty, then get all the data
     if (!searchTerm) {
-      try {
-        const res = await fetch("http://localhost:8000/api");
-        const data = await res.json();
-        setStartups(data);
-      } catch (error) {
-        setStartups(fallbackData);
-      }
-
-      setIsLoading(false);
+      handleReset();
       return;
     }
 
-    //Try Express Search
+    //Search name OR industry for the search term
 
     try {
-      const res = await fetch(
-        `http://localhost:8000/api/industry/${searchTerm}`,
+      const { data, error } = (await supabase.from("startups").select("*")).or(
+        `name.ilike.%${searchTerm}%,industry.ilike.%${searchTerm}%`,
       );
 
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      setStartups(Array.isArray(data) ? data : []);
+      if (error) throw error;
+      setStartups(data);
     } catch (error) {
       //Vercel fallback Search: data.js
 
-      console.log("Searching locally...");
+      console.log("Supabase search failed, searching locally...");
       const filtered = fallbackData.filter(
         (s) =>
           s.industry.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -178,10 +170,10 @@ function App() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/api");
-      if (!res.ok) throw new Error();
+      const { data, error } = await supabase.from("startups").select("*");
 
-      const data = await res.json();
+      if (error) throw new Error();
+
       setStartups(data);
     } catch (error) {
       console.error("Error resetting atlas:", error);
