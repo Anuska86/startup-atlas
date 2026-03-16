@@ -1,5 +1,6 @@
 import "./styles/App.css";
 import { startups as fallbackData } from "./data/data.js";
+import { supabase } from "./supabaseClient.js";
 
 import HomePage from "./components/HomePage.jsx";
 import MapPage from "./components/MapPage.jsx";
