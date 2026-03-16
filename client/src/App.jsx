@@ -95,22 +95,28 @@ function App() {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
-  //Fetching the data: First the Express Backend
+  //Initial Fetch: first supabase, then fallback data.js
+
   useEffect(() => {
-    fetch("http://localhost:8000/api")
-      .then((res) => {
-        if (!res.ok) throw new Error("Server not reached");
-        return res.json();
-      })
-      .then((data) => {
-        console.log("Connected to Express Server");
-        setStartups(data);
-      })
-      .catch((err) => {
-        console.warn("Using local data.js fallback");
+    const getInitialData = async () => {
+      setIsLoading(true);
+      try {
+        const { data, error } = await supabase.from("startups").select("*");
+
+        if (error) throw error;
+
+        console.log("🚀 Supabase Success! Data found:", data);
+      } catch (error) {
+        console.warn(
+          "Supabase unreacheable.Using local data.js fallback",
+          error,
+        );
         setStartups(fallbackData);
-      })
-      .finally(() => setIsLoading(false));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getInitialData();
   }, []);
 
   //Handle the search: fist from the server, else fallback
