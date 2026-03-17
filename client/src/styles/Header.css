@@ -191,6 +191,20 @@
   box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
 }
 
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-group span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .checkbox-label {
   display: flex;
   align-items: center;

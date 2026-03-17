@@ -121,45 +121,57 @@ function Header({
 
             <div className="filter-bar">
               {/* Industry Select */}
-              <select
-                value={filters.industry}
-                onChange={(e) =>
-                  setFilters({ ...filters, industry: e.target.value })
-                }
-              >
-                {uniqueIndustries.map((ind, i) => (
-                  <option key={`ind-${ind}-${i}`} value={ind}>
-                    {ind}
-                  </option>
-                ))}
-              </select>
+              <div className="filter-group">
+                <span>Industry</span>
+                <select
+                  value={filters.industry}
+                  onChange={(e) =>
+                    setFilters({ ...filters, industry: e.target.value })
+                  }
+                >
+                  <option value="All">All Industries</option>
+                  {uniqueIndustries.map((ind, i) => (
+                    <option key={`ind-${ind}-${i}`} value={ind}>
+                      {ind}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
               {/* Continent Select */}
-              <select
-                value={filters.continent}
-                onChange={(e) =>
-                  setFilters({ ...filters, continent: e.target.value })
-                }
-              >
-                {uniqueContinents.map((con, i) => (
-                  <option key={`con-${con}-${i}`} value={con}>
-                    {con}
-                  </option>
-                ))}
-              </select>
+              <div className="filter-group">
+                <span>Location</span>
+                <select
+                  value={filters.continent}
+                  onChange={(e) =>
+                    setFilters({ ...filters, continent: e.target.value })
+                  }
+                >
+                  <option value="All">All Continents</option>
+                  {uniqueContinents.map((con, i) => (
+                    <option key={`con-${con}-${i}`} value={con}>
+                      {con}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-              <select
-                value={filters.category}
-                onChange={(e) =>
-                  setFilters({ ...filters, category: e.target.value })
-                }
-              >
-                {uniqueCategories.map((cat, i) => (
-                  <option key={`cat-${cat}-${i}`} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
+              {/* Category Select */}
+              <div className="filter-group">
+                <select
+                  value={filters.category}
+                  onChange={(e) =>
+                    setFilters({ ...filters, category: e.target.value })
+                  }
+                >
+                  <option value="All">All Categories</option>
+                  {uniqueCategories.map((cat, i) => (
+                    <option key={`cat-${cat}-${i}`} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
               {/* Checkboxes */}
               {/* Seeking Funding Checkbox */}
