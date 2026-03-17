@@ -162,6 +162,7 @@ function Header({
 
               {/* Category Select */}
               <div className="filter-group">
+                <span>Category</span>
                 <select
                   value={filters.category}
                   onChange={(e) =>
