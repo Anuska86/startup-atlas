@@ -52,7 +52,8 @@ function StartupDetails({ startups }) {
           </div>
           <div className="details-meta">
             <span>
-              <BiMap className="meta-icon map-pin-color" /> {startup.city},{" "}
+              <BiMap className="meta-icon map-pin-color" />{" "}
+              {startup.city && `${startup.city}, `}
               {startup.country}
             </span>
             <span>
