@@ -68,7 +68,7 @@ function Header({
           <button
             className="theme-btn-pill"
             onClick={toggleTheme}
-            aria-label="Toggle Theme"
+            aria-label="Toggle"
           >
             {theme === "light" ? (
               <>
