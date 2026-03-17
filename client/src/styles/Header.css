@@ -1,7 +1,7 @@
 /*App Header*/
 
 .app-header {
-  background-color: rgba(10, 10, 20, 0.95);
+  background-color: var(--main-bg);
   backdrop-filter: blur(10px);
   padding: 0.8rem 2rem;
   border-bottom: 1px solid var(--border-color);
@@ -61,7 +61,7 @@
 .view-nav {
   display: flex;
   flex: 1;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
   margin-bottom: 0;
 }
@@ -158,22 +158,6 @@
 
 [data-theme="light"] .search-btn {
   box-shadow: 0 4px 12px rgba(114, 9, 183, 0.2);
-}
-
-/*Theme button*/
-
-.theme-btn {
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 8px;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.9rem;
 }
 
 /*Filter bar*/

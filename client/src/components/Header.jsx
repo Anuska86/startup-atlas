@@ -33,53 +33,57 @@ function Header({
 
   return (
     <header className="app-header">
-      <div className="header-top">
+      <div className="header-top-row">
+        <nav className="view-nav">
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            <BiHomeAlt size={20} /> Home
+          </NavLink>
+          <NavLink
+            to="/list"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            <BiListUl size={20} /> List View
+          </NavLink>
+          <NavLink
+            to="/map"
+            className={({ isActive }) =>
+              isActive ? "nav-link icon-link active" : "nav-link icon-link"
+            }
+          >
+            <BiMapAlt size={20} /> Map View
+          </NavLink>
+        </nav>
+
         <h1>Startup Atlas</h1>
-        <button
-          className="theme-btn"
-          onClick={toggleTheme}
-          aria-label="theme-btn"
-        >
-          {theme === "light" ? (
-            <>
-              <BiMoon size={18} />
-              <span>Dark Mode</span>
-            </>
-          ) : (
-            <>
-              <BiSun size={18} />
-              <span>Light Mode</span>
-            </>
-          )}
-        </button>
+
+        <div className="theme-btn">
+          <button
+            className="theme-btn-pill"
+            onClick={toggleTheme}
+            aria-label="Toggle Theme"
+          >
+            {theme === "light" ? (
+              <>
+                <BiMoon size={18} />
+                <span>Dark Mode</span>
+              </>
+            ) : (
+              <>
+                <BiSun size={18} />
+                <span>Light Mode</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
-      <nav className="view-nav">
-        <NavLink
-          to="/"
-          end
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
-          <BiHomeAlt size={20} /> Home
-        </NavLink>
-        <NavLink
-          to="/list"
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
-          <BiListUl size={20} /> List View
-        </NavLink>
-        <NavLink
-          to="/map"
-          className={({ isActive }) =>
-            isActive ? "nav-link icon-link active" : "nav-link icon-link"
-          }
-        >
-          <BiMapAlt size={20} /> Map View
-        </NavLink>
-      </nav>
 
       {location.pathname !== "/" &&
         !location.pathname.startsWith("/startup/") && (

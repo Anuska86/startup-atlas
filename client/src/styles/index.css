@@ -9,7 +9,7 @@
   --neon-purple-light: #bc59ff;
   --electric-sapphire: #4361ee;
   --sky-aqua: #4cc9f0;
-  --dark-bg: #0b090a;
+  --main-bg: #0b090a;
   --card-bg: #161a1d;
   --text-color: #f5f3f4;
   --text-secondary: #adb5bd;
@@ -19,7 +19,7 @@
 }
 
 [data-theme="light"] {
-  --dark-bg: #f8f9fa;
+  --main-bg: #f8f9fa;
   --card-bg: #efedf6;
   --text-color: #1a1c2c;
   --text-secondary: #52577a;
@@ -36,7 +36,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--dark-bg);
+  background-color: var(--main-bg);
   color: var(--text-color);
   transition:
     background-color 0.3s ease,
@@ -81,32 +81,28 @@ button:focus-visible {
 
 .theme-btn {
   display: flex;
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 2000;
+  flex: 1;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: center;
+}
+
+.theme-btn-pill {
+  display: flex;
+  align-items: center;
   gap: 8px;
+  background-color: var(--neon-pink);
+  color: white;
   padding: 8px 16px;
+  border-radius: 30px;
+  border: none;
   cursor: pointer;
-  border-radius: 20px;
-  border: 1px solid var(--border-color);
-  background: var(--card-bg);
-  color: var(--text-color);
-  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
 }
 
-.theme-btn svg {
-  transition: transform 0.4s ease;
-}
-
-.theme-btn:hover {
-  border-color: var(--sky-aqua);
-  box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
-}
-
-.theme-btn:hover svg {
-  transform: rotate(15deg);
-  color: var(--sky-aqua);
+.theme-btn-pill:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(247, 37, 133, 0.4);
 }
