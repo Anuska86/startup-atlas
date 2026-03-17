@@ -81,7 +81,7 @@ button:focus-visible {
 
 .theme-btn {
   display: flex;
-  flex: 1;
+  flex: 0 1 auto;
   justify-content: flex-end;
   align-items: center;
 }
