@@ -23,7 +23,7 @@ function Header({
   filters,
   setFilters,
   uniqueIndustries,
-  uniqueContinents,
+  uniqueCountries,
   uniqueCategories,
   filteredCount,
   isFiltering,
@@ -130,29 +130,33 @@ function Header({
                   }
                 >
                   <option value="All">All Industries</option>
-                  {uniqueIndustries.map((ind, i) => (
-                    <option key={`ind-${ind}-${i}`} value={ind}>
-                      {ind}
-                    </option>
-                  ))}
+                  {uniqueIndustries
+                    .filter((ind) => ind !== "All")
+                    .map((ind, i) => (
+                      <option key={`ind-${ind}-${i}`} value={ind}>
+                        {ind}
+                      </option>
+                    ))}
                 </select>
               </div>
 
-              {/* Continent Select */}
+              {/* Location Select */}
               <div className="filter-group">
                 <span>Location</span>
                 <select
-                  value={filters.continent}
+                  value={filters.country}
                   onChange={(e) =>
-                    setFilters({ ...filters, continent: e.target.value })
+                    setFilters({ ...filters, country: e.target.value })
                   }
                 >
-                  <option value="All">All Continents</option>
-                  {uniqueContinents.map((con, i) => (
-                    <option key={`con-${con}-${i}`} value={con}>
-                      {con}
-                    </option>
-                  ))}
+                  <option value="All">All Countries</option>
+                  {uniqueCountries
+                    .filter((con) => con !== "All")
+                    .map((con, i) => (
+                      <option key={`con-${con}-${i}`} value={con}>
+                        {con}
+                      </option>
+                    ))}
                 </select>
               </div>
 
@@ -165,11 +169,13 @@ function Header({
                   }
                 >
                   <option value="All">All Categories</option>
-                  {uniqueCategories.map((cat, i) => (
-                    <option key={`cat-${cat}-${i}`} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
+                  {uniqueCategories
+                    .filter((cat) => cat !== "All")
+                    .map((cat, i) => (
+                      <option key={`cat-${cat}-${i}`} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
                 </select>
               </div>
 

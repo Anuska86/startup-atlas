@@ -42,11 +42,11 @@ function App() {
         .filter((value) => value && value.trim() !== ""),
     ),
   ].sort();
-  const uniqueContinents = [
+  const uniqueCountries = [
     "All",
     ...new Set(
       startups
-        .map((s) => s.continent)
+        .map((s) => s.country)
         .filter((value) => value && value.trim() !== ""),
     ),
   ].sort();
@@ -223,7 +223,7 @@ function App() {
         filters={filters}
         setFilters={setFilters}
         uniqueIndustries={uniqueIndustries}
-        uniqueContinents={uniqueContinents}
+        uniqueCountries={uniqueCountries}
         uniqueCategories={uniqueCategories}
         filteredCount={filteredStartups.length}
         isFiltering={isFiltering}
