@@ -15,6 +15,13 @@
   transition: all 0.3s ease-in-out;
 }
 
+.traditional-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
 .header-top-row {
   display: flex;
   justify-content: space-between;
@@ -25,7 +32,15 @@
   gap: 20px;
 }
 
-.header-top-row h1 {
+.header-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+
+.header-brand-link h1 {
   flex: 1;
   text-align: center;
   font-size: 1.5rem;
@@ -61,8 +76,8 @@
 /*Nav*/
 .view-nav {
   display: flex;
-  flex: 0 1 auto;
-  justify-content: flex-start;
+  flex: 1;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 0;
 }

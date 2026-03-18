@@ -1,4 +1,5 @@
 import "../styles/Header.css";
+import { StartupAtlasLogo } from "./Logo.jsx";
 
 import { NavLink, useLocation } from "react-router-dom";
 import {
@@ -33,7 +34,11 @@ function Header({
 
   return (
     <header className="app-header">
-      <div className="header-top-row">
+      <div className="header-top-row traditional-layout">
+        <NavLink to="/" className="header-brand-link">
+          <StartupAtlasLogo />
+          <h1 className="header-title">Startup Atlas</h1>
+        </NavLink>
         <nav className="view-nav">
           <NavLink
             to="/"
@@ -61,8 +66,6 @@ function Header({
             <BiMapAlt size={20} /> Map View
           </NavLink>
         </nav>
-
-        <h1>Startup Atlas</h1>
 
         <div className="theme-btn">
           <button
