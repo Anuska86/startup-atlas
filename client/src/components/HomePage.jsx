@@ -70,12 +70,6 @@ function HomePage({ startups }) {
             <BiListUl size={26} /> Browse List
           </Link>
         </div>
-
-        {/*Project Disclaimer*/}
-        <div className="project-disclaimer">
-          <span className="disclaimer-tag">Portfolio Project</span>
-          <p>Data shown is simulated for demonstration purposes</p>
-        </div>
       </section>
 
       {/* SECTION 2: INTRODUCTION (Middle) */}

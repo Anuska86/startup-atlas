@@ -7,6 +7,7 @@ import MapPage from "./components/MapPage.jsx";
 import ListPage from "./components/ListPage.jsx";
 import StartupDetails from "./components/StartupDetails.jsx";
 import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
 
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -262,6 +263,7 @@ function App() {
           />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }
