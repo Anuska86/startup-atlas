@@ -1,7 +1,5 @@
 import React from "react";
-
 import "../styles/StartupDetails.css";
-
 import { useParams, useNavigate } from "react-router-dom";
 import {
   BiArrowBack,
@@ -12,13 +10,16 @@ import {
   BiMap,
   BiCalendarAlt,
   BiUserVoice,
+  BiTargetLock,
+  BiExclude,
+  BiCodeBlock,
 } from "react-icons/bi";
 
 function StartupDetails({ startups }) {
-  const { id } = useParams(); //Grabing the id from the url
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const startup = startups.find((startup) => startup.id == id); //important to use == instead of === in case tgat te ID is a string in the url but a number in a data
+  const startup = startups.find((startup) => startup.id == id);
 
   if (!startup) {
     return (
@@ -33,7 +34,6 @@ function StartupDetails({ startups }) {
 
   return (
     <div className="details-page-container">
-      {/* Navigation Header */}
       <button className="back-nav-btn" onClick={() => navigate(-1)}>
         <BiArrowBack /> Back to Atlas
       </button>
@@ -57,7 +57,6 @@ function StartupDetails({ startups }) {
               {startup.country}
             </span>
             <span>
-              {" "}
               <BiCalendarAlt className="meta-icon calendar-color" />
               Founded: {startup.founded}
             </span>
@@ -67,26 +66,68 @@ function StartupDetails({ startups }) {
         {/* Content Grid */}
         <div className="details-content-grid">
           <div className="details-description">
-            <h3>Mission & Vision</h3>
-            <p>
-              {startup.description ||
-                "The Atlas is currently gathering more description data for this startup."}
-            </p>
+            {/* 1. Main Mission & Vision */}
+            <section className="info-block">
+              <h3>Mission & Vision</h3>
+              <p>{startup.description || "Gathering mission data..."}</p>
+            </section>
+
+            {/* Problem Solved */}
+            {startup.problem_solved && (
+              <section className="info-block problem-section">
+                <h3>
+                  <BiExclude /> The Problem
+                </h3>
+                <p>{startup.problem_solved}</p>
+              </section>
+            )}
+
+            {/* Deep Dive / Long Description */}
+            {startup.long_description && (
+              <section className="info-block deep-dive-section">
+                <h3>Detailed Analysis</h3>
+                <p className="long-desc-text">{startup.long_description}</p>
+              </section>
+            )}
           </div>
-          {/* Founders Section */}
-          <section className="info-section founders-section">
-            <h3>
-              <BiUserVoice /> Leadership
-            </h3>
-            <div className="founders-display">
-              <p className="founders-text">
-                {startup.founders ||
-                  "Information currently being updated by the Atlas team."}
-              </p>
-            </div>
-          </section>
 
           <div className="details-sidebar">
+            {/* Leadership Section */}
+            <section className="info-section sidebar-box">
+              <h3>
+                <BiUserVoice /> Leadership
+              </h3>
+              <p className="founders-text">
+                {startup.founders || "Information being updated..."}
+              </p>
+            </section>
+
+            {/* Target Market */}
+            {startup.target_market && (
+              <div className="info-box market-box">
+                <h4>
+                  <BiTargetLock /> Target Market
+                </h4>
+                <p>{startup.target_market}</p>
+              </div>
+            )}
+
+            {/* Tech Stack  */}
+            {startup.tech_stack && startup.tech_stack.length > 0 && (
+              <div className="info-box tech-box">
+                <h4>
+                  <BiCodeBlock /> Core Tech
+                </h4>
+                <div className="tech-badge-container">
+                  {startup.tech_stack.map((tech, index) => (
+                    <span key={index} className="tech-tag">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="info-box">
               <h4>Industry Stats</h4>
               <ul>
@@ -99,17 +140,18 @@ function StartupDetails({ startups }) {
                 <li>
                   <span>
                     <BiRocket /> <strong>Stage:</strong>
-                  </span>
+                  </span>{" "}
                   {startup.has_mvp ? "Post-MVP" : "Pre-MVP"}
                 </li>
                 <li>
                   <span>
                     <BiDollarCircle /> <strong>Investment:</strong>
-                  </span>
+                  </span>{" "}
                   {startup.is_seeking_funding ? "Open" : "Closed"}
                 </li>
               </ul>
             </div>
+
             {startup.website && (
               <a
                 href={startup.website}
