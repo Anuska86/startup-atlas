@@ -1,9 +1,10 @@
 .app-footer {
   margin-top: auto;
   padding: 40px 20px;
-  background: rgba(0, 0, 0, 0.2);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: var(--main-bg);
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  transition: background 0.3s ease;
 }
 
 /*Content*/
@@ -18,6 +19,8 @@
   text-align: center;
 }
 
+/*Badge*/
+
 .footer-badge {
   display: inline-block;
   font-size: 0.65rem;
@@ -28,7 +31,13 @@
   border-radius: 4px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+[data-theme="light"] .footer-badge {
+  background: rgba(0, 119, 182, 0.1);
+  color: var(--sky-aqua);
+  border-color: var(--sky-aqua);
 }
 
 /*Note*/
