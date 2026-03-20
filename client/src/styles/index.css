@@ -1,5 +1,11 @@
 /*BASE*/
 
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 /*Palette*/
 
 :root {
@@ -42,6 +48,7 @@ body {
     background-color 0.3s ease,
     color 0.3s ease;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 /*Typhography*/
