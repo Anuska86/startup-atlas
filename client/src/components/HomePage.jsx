@@ -160,7 +160,7 @@ function HomePage({ startups }) {
           </div>
           <div className="stat-card">
             <h3>Global</h3>
-            <p>5+ Continents</p>
+            <p>5+ Countries</p>
           </div>
         </div>
       </section>

@@ -45,7 +45,7 @@ function ListPage({ startups, isLoading, onReset }) {
               </p>
               <p>
                 <strong>Location:</strong> {startup.country}
-                {startup.continent ? `, ${startup.continent}` : ""}
+                {startup.country ? `, ${startup.country}` : ""}
               </p>
             </div>
             <Link
