@@ -49,7 +49,7 @@ function Footer() {
             rel="noreferrer"
             aria-label="GitHub"
           >
-            <BiLogoGithub />
+            <BiLogoGithub size={35} />
           </a>
           <a
             href="https://www.linkedin.com/in/ana-sappia-rey/"
@@ -57,7 +57,7 @@ function Footer() {
             rel="noreferrer"
             aria-label="LinkedIn"
           >
-            <BiLogoLinkedinSquare />
+            <BiLogoLinkedinSquare size={35}/>
           </a>
         </div>
 
