@@ -161,10 +161,11 @@
   }
 
   .back-to-top-btn {
-    bottom: 20px;
-    right: 20px;
     width: 45px;
     height: 45px;
+    bottom: 15px;
+    right: 15px;
+    font-size: 0.6rem;
   }
 
   .footer-socials a {

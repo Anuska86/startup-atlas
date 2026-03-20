@@ -1,6 +1,8 @@
 /*App Header*/
 
 .app-header {
+  width: 100%;
+  box-sizing: border-box;
   background-color: var(--main-bg);
   backdrop-filter: blur(10px);
   padding: 2rem 2rem;
@@ -23,27 +25,27 @@
 }
 
 .header-top-row {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 0.5fr;
   align-items: center;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  gap: 20px;
+  gap: 30px;
 }
 
 .header-brand-link {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 12px;
   text-decoration: none;
-  flex: 0 0 auto;
 }
 
 .header-brand-link h1 {
   flex: 1;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin: 0;
   background: linear-gradient(135deg, var(--sky-aqua), var(--neon-pink));
   -webkit-background-clip: text;
@@ -76,9 +78,8 @@
 /*Nav*/
 .view-nav {
   display: flex;
-  flex: 1;
   justify-content: center;
-  gap: 10px;
+  gap: 30px;
   margin-bottom: 0;
 }
 
@@ -357,12 +358,16 @@
 
 @media (max-width: 768px) {
   .app-header {
-    padding: 1rem 0.5rem;
+    width: 100vw;
+    padding: 1rem 15px;
+    box-sizing: border-box;
     align-items: center;
     text-align: center;
   }
 
   .header-top-row {
+    width: 95%;
+    display: flex;
     flex-direction: column;
     gap: 15px;
     align-items: center;
@@ -376,6 +381,7 @@
     align-items: center;
     width: 100%;
     margin: 0 auto;
+    flex: none;
   }
 
   .view-nav {
@@ -386,7 +392,7 @@
   }
 
   .nav-link {
-    padding: 8px 12px;
+    padding: 10px 15px;
     font-size: 0.8rem;
     flex: 1 1 auto;
     justify-content: center;
@@ -418,11 +424,5 @@
   .filter-group select {
     flex: 1;
     max-width: 200px;
-  }
-
-  .theme-btn {
-    width: 100%;
-    display: flex;
-    justify-content: center;
   }
 }
