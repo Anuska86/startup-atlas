@@ -35,6 +35,10 @@ function HomePage({ startups }) {
   const industries = [...new Set(startups.map((startup) => startup.industry))]
     .length;
 
+  const totalCountries = new Set(
+    startups.map((startup) => startup.country).filter((country) => country),
+  ).size;
+
   //chartData
   const chartData = useMemo(() => {
     const counts = startups.reduce((acc, startup) => {
@@ -160,7 +164,7 @@ function HomePage({ startups }) {
           </div>
           <div className="stat-card">
             <h3>Global</h3>
-            <p>5+ Countries</p>
+            <p>{totalCountries} + Countries</p>
           </div>
         </div>
       </section>
