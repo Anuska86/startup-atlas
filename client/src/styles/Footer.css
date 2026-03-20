@@ -1,0 +1,149 @@
+.app-footer {
+  margin-top: auto;
+  padding: 60px 20px 40px;
+  background: var(--main-bg);
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+/*Content*/
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 20px;
+  text-align: center;
+}
+
+/*Badge*/
+
+.footer-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--sky-aqua);
+  border: 1px solid var(--sky-aqua);
+  padding: 2px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+[data-theme="light"] .footer-badge {
+  background: rgba(0, 119, 182, 0.1);
+  color: var(--sky-aqua);
+  border-color: var(--sky-aqua);
+}
+
+/*Note*/
+
+.footer-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #888;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin: 0;
+}
+
+/*Socials*/
+
+.footer-socials {
+  display: flex;
+  gap: 20px;
+  margin: 10px 0;
+}
+
+.footer-socials a {
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.footer-socials a:hover {
+  color: var(--sky-aqua);
+  transform: translateY(-3px);
+  filter: drop-shadow(0 0 8px var(--sky-aqua));
+}
+
+[data-theme="light"] .footer-socials a {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .footer-socials a:hover {
+  color: var(--indigo-bloom);
+}
+
+/*Credits*/
+
+.footer-credits {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+.footer-credits p {
+  margin: 0;
+}
+
+.footer-credits strong {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+/*Links*/
+
+.footer-link {
+  color: var(--sky-aqua);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+/*BUTTONS*/
+
+.back-to-top-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 55px;
+  height: 55px;
+  background: var(--card-bg);
+  border: 1px solid var(--sky-aqua);
+  color: var(--sky-aqua);
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.back-to-top-btn svg {
+  display: block;
+}
+
+.back-to-top-btn:hover {
+  background: var(--sky-aqua);
+  color: var(--main-bg);
+  box-shadow: 0 0 5px var(--sky-aqua);
+  transform: translateY(-3px);
+}

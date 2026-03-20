@@ -1,4 +1,5 @@
 import "../styles/Header.css";
+import { StartupAtlasLogo } from "./Logo.jsx";
 
 import { NavLink, useLocation } from "react-router-dom";
 import {
@@ -23,7 +24,7 @@ function Header({
   filters,
   setFilters,
   uniqueIndustries,
-  uniqueContinents,
+  uniqueCountries,
   uniqueCategories,
   filteredCount,
   isFiltering,
@@ -33,53 +34,59 @@ function Header({
 
   return (
     <header className="app-header">
-      <div className="header-top">
-        <h1>Startup Atlas</h1>
-        <button
-          className="theme-btn"
-          onClick={toggleTheme}
-          aria-label="theme-btn"
-        >
-          {theme === "light" ? (
-            <>
-              <BiMoon size={18} />
-              <span>Dark Mode</span>
-            </>
-          ) : (
-            <>
-              <BiSun size={18} />
-              <span>Light Mode</span>
-            </>
-          )}
-        </button>
+      <div className="header-top-row traditional-layout">
+        <NavLink to="/" className="header-brand-link">
+          <StartupAtlasLogo />
+          <h1 className="header-title">Startup Atlas</h1>
+        </NavLink>
+        <nav className="view-nav">
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            <BiHomeAlt size={20} /> Home
+          </NavLink>
+          <NavLink
+            to="/list"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            <BiListUl size={20} /> List View
+          </NavLink>
+          <NavLink
+            to="/map"
+            className={({ isActive }) =>
+              isActive ? "nav-link icon-link active" : "nav-link icon-link"
+            }
+          >
+            <BiMapAlt size={20} /> Map View
+          </NavLink>
+        </nav>
+
+        <div className="theme-btn">
+          <button
+            className="theme-btn-pill"
+            onClick={toggleTheme}
+            aria-label="Toggle"
+          >
+            {theme === "light" ? (
+              <>
+                <BiMoon size={18} />
+                <span>Dark Mode</span>
+              </>
+            ) : (
+              <>
+                <BiSun size={18} />
+                <span>Light Mode</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
-      <nav className="view-nav">
-        <NavLink
-          to="/"
-          end
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
-          <BiHomeAlt size={20} /> Home
-        </NavLink>
-        <NavLink
-          to="/list"
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
-          <BiListUl size={20} /> List View
-        </NavLink>
-        <NavLink
-          to="/map"
-          className={({ isActive }) =>
-            isActive ? "nav-link icon-link active" : "nav-link icon-link"
-          }
-        >
-          <BiMapAlt size={20} /> Map View
-        </NavLink>
-      </nav>
 
       {location.pathname !== "/" &&
         !location.pathname.startsWith("/startup/") && (
@@ -117,45 +124,64 @@ function Header({
 
             <div className="filter-bar">
               {/* Industry Select */}
-              <select
-                value={filters.industry}
-                onChange={(e) =>
-                  setFilters({ ...filters, industry: e.target.value })
-                }
-              >
-                {uniqueIndustries.map((ind, i) => (
-                  <option key={`ind-${ind}-${i}`} value={ind}>
-                    {ind}
-                  </option>
-                ))}
-              </select>
+              <div className="filter-group">
+                <span>Industry</span>
+                <select
+                  value={filters.industry}
+                  onChange={(e) =>
+                    setFilters({ ...filters, industry: e.target.value })
+                  }
+                >
+                  <option value="All">All Industries</option>
+                  {uniqueIndustries
+                    .filter((ind) => ind !== "All")
+                    .map((ind, i) => (
+                      <option key={`ind-${ind}-${i}`} value={ind}>
+                        {ind}
+                      </option>
+                    ))}
+                </select>
+              </div>
 
-              {/* Continent Select */}
-              <select
-                value={filters.continent}
-                onChange={(e) =>
-                  setFilters({ ...filters, continent: e.target.value })
-                }
-              >
-                {uniqueContinents.map((con, i) => (
-                  <option key={`con-${con}-${i}`} value={con}>
-                    {con}
-                  </option>
-                ))}
-              </select>
+              {/* Location Select */}
+              <div className="filter-group">
+                <span>Location</span>
+                <select
+                  value={filters.country}
+                  onChange={(e) =>
+                    setFilters({ ...filters, country: e.target.value })
+                  }
+                >
+                  <option value="All">All Countries</option>
+                  {uniqueCountries
+                    .filter((con) => con !== "All")
+                    .map((con, i) => (
+                      <option key={`con-${con}-${i}`} value={con}>
+                        {con}
+                      </option>
+                    ))}
+                </select>
+              </div>
 
-              <select
-                value={filters.category}
-                onChange={(e) =>
-                  setFilters({ ...filters, category: e.target.value })
-                }
-              >
-                {uniqueCategories.map((cat, i) => (
-                  <option key={`cat-${cat}-${i}`} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
+              {/* Category Select */}
+              <div className="filter-group">
+                <span>Category</span>
+                <select
+                  value={filters.category}
+                  onChange={(e) =>
+                    setFilters({ ...filters, category: e.target.value })
+                  }
+                >
+                  <option value="All">All Categories</option>
+                  {uniqueCategories
+                    .filter((cat) => cat !== "All")
+                    .map((cat, i) => (
+                      <option key={`cat-${cat}-${i}`} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                </select>
+              </div>
 
               {/* Checkboxes */}
               {/* Seeking Funding Checkbox */}

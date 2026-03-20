@@ -7,6 +7,7 @@ import MapPage from "./components/MapPage.jsx";
 import ListPage from "./components/ListPage.jsx";
 import StartupDetails from "./components/StartupDetails.jsx";
 import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
 
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -42,11 +43,11 @@ function App() {
         .filter((value) => value && value.trim() !== ""),
     ),
   ].sort();
-  const uniqueContinents = [
+  const uniqueCountries = [
     "All",
     ...new Set(
       startups
-        .map((s) => s.continent)
+        .map((s) => s.country)
         .filter((value) => value && value.trim() !== ""),
     ),
   ].sort();
@@ -216,7 +217,7 @@ function App() {
         filters={filters}
         setFilters={setFilters}
         uniqueIndustries={uniqueIndustries}
-        uniqueContinents={uniqueContinents}
+        uniqueCountries={uniqueCountries}
         uniqueCategories={uniqueCategories}
         filteredCount={filteredStartups.length}
         isFiltering={isFiltering}
@@ -255,6 +256,7 @@ function App() {
           />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }

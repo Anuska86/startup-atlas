@@ -1,34 +1,63 @@
 /*App Header*/
 
 .app-header {
-  background-color: var(--dark-bg);
+  background-color: var(--main-bg);
+  backdrop-filter: blur(10px);
   padding: 2rem 2rem;
-  align-items: center;
   border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
   z-index: 1100;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease-in-out;
 }
 
-.header-top {
+.traditional-layout {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header-top-row {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  gap: 20px;
+}
+
+.header-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+
+.header-brand-link h1 {
+  flex: 1;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0;
+  background: linear-gradient(135deg, var(--sky-aqua), var(--neon-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
 }
 
 .header-controls {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  margin-top: 20px;
+  gap: 10px;
   width: 100%;
   animation: fadeIn 0.4s ease-out;
 }
@@ -47,9 +76,10 @@
 /*Nav*/
 .view-nav {
   display: flex;
+  flex: 1;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 10px;
+  gap: 10px;
+  margin-bottom: 0;
 }
 
 .nav-link {
@@ -59,10 +89,12 @@
   text-decoration: none;
   color: var(--sky-aqua);
   font-weight: bold;
-  padding: 8px 16px;
+  font-size: 0.9rem;
+  padding: 6px 16px;
   border: 1px solid var(--sky-aqua);
   border-radius: 20px;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -73,7 +105,7 @@
 .nav-link.active {
   background-color: var(--sky-aqua);
   color: var(--dark-bg);
-  box-shadow: 0 0 15px var(--sky-aqua);
+  box-shadow: 0 0 5px var(--sky-aqua);
   border-color: var(--sky-aqua);
 }
 
@@ -86,15 +118,16 @@
 
 .search-container {
   display: flex;
-  gap: 15px;
+  flex: 1;
+  gap: 10px;
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
   justify-content: center;
 }
 
 .search-container input {
   flex: 1;
-  padding: 12px 20px;
+  padding: 8px 15px;
   border-radius: 30px;
   border: 2px solid #e0e0e0;
   background: var(--input-bg);
@@ -116,11 +149,12 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 24px;
+  padding: 8px 20px;
   border-radius: 30px;
   border: none;
   cursor: pointer;
   font-weight: 700;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   background: linear-gradient(135deg, var(--indigo-bloom), var(--neon-purple));
@@ -148,11 +182,12 @@
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 12px 24px;
+  gap: 15px;
+  padding: 6px 15px;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.02);
   border-radius: 15px;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -170,6 +205,20 @@
 .filter-bar select:hover {
   border-color: var(--sky-aqua);
   box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-group span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .checkbox-label {

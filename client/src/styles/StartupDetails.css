@@ -79,11 +79,7 @@
   gap: 15px;
 }
 
-.details-main-card h1 {
-  color: var(--text-color);
-  background: none;
-  -webkit-text-fill-color: initial;
-}
+
 
 .details-meta span {
   display: flex;
@@ -128,6 +124,24 @@
   gap: 40px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 30px;
+}
+.info-block {
+  margin-bottom: 2.5rem;
+}
+
+/*Problem solved section*/
+.problem-section h3 {
+  color: var(--sky-aqua);
+}
+
+/*Long description*/
+
+.long-desc-text {
+  line-height: 1.8;
+  color: var(--text-color);
+  font-size: 1.05rem;
+  opacity: 0.9;
+  white-space: pre-line;
 }
 
 /*Founders Section*/
@@ -180,7 +194,49 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+/*Target Market*/
+
+.market-box p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  border-left: 2px solid var(--neon-pink);
+  padding-left: 15px;
+  margin-top: 10px;
+}
+
+/*Teck Stack*/
+.tech-badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tech-tag {
+  background: rgba(76, 201, 240, 0.1);
+  border: 1px solid rgba(76, 201, 240, 0.3);
+  color: var(--sky-aqua);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.tech-tag:hover {
+  background: rgba(76, 201, 240, 0.2);
+  border-color: var(--sky-aqua);
+  transform: translateY(-2px);
+}
 /* Sidebar & Stats */
+
+.sidebar-box,
+.market-box,
+.tech-box {
+  margin-bottom: 20px;
+}
+
 .info-box {
   background: rgba(255, 255, 255, 0.03);
   padding: 20px;
@@ -189,11 +245,16 @@
 }
 
 .info-box h4 {
-  margin: 0 0 15px 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.9rem;
-  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.info-box h4 svg {
+  font-size: 1.1rem;
+  color: var(--neon-pink);
 }
 
 .info-box ul {
@@ -288,15 +349,29 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  .details-content-grid {
-    grid-template-columns: 1fr;
+
+
+
+
+
+
+  .details-main-card {
+    padding: 25px; /
   }
 
-  .details-header {
+    .details-header {
     flex-direction: column;
   }
+  
+  .details-header h1 {
+    font-size: 2.2rem; 
+  }
 
-  .details-meta {
+    .details-meta {
     align-items: flex-start;
+  }
+
+    .details-content-grid {
+    grid-template-columns: 1fr;
   }
 }

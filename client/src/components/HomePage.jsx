@@ -86,7 +86,7 @@ function HomePage({ startups }) {
           <div className="feature-item">
             <div className="feature-dot purple"></div>
 
-            <span>Real-time Data</span>
+            <span>Dynamic Data</span>
           </div>
           <div className="feature-item">
             <div className="feature-dot blue"></div>
