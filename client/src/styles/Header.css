@@ -105,7 +105,7 @@
 .nav-link.active {
   background-color: var(--sky-aqua);
   color: var(--dark-bg);
-  box-shadow: 0 0 15px var(--sky-aqua);
+  box-shadow: 0 0 5px var(--sky-aqua);
   border-color: var(--sky-aqua);
 }
 

@@ -1,16 +1,32 @@
 import React from "react";
 import {
   BiInfoCircle,
-  BiCodeCurly,
   BiLogoGithub,
   BiLogoLinkedinSquare,
+  BiArrowToTop,
 } from "react-icons/bi";
 import "../styles/Footer.css";
 
 function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <footer className="app-footer">
       <div className="footer-content">
+        <button
+          className="back-to-top-btn"
+          onClick={scrollToTop}
+          aria-label="Back to top button"
+        >
+          <BiArrowToTop />
+          <span>Back to Top</span>
+        </button>
+
         <div className="footer-project-info">
           <span className="footer-badge">Portfolio Project</span>
           <p className="footer-note">
