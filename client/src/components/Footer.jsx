@@ -1,5 +1,10 @@
 import React from "react";
-import { BiInfoCircle } from "react-icons/bi";
+import {
+  BiInfoCircle,
+  BiCodeCurly,
+  BiLogoGithub,
+  BiLogoLinkedinSquare,
+} from "react-icons/bi";
 import "../styles/Footer.css";
 
 function Footer() {
@@ -13,6 +18,26 @@ function Footer() {
             purposes. Built as a technical showcase.
           </p>
         </div>
+
+        <div className="footer-socials">
+          <a
+            href="https://github.com/Anuska86"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+          >
+            <BiLogoGithub />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ana-sappia-rey/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn"
+          >
+            <BiLogoLinkedinSquare />
+          </a>
+        </div>
+
         <div className="footer-credits">
           <p>
             &copy; {new Date().getFullYear()} <strong>Startup Atlas</strong> |
