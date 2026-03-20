@@ -353,3 +353,69 @@
   color: white;
   border-color: #ff4d4d;
 }
+/* @media querys */
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1rem;
+    gap: 15px;
+  }
+
+  .header-top-row {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .header-brand-link {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .view-nav {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .nav-link {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .search-container {
+    flex-direction: column;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .search-container input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    width: 90%;
+    padding: 15px;
+  }
+
+  .filter-group {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .filter-group select {
+    flex: 1;
+    max-width: 200px;
+  }
+
+  .theme-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
