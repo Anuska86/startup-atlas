@@ -1,13 +1,18 @@
 import React from "react";
+import "../styles/Footer.css";
+
+import { useScrollVisible } from "../utils/useScrollVisible.js";
+
 import {
   BiInfoCircle,
   BiLogoGithub,
   BiLogoLinkedinSquare,
   BiArrowToTop,
 } from "react-icons/bi";
-import "../styles/Footer.css";
 
 function Footer() {
+  const isVisible = useScrollVisible(300);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -18,14 +23,16 @@ function Footer() {
   return (
     <footer className="app-footer">
       <div className="footer-content">
-        <button
-          className="back-to-top-btn"
-          onClick={scrollToTop}
-          aria-label="Back to top button"
-        >
-          <BiArrowToTop />
-          <span>Back to Top</span>
-        </button>
+        {isVisible && (
+          <button
+            className="back-to-top-btn"
+            onClick={scrollToTop}
+            aria-label="Back to top button"
+          >
+            <BiArrowToTop size={20} />
+            <span>Back to Top</span>
+          </button>
+        )}
 
         <div className="footer-project-info">
           <span className="footer-badge">Portfolio Project</span>
