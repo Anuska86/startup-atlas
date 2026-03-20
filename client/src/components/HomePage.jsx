@@ -32,13 +32,23 @@ const ChartSkeleton = () => (
 function HomePage({ startups }) {
   const totalStartups = startups.length;
   const isLoading = startups.length === 0;
+
   const industries = [...new Set(startups.map((startup) => startup.industry))]
     .length;
 
+  //totals
   const totalCountries = new Set(
     startups.map((startup) => startup.country).filter((country) => country),
   ).size;
 
+  const totalIndustries = new Set(
+    startups.map((s) => s.industry).filter((i) => i),
+  ).size;
+
+  const totalEmployees = startups.reduce(
+    (sum, s) => sum + (Number(s.employees) || 0),
+    0,
+  );
   //chartData
   const chartData = useMemo(() => {
     const counts = startups.reduce((acc, startup) => {
@@ -155,16 +165,20 @@ function HomePage({ startups }) {
       <section className="stats-section">
         <div className="stats-grid">
           <div className="stat-card">
-            <h3>{totalStartups}</h3>
-            <p>Companies Tracked</p>
+            <h3>Companies Tracked</h3>
+            <p>{totalStartups}</p>
           </div>
           <div className="stat-card">
-            <h3>{industries}</h3>
-            <p>Unique Industries</p>
+            <h3>Sectors</h3>
+            <p>{totalIndustries} Industries</p>
           </div>
           <div className="stat-card">
             <h3>Global</h3>
             <p>{totalCountries} + Countries</p>
+          </div>
+          <div className="stat-card">
+            <h3>Community</h3>
+            <p>{totalEmployees.toLocaleString()} Employees</p>
           </div>
         </div>
       </section>
