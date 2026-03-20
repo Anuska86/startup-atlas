@@ -29,8 +29,7 @@ function Footer() {
             onClick={scrollToTop}
             aria-label="Back to top button"
           >
-            <BiArrowToTop size={20} />
-            <span>Back to Top</span>
+            <BiArrowToTop size={35} />
           </button>
         )}
 
@@ -57,7 +56,7 @@ function Footer() {
             rel="noreferrer"
             aria-label="LinkedIn"
           >
-            <BiLogoLinkedinSquare size={35}/>
+            <BiLogoLinkedinSquare size={35} />
           </a>
         </div>
 
