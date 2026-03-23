@@ -12,6 +12,7 @@ import {
   BiLineChart,
   BiHeart,
   BiRefresh,
+  BiUserCircle,
 } from "react-icons/bi";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -19,7 +20,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
-function MapPage({ startups, theme }) {
+function MapPage({ startups, theme, userCoords }) {
   const [map, setMap] = useState(null); //Actual Leaflet
 
   const location = useLocation();
@@ -97,6 +98,11 @@ function MapPage({ startups, theme }) {
       return () => {
         clearTimeout(jumpTimer);
       };
+    } else if (userCoords) {
+      map.flyTo([userCoords.lat, userCoords.lng], 10, {
+        animate: true,
+        duration: 1.5,
+      });
     } else if (startups.length > 0 && !flyToCoords && !hasFlown.current) {
       // VIEW ALL
       const bounds = L.latLngBounds(startups.map((s) => [s.lat, s.lng]));
@@ -104,8 +110,9 @@ function MapPage({ startups, theme }) {
     } else if (startups.length === 0 && !flyToCoords) {
       map.setView(center, zoom);
     }
-  }, [map, theme, startups, location.state]);
+  }, [map, theme, startups, location.state, userCoords]);
 
+  //Custom Icon for each industry
   const createCustomIcon = (startup) => {
     let SelectedIcon = BiChip;
     const industry = startup.industry?.toLowerCase() || "";
@@ -145,6 +152,19 @@ function MapPage({ startups, theme }) {
       popupAnchor: [0, -25],
     });
   };
+
+  //User icon
+
+  const userIcon = L.divIcon({
+    html: renderToStaticMarkup(
+      <div style={{ color: "#3b82f6", fontSize: "32px" }}>
+        <BiUserCircle />
+      </div>,
+    ),
+    className: "user-location-marker",
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  });
 
   const handleResetView = () => {
     if (map) {

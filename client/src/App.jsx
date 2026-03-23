@@ -334,7 +334,13 @@ function App() {
           {/*Startups Map Route */}
           <Route
             path="/map"
-            element={<MapPage startups={filteredStartups} theme={theme} />}
+            element={
+              <MapPage
+                startups={filteredStartups}
+                theme={theme}
+                userCoords={userCoords}
+              />
+            }
           />
 
           {/*Startup Details*/}
