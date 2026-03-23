@@ -136,8 +136,10 @@ function Header({
               <div className="location-control-group">
                 <button
                   className={`location-gps-btn ${userCoords ? "active" : ""}`}
-                  onClick={detectLocation}
-                  title="Use my current location"
+                  onClick={userCoords ? handleClearLocation : detectLocation}
+                  title={
+                    userCoords ? "Clear location" : "Use my current location"
+                  }
                 >
                   <BiTargetLock size={20} />
                   <span>Near Me</span>
@@ -156,6 +158,7 @@ function Header({
                       type="button"
                       className="loc-clear-btn"
                       onClick={handleClearLocation}
+                      title="Clear location"
                     >
                       <BiX size={18} />
                     </button>
