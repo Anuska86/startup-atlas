@@ -211,6 +211,8 @@ function App() {
       is_seeking_funding: false,
       has_mvp: false,
     });
+    setUserCoords(null);
+
     setIsLoading(true);
 
     try {
