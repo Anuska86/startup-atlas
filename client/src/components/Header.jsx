@@ -36,6 +36,7 @@ function Header({
   handleManualLocationSearch,
   userCoords,
   setUserCoords,
+  proximityRadius,
 }) {
   const [tempLocation, setTempLocation] = useState("");
 
@@ -176,7 +177,9 @@ function Header({
                   </p>
 
                   {userCoords && (
-                    <span className="proximity-badge">Within 50km</span>
+                    <span className="proximity-badge">
+                      Within {proximityRadius}km
+                    </span>
                   )}
                 </div>
 

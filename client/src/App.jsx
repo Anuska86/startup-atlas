@@ -36,6 +36,8 @@ function App() {
 
   const location = useLocation();
 
+  const PROXIMITY_RADIUS = 50;
+
   //Theme
   const [theme, setTheme] = useState(
     window.matchMedia("(prefers-color-scheme: light)").matches
@@ -107,7 +109,7 @@ function App() {
           userCoords.lng,
           startup.lat,
           startup.lng,
-        ) < 50);
+        ) < PROXIMITY_RADIUS);
 
     return (
       matchSearch &&
@@ -127,7 +129,8 @@ function App() {
     filters.country !== "All" ||
     filters.category !== "All" ||
     filters.is_seeking_funding !== false ||
-    filters.has_mvp !== false;
+    filters.has_mvp !== false ||
+    userCoords !== null;
 
   //Screen mode
 
@@ -314,6 +317,7 @@ function App() {
         handleManualLocationSearch={handleManualLocationSearch}
         userCoords={userCoords}
         setUserCoords={setUserCoords}
+        proximityRadius={PROXIMITY_RADIUS}
       />
       <main>
         <Routes>
