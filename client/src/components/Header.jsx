@@ -169,10 +169,17 @@ function Header({
 
             {isFilterActive && (
               <div className="results-count-bar">
-                <p>
-                  Found <strong>{filteredCount}</strong>{" "}
-                  {filteredCount === 1 ? "startup" : "startups"}
-                </p>
+                <div className="results-info">
+                  <p>
+                    Found <strong>{filteredCount}</strong>{" "}
+                    {filteredCount === 1 ? "startup" : "startups"}
+                  </p>
+
+                  {userCoords && (
+                    <span className="proximity-badge">Within 50km</span>
+                  )}
+                </div>
+
                 <button className="reset-all-filters-btn" onClick={handleReset}>
                   <BiX size={18} /> Reset All Filters
                 </button>
