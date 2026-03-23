@@ -160,19 +160,13 @@
   align-items: center;
 }
 
-.location-gps-btn.active {
-  background: #3b82f6; /* Modern Blue */
-  color: white;
-  border-color: #2563eb;
-}
-
 .location-manual-form {
   display: flex;
   align-items: center;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 0 10px;
+  background: var(--input-bg);
+  border: 2px solid #e0e0e0;
+  border-radius: 30px;
+  padding: 0 15px;
 }
 
 .location-manual-form input {
@@ -180,7 +174,7 @@
   background: transparent;
   padding: 8px;
   outline: none;
-  color: var(--text-primary);
+  color: var(--text-color);
   width: 150px;
 }
 
@@ -226,10 +220,32 @@
 
 /*GPS btn*/
 
+.location-gps-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.location-gps-btn:hover {
+  border-color: var(--sky-aqua);
+  box-shadow: 0 0 10px rgba(76, 201, 240, 0.2);
+}
+
 .location-gps-btn.active {
-  background: #3b82f6;
+  background: var(--electric-sapphire);
   color: white;
-  border-color: #2563eb;
+  border-color: var(--electric-sapphire);
+  box-shadow: 0 0 15px rgba(67, 97, 238, 0.4);
 }
 
 /*Location clear btn*/
