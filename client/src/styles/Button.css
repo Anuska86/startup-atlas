@@ -1,3 +1,5 @@
+/*BASE*/
+
 .custom-btn {
   display: flex;
   align-items: center;
@@ -9,6 +11,38 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/*Ripple shape*/
+
+.custom-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-btn:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(40);
+    opacity: 0;
+  }
 }
 
 /*VARIANT*/
@@ -45,7 +79,7 @@
 
 @media (max-width: 600px) {
   .custom-btn {
-    padding: 12px 16px;
+    padding: 14px 20px;
     font-size: 0.9rem;
     width: 100%;
     max-width: 300px;
