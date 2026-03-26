@@ -110,7 +110,14 @@ function MapPage({ startups, theme, userCoords }) {
     } else if (startups.length === 0 && !flyToCoords) {
       map.setView(center, zoom);
     }
-  }, [map, theme, startups, location.state, userCoords]);
+  }, [
+    map,
+    theme,
+    startups,
+    location.state?.startupId,
+    location.state?.flyTo,
+    userCoords,
+  ]);
 
   //Custom Icon for each industry
   const createCustomIcon = (startup) => {
