@@ -1,4 +1,5 @@
 import "../../styles/Header.css";
+import Button from "../common/Button.jsx";
 import { StartupAtlasLogo } from "../common/Logo.jsx";
 
 import { NavLink, useLocation } from "react-router-dom";
@@ -88,23 +89,13 @@ function Header({
         </nav>
 
         <div className="theme-btn">
-          <button
+          <Button
             className="theme-btn-pill"
+            variant="secondary"
             onClick={toggleTheme}
-            aria-label="Toggle"
-          >
-            {theme === "light" ? (
-              <>
-                <BiMoon size={18} />
-                <span>Dark Mode</span>
-              </>
-            ) : (
-              <>
-                <BiSun size={18} />
-                <span>Light Mode</span>
-              </>
-            )}
-          </button>
+            icon={theme === "light" ? BiMoon : BiSun}
+            aria-label="Toggle Theme"
+          ></Button>
         </div>
       </div>
 
@@ -122,29 +113,34 @@ function Header({
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 />
-                <button className="search-btn" onClick={handleSearch}>
-                  <BiSearch size={20} />
-                  <span>Search</span>
-                </button>
+                <Button
+                  variant="primary"
+                  onClick={handleSearch}
+                  icon={BiSearch}
+                >
+                  Search
+                </Button>
+
                 {searchTerm && (
-                  <button className="reset-btn" onClick={handleReset}>
-                    <BiX size={20} /> Clear
-                  </button>
+                  <Button variant="secondary" onClick={handleReset} icon={BiX}>
+                    Clear
+                  </Button>
                 )}
               </div>
 
               {/* Proximity Location Controls */}
               <div className="location-control-group">
-                <button
+                <Button
                   className={`location-gps-btn ${userCoords ? "active" : ""}`}
+                  variant="secondary"
                   onClick={userCoords ? handleClearLocation : detectLocation}
+                  icon={BiTargetLock}
                   title={
                     userCoords ? "Clear location" : "Use my current location"
                   }
                 >
-                  <BiTargetLock size={20} />
-                  <span>Near Me</span>
-                </button>
+                  Near Me
+                </Button>
 
                 <form className="location-manual-form" onSubmit={handleSubmit}>
                   <BiMapPin className="pin-icon" />
@@ -182,10 +178,14 @@ function Header({
                     </span>
                   )}
                 </div>
-
-                <button className="reset-all-filters-btn" onClick={handleReset}>
-                  <BiX size={18} /> Reset All Filters
-                </button>
+                <Button
+                  className="reset-all-filters-btn"
+                  variant="secondary"
+                  onClick={handleReset}
+                  icon={BiX}
+                >
+                  Reset All Filters
+                </Button>
               </div>
             )}
 
