@@ -12,12 +12,31 @@ import Footer from "./components/Footer.jsx";
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
+//Haversine Formula (calculates the distance between two sets of coordinates)
+
+const calculateDistance = (lat1, lon1, lat2, lon2) => {
+  const R = 6371; // Earth's radius in km
+  const dLat = (lat2 - lat1) * (Math.PI / 180);
+  const dLon = (lon2 - lon1) * (Math.PI / 180);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * (Math.PI / 180)) *
+      Math.cos(lat2 * (Math.PI / 180)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+};
+
 function App() {
   const [startups, setStartups] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [userCoords, setUserCoords] = useState(null);
 
   const location = useLocation();
+
+  const PROXIMITY_RADIUS = 50;
 
   //Theme
   const [theme, setTheme] = useState(
@@ -29,7 +48,7 @@ function App() {
   //Filters
   const [filters, setFilters] = useState({
     industry: "All",
-    continent: "All",
+    country: "All",
     category: "All",
     is_seeking_funding: false,
     has_mvp: false,
@@ -70,8 +89,8 @@ function App() {
     const matchIndustry =
       filters.industry === "All" || startup.industry === filters.industry;
 
-    const matchContinent =
-      filters.continent === "All" || startup.continent === filters.continent;
+    const matchCountry =
+      filters.country === "All" || startup.country === filters.country;
 
     const matchCategory =
       filters.category === "All" || startup.category === filters.category;
@@ -81,13 +100,25 @@ function App() {
 
     const matchMVP = filters.has_mvp === false ? true : startup.has_mvp;
 
+    const matchLocation =
+      !userCoords ||
+      (startup.lat &&
+        startup.lng &&
+        calculateDistance(
+          userCoords.lat,
+          userCoords.lng,
+          startup.lat,
+          startup.lng,
+        ) < PROXIMITY_RADIUS);
+
     return (
       matchSearch &&
       matchIndustry &&
-      matchContinent &&
+      matchCountry &&
       matchCategory &&
       matchFunding &&
-      matchMVP
+      matchMVP &&
+      matchLocation
     );
   });
 
@@ -95,10 +126,11 @@ function App() {
 
   const isFilterActive =
     filters.industry !== "All" ||
-    filters.continent !== "All" ||
+    filters.country !== "All" ||
     filters.category !== "All" ||
     filters.is_seeking_funding !== false ||
-    filters.has_mvp !== false;
+    filters.has_mvp !== false ||
+    userCoords !== null;
 
   //Screen mode
 
@@ -171,11 +203,13 @@ function App() {
     setSearchTerm("");
     setFilters({
       industry: "All",
-      continent: "All",
+      country: "All",
       category: "All",
       is_seeking_funding: false,
       has_mvp: false,
     });
+    setUserCoords(null);
+
     setIsLoading(true);
 
     try {
@@ -196,7 +230,7 @@ function App() {
   const isFiltering =
     searchTerm !== "" ||
     filters.industry !== "All" ||
-    filters.continent !== "All" ||
+    filters.country !== "All" ||
     filters.category !== "All" ||
     filters.is_seeking_funding !== false ||
     filters.has_mvp !== false;
@@ -204,6 +238,54 @@ function App() {
   //Checking if the users in on searchable pages
   const isSearchPage =
     location.pathname === "/map" || location.pathname === "/list";
+
+  //Get the user location
+
+  //Geolocation
+
+  const detectLocation = () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not allowed by your browser");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserCoords({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      },
+      () => alert("Unable to retrieve your location"),
+    );
+  };
+
+  //Manual location
+
+  const handleManualLocationSearch = async (locationName) => {
+    if (!locationName) {
+      setUserCoords(null);
+      return;
+    }
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(locationName)}&format=json&limit=1`,
+        { headers: { "User-Agent": "StartupAtlas/1.0" } },
+      );
+      const data = await response.json();
+
+      if (data && data.length > 0) {
+        setUserCoords({
+          lat: parseFloat(data[0].lat),
+          lng: parseFloat(data[0].lon),
+        });
+      } else {
+        alert("Location not found");
+      }
+    } catch (error) {
+      console.error("Geocoding error:", error);
+    }
+  };
 
   return (
     <div className="app-div">
@@ -224,6 +306,11 @@ function App() {
         isFilterActive={isFilterActive}
         filteredStartups={filteredStartups}
         showFilters={isSearchPage}
+        detectLocation={detectLocation}
+        handleManualLocationSearch={handleManualLocationSearch}
+        userCoords={userCoords}
+        setUserCoords={setUserCoords}
+        proximityRadius={PROXIMITY_RADIUS}
       />
       <main>
         <Routes>
@@ -246,7 +333,13 @@ function App() {
           {/*Startups Map Route */}
           <Route
             path="/map"
-            element={<MapPage startups={filteredStartups} theme={theme} />}
+            element={
+              <MapPage
+                startups={filteredStartups}
+                theme={theme}
+                userCoords={userCoords}
+              />
+            }
           />
 
           {/*Startup Details*/}

@@ -30,7 +30,7 @@
 .details-header h1 {
   font-size: 3rem;
   margin: 0;
-  background: linear-gradient(90deg, #fff, var(--sky-aqua));
+  background: linear-gradient(90deg, var(--electric-sapphire), var(--sky-aqua));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -349,10 +349,6 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-
-
-
-
 
 
   .details-main-card {

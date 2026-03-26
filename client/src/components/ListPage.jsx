@@ -44,8 +44,10 @@ function ListPage({ startups, isLoading, onReset }) {
                 <strong>Industry:</strong> {startup.industry}
               </p>
               <p>
-                <strong>Location:</strong> {startup.country}
-                {startup.continent ? `, ${startup.continent}` : ""}
+                <strong>Location:</strong>{" "}
+                {startup.city === startup.country
+                  ? startup.country
+                  : `${startup.city}, ${startup.country}`}
               </p>
             </div>
             <Link

@@ -7,12 +7,15 @@ import {
   BiHomeAlt,
   BiListUl,
   BiMapAlt,
+  BiMapPin,
+  BiTargetLock,
+  BiX,
   BiDollarCircle,
   BiRocket,
   BiMoon,
   BiSun,
-  BiX,
 } from "react-icons/bi";
+import { useState } from "react";
 
 function Header({
   theme,
@@ -29,8 +32,25 @@ function Header({
   filteredCount,
   isFiltering,
   isFilterActive,
+  detectLocation,
+  handleManualLocationSearch,
+  userCoords,
+  setUserCoords,
+  proximityRadius,
 }) {
+  const [tempLocation, setTempLocation] = useState("");
+
   const location = useLocation();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleManualLocationSearch(tempLocation);
+  };
+
+  const handleClearLocation = () => {
+    setUserCoords(null);
+    setTempLocation("");
+  };
 
   return (
     <header className="app-header">
@@ -88,34 +108,81 @@ function Header({
         </div>
       </div>
 
+      {/* SEARCH & LOCATION CONTROLS */}
       {location.pathname !== "/" &&
         !location.pathname.startsWith("/startup/") && (
           <div className="header-controls">
-            <div className="search-container">
-              <input
-                id="search-input"
-                type="text"
-                placeholder="Search by industry (e.g.AI)..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              />
-              <button className="search-btn" onClick={handleSearch}>
-                <BiSearch size={20} />
-                <span>Search</span>
-              </button>
-              {searchTerm && (
-                <button className="reset-btn" onClick={handleReset}>
-                  <BiX size={20} /> Clear
+            <div className="search-and-location-row">
+              <div className="search-container">
+                <input
+                  id="search-input"
+                  type="text"
+                  placeholder="Search by industry (e.g.AI)..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                />
+                <button className="search-btn" onClick={handleSearch}>
+                  <BiSearch size={20} />
+                  <span>Search</span>
                 </button>
-              )}
+                {searchTerm && (
+                  <button className="reset-btn" onClick={handleReset}>
+                    <BiX size={20} /> Clear
+                  </button>
+                )}
+              </div>
+
+              {/* Proximity Location Controls */}
+              <div className="location-control-group">
+                <button
+                  className={`location-gps-btn ${userCoords ? "active" : ""}`}
+                  onClick={userCoords ? handleClearLocation : detectLocation}
+                  title={
+                    userCoords ? "Clear location" : "Use my current location"
+                  }
+                >
+                  <BiTargetLock size={20} />
+                  <span>Near Me</span>
+                </button>
+
+                <form className="location-manual-form" onSubmit={handleSubmit}>
+                  <BiMapPin className="pin-icon" />
+                  <input
+                    type="text"
+                    placeholder="City or Address..."
+                    value={tempLocation}
+                    onChange={(e) => setTempLocation(e.target.value)}
+                  />
+                  {userCoords && (
+                    <button
+                      type="button"
+                      className="loc-clear-btn"
+                      onClick={handleClearLocation}
+                      title="Clear location"
+                    >
+                      <BiX size={18} />
+                    </button>
+                  )}
+                </form>
+              </div>
             </div>
+
             {isFilterActive && (
               <div className="results-count-bar">
-                <p>
-                  Found <strong>{filteredCount}</strong>{" "}
-                  {filteredCount === 1 ? "startup" : "startups"}
-                </p>
+                <div className="results-info">
+                  <p>
+                    Found <strong>{filteredCount}</strong>{" "}
+                    {filteredCount === 1 ? "startup" : "startups"}
+                  </p>
+
+                  {userCoords && (
+                    <span className="proximity-badge">
+                      Within {proximityRadius}km
+                    </span>
+                  )}
+                </div>
+
                 <button className="reset-all-filters-btn" onClick={handleReset}>
                   <BiX size={18} /> Reset All Filters
                 </button>

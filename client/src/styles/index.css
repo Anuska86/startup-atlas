@@ -1,4 +1,15 @@
+/* GLOBAL RESET */
+* {
+  box-sizing: border-box;
+}
+
 /*BASE*/
+
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 /*Palette*/
 
@@ -42,6 +53,7 @@ body {
     background-color 0.3s ease,
     color 0.3s ease;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 /*Typhography*/
@@ -81,7 +93,6 @@ button:focus-visible {
 
 .theme-btn {
   display: flex;
-  flex: 0 1 auto;
   justify-content: flex-end;
   align-items: center;
 }
@@ -105,4 +116,13 @@ button:focus-visible {
   filter: brightness(1.1);
   transform: translateY(-1px);
   box-shadow: 0 4px 15px rgba(247, 37, 133, 0.4);
+}
+
+@media (max-width: 768px) {
+  .theme-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex: none;
+  }
 }

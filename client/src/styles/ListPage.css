@@ -285,9 +285,42 @@
 
 /*@ media querys*/
 
+@media (max-width: 900px) {
+  .stats-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
 @media (max-width: 600px) {
   .card-container {
-    padding: 20px;
-    grid-template-columns: 1fr;
+    padding: 15px;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    gap: 15px;
+  }
+
+  .startup-card {
+    padding: 15px;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .startup-card h2 {
+    font-size: 1.2rem;
+  }
+
+  .card-details {
+    font-size: 0.85rem;
+  }
+
+  .funding-badge {
+    font-size: 0.55rem;
+    padding: 4px 10px;
+    border-bottom-left-radius: 8px;
+  }
+
+  .visit-website-btn {
+    padding: 10px;
   }
 }

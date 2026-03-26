@@ -147,3 +147,28 @@
   box-shadow: 0 0 5px var(--sky-aqua);
   transform: translateY(-3px);
 }
+
+/* Mobile Responsive Adjustments (Screens smaller than 768px) */
+@media (max-width: 768px) {
+  .app-footer {
+    padding: 40px 15px 100px;
+  }
+
+  .footer-note {
+    font-size: 0.8rem;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .back-to-top-btn {
+    width: 45px;
+    height: 45px;
+    bottom: 15px;
+    right: 15px;
+    font-size: 0.6rem;
+  }
+
+  .footer-socials a {
+    font-size: 1.2rem;
+  }
+}
