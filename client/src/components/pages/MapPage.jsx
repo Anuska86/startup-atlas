@@ -165,7 +165,12 @@ function MapPage({ startups, theme, userCoords }) {
 
   const userIcon = L.divIcon({
     html: renderToStaticMarkup(
-      <div style={{ color: "#3b82f6", fontSize: "32px" }}>
+      <div
+        style={{
+          color: "var(--electric-sapphire)",
+          fontSize: "32px",
+        }}
+      >
         <BiUserCircle />
       </div>,
     ),
@@ -225,6 +230,21 @@ function MapPage({ startups, theme, userCoords }) {
             }
             attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
           />
+
+          {/* User's Location Marker */}
+          {userCoords && (
+            <Marker
+              position={[userCoords.lat, userCoords.lng]}
+              icon={userIcon}
+              zIndexOffset={1000}
+            >
+              <Popup>
+                <div style={{ textAlign: "center", fontWeight: "bold" }}>
+                  You are here
+                </div>
+              </Popup>
+            </Marker>
+          )}
 
           <MarkerClusterGroup chunkedLoading spiderfyOnMaxZoom={true}>
             {startups.map((startup) => (
