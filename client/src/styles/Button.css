@@ -75,6 +75,14 @@
   box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
 }
 
+/*Icon*/
+
+.btn-icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
 /*RESPONSIVE ADJUSTMENTS*/
 
 @media (max-width: 600px) {

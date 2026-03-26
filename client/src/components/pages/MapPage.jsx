@@ -1,4 +1,5 @@
 import "../../styles/MapPage.css";
+import Button from "../common/Button.jsx";
 
 import { getCategoryColor } from "../../utils/helpers.js";
 
@@ -186,16 +187,13 @@ function MapPage({ startups, theme, userCoords }) {
     <div className="map-page-container">
       <div className="map-wrapper">
         <div className="map-internal-controls">
-          <button className="reset-view-btn" onClick={handleResetView}>
-            <BiRefresh
-              style={{
-                marginRight: "8px",
-                verticalAlign: "middle",
-                fontSize: "1.2rem",
-              }}
-            />
-            <span> Restore Initial View</span>
-          </button>
+          <Button
+            variant="secondary"
+            onClick={handleResetView}
+            icon={BiRefresh}
+          >
+            Restore Initial View
+          </Button>
         </div>
         <div className="map-legend">
           <h4>Industry Key</h4>
