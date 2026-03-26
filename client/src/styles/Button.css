@@ -40,3 +40,19 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
 }
+
+/*RESPONSIVE ADJUSTMENTS*/
+
+@media (max-width: 600px) {
+  .custom-btn {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .btn-icon {
+    font-size: 1.1rem;
+  }
+}
