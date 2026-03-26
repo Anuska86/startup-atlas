@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/ListPage.css";
+import "../../styles/ListPage.css";
 
 import {
   BiLinkExternal,

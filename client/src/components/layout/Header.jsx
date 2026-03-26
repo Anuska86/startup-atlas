@@ -1,5 +1,5 @@
-import "../styles/Header.css";
-import { StartupAtlasLogo } from "./Logo.jsx";
+import "../../styles/Header.css";
+import { StartupAtlasLogo } from "../common/Logo.jsx";
 
 import { NavLink, useLocation } from "react-router-dom";
 import {

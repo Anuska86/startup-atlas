@@ -1,6 +1,6 @@
-import "../styles/MapPage.css";
+import "../../styles/MapPage.css";
 
-import { getCategoryColor } from "../utils/helpers.js";
+import { getCategoryColor } from "../../utils/helpers.js";
 
 import { useEffect, useState, useRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";

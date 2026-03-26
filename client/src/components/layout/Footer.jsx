@@ -1,7 +1,6 @@
 import React from "react";
-import "../styles/Footer.css";
-
-import { useScrollVisible } from "../utils/useScrollVisible.js";
+import "../../styles/Footer.css";
+import { useScrollVisible } from "../../utils/useScrollVisible.js";
 
 import {
   BiInfoCircle,

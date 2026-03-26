@@ -2,12 +2,12 @@ import "./styles/App.css";
 import { startups as fallbackData } from "./data/data.js";
 import { supabase } from "./supabaseClient.js";
 
-import HomePage from "./components/HomePage.jsx";
-import MapPage from "./components/MapPage.jsx";
-import ListPage from "./components/ListPage.jsx";
-import StartupDetails from "./components/StartupDetails.jsx";
-import Header from "./components/Header.jsx";
-import Footer from "./components/Footer.jsx";
+import HomePage from "./components/pages/HomePage.jsx";
+import MapPage from "./components/pages/MapPage.jsx";
+import ListPage from "./components/pages/ListPage.jsx";
+import StartupDetails from "./components/pages/StartupDetails.jsx";
+import Header from "./components/layout/Header.jsx";
+import Footer from "./components/layout/Footer.jsx";
 
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";

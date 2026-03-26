@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/StartupDetails.css";
+import "../../styles/StartupDetails.css";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   BiArrowBack,
