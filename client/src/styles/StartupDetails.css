@@ -186,6 +186,17 @@
   font-weight: 600;
   margin: 0;
   letter-spacing: 0.5px;
+  border-left: 2px solid var(--neon-pink);
+  padding-left: 12px;
+  margin-left: 5px;
+  transition: all 0.3s ease;
+}
+
+.founders-text::before {
+  content: "↳"; 
+  color: var(--sky-aqua);
+  margin-right: 10px;
+  font-weight: bold;
 }
 
 /* Light Mode*/
