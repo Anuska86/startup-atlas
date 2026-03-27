@@ -254,10 +254,10 @@
 .btn-link-to-map{
   border-radius: 30px;
   border: 1px solid var(--border-color);
-  padding: 8px 16px;
   margin-bottom: 5px;
-  width: 150px;
+  width: 160px;
   align-self: center;
+  justify-content: center;
 
 }
 
