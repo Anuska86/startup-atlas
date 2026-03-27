@@ -40,9 +40,13 @@ function StartupDetails({ startups }) {
 
   return (
     <div className="details-page-container">
-      <button className="back-nav-btn" onClick={() => navigate(-1)}>
-        <BiArrowBack /> Back to Atlas
-      </button>
+      <Button
+        className="back-nav-btn"
+        onClick={() => navigate(-1)}
+        icon={BiArrowBack}
+      >
+        Back to Atlas
+      </Button>
 
       <div className="details-main-card">
         {/* Top Header Section */}
