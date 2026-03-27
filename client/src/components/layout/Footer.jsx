@@ -47,17 +47,23 @@ function Footer() {
             href="https://github.com/Anuska86"
             target="_blank"
             rel="noreferrer"
-            aria-label="GitHub"
           >
-            <BiLogoGithub size={35} />
+            <Button
+              variant="secondary"
+              icon={BiLogoGithub}
+              arial-label="GitHub"
+            />
           </a>
           <a
             href="https://www.linkedin.com/in/ana-sappia-rey/"
             target="_blank"
             rel="noreferrer"
-            aria-label="LinkedIn"
           >
-            <BiLogoLinkedinSquare size={35} />
+            <Button
+              variant="secondary"
+              icon={BiLogoLinkedinSquare}
+              aria-label="LinkedIn"
+            />
           </a>
         </div>
 
