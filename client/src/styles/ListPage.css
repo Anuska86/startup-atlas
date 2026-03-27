@@ -247,6 +247,21 @@
   }
 }
 
+/*BUTTONS*/
+
+/*Btn link to map*/
+
+.btn-link-to-map{
+  border-radius: 30px;
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  margin-bottom: 5px;
+  width: 150px;
+  align-self: center;
+
+}
+
+
 /*Reset button simple*/
 
 .reset-btn-simple {

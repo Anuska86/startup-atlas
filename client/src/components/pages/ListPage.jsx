@@ -51,17 +51,22 @@ function ListPage({ startups, isLoading, onReset }) {
                   : `${startup.city}, ${startup.country}`}
               </p>
             </div>
-            <Link
-              to="/map"
-              state={{
-                flyTo: [startup.lat, startup.lng],
-                startupId: startup.id,
+            <Button
+              className="btn-link-to-map"
+              variant="secondary"
+              icon={BiMapAlt}
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate("/map", {
+                  state: {
+                    flyTo: [startup.lat, startup.lng],
+                    startupId: startup.id,
+                  },
+                });
               }}
-              className="view-on-map-link"
-              onClick={(e) => e.stopPropagation()}
             >
-              <BiMapAlt size={22} /> View on Map
-            </Link>
+              View on Map
+            </Button>
 
             {startup.website && (
               <a
