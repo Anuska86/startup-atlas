@@ -1,5 +1,7 @@
 import React from "react";
 import "../../styles/StartupDetails.css";
+import Button from "../common/Button.jsx";
+
 import { useParams, useNavigate } from "react-router-dom";
 import {
   BiArrowBack,
@@ -25,9 +27,13 @@ function StartupDetails({ startups }) {
     return (
       <div className="loader-div">
         <p>Loading startup intelligence...</p>
-        <button onClick={() => navigate("/list")} className="reset-btn-simple">
+        <Button
+          variant="secondary"
+          onClick={() => navigate("/list")}
+          icon={BiArrowBack}
+        >
           Back to List
-        </button>
+        </Button>
       </div>
     );
   }

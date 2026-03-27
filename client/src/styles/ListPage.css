@@ -38,6 +38,8 @@
   transition: all 0.3s ease;
 }
 
+
+
 .startup-card strong {
   color: var(--neon-pink);
 }
