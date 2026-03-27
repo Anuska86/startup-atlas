@@ -15,6 +15,7 @@ import {
   BiTargetLock,
   BiExclude,
   BiCodeBlock,
+  BiStats
 } from "react-icons/bi";
 
 function StartupDetails({ startups }) {
@@ -139,7 +140,7 @@ function StartupDetails({ startups }) {
             )}
 
             <div className="info-box">
-              <h4>Industry Stats</h4>
+              <h4> <BiStats /> Industry Stats</h4>
               <ul>
                 <li>
                   <span>

@@ -248,7 +248,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #aaa;
+  color: var(--text-secondary);
   font-size: 0.85rem;
 }
 
