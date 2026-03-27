@@ -1,5 +1,7 @@
 import React from "react";
 import "../../styles/Footer.css";
+import Button from "../common/Button.jsx";
+
 import { useScrollVisible } from "../../utils/useScrollVisible.js";
 
 import {
@@ -23,13 +25,13 @@ function Footer() {
     <footer className="app-footer">
       <div className="footer-content">
         {isVisible && (
-          <button
+          <Button
             className="back-to-top-btn"
+            variant="secondary"
             onClick={scrollToTop}
-            aria-label="Back to top button"
-          >
-            <BiArrowToTop size={35} />
-          </button>
+            icon={BiArrowToTop}
+            aria-label="Back to top"
+          />
         )}
 
         <div className="footer-project-info">
