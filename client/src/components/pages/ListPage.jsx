@@ -8,6 +8,7 @@ import {
   BiMapAlt,
 } from "react-icons/bi";
 import { useNavigate, Link } from "react-router-dom";
+import Button from "../common/Button.jsx";
 
 function ListPage({ startups, isLoading, onReset }) {
   const navigate = useNavigate();
@@ -84,9 +85,14 @@ function ListPage({ startups, isLoading, onReset }) {
             Try adjusting your filters or search terms to find what you're
             looking for.
           </p>
-          <button className="reset-btn-simple" onClick={onReset}>
+          <Button
+            className="reset-btn-simple"
+            variant="secondary"
+            onClick={onReset}
+            aria-label="reset button"
+          >
             Reset All Filters
-          </button>
+          </Button>
         </div>
       )}
     </div>
