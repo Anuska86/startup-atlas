@@ -55,7 +55,7 @@
 .funding-pill {
   background: #ff2e63;
   color: white;
-  box-shadow: 0 0 15px rgba(255, 46, 99, 0.3);
+  box-shadow: 0 0 5px rgba(255, 46, 99, 0.3);
 }
 
 .mvp-pill {
