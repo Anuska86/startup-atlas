@@ -93,31 +93,29 @@ button:focus-visible {
 
 .theme-btn {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 }
 
-.theme-btn-pill {
+.theme-toggle-action{
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
   display: flex;
   align-items: center;
-  gap: 8px;
-  background-color: var(--neon-pink);
-  background: var(--card-bg);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
+  justify-content: center;
 }
 
-.theme-btn-pill:hover {
+.theme-toggle-action:hover{
   filter: brightness(1.1);
   transform: translateY(-1px);
   box-shadow: 0 4px 15px rgba(247, 37, 133, 0.4);
 }
+
+
+
+/*media querys*/
 
 @media (max-width: 768px) {
   .theme-btn {
@@ -125,5 +123,19 @@ button:focus-visible {
     display: flex;
     justify-content: center;
     flex: none;
+    margin: 10px 0;
   }
+
+  .theme-btn svg {
+    font-size: 1.6rem;
+  }
+
+  .theme-toggle-action{
+    width: 60% ;
+    max-width: 300px ;
+    height: 45px ;
+    border-radius: 30px ;
+  }
+
+
 }
