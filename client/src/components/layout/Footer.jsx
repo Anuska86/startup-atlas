@@ -1,7 +1,8 @@
 import React from "react";
-import "../styles/Footer.css";
+import "../../styles/Footer.css";
+import Button from "../common/Button.jsx";
 
-import { useScrollVisible } from "../utils/useScrollVisible.js";
+import { useScrollVisible } from "../../utils/useScrollVisible.js";
 
 import {
   BiInfoCircle,
@@ -24,13 +25,13 @@ function Footer() {
     <footer className="app-footer">
       <div className="footer-content">
         {isVisible && (
-          <button
+          <Button
             className="back-to-top-btn"
+            variant="secondary"
             onClick={scrollToTop}
-            aria-label="Back to top button"
-          >
-            <BiArrowToTop size={35} />
-          </button>
+            icon={BiArrowToTop}
+            aria-label="Back to top"
+          />
         )}
 
         <div className="footer-project-info">
@@ -46,17 +47,23 @@ function Footer() {
             href="https://github.com/Anuska86"
             target="_blank"
             rel="noreferrer"
-            aria-label="GitHub"
           >
-            <BiLogoGithub size={35} />
+            <Button
+              variant="secondary"
+              icon={BiLogoGithub}
+              arial-label="GitHub"
+            />
           </a>
           <a
             href="https://www.linkedin.com/in/ana-sappia-rey/"
             target="_blank"
             rel="noreferrer"
-            aria-label="LinkedIn"
           >
-            <BiLogoLinkedinSquare size={35} />
+            <Button
+              variant="secondary"
+              icon={BiLogoLinkedinSquare}
+              aria-label="LinkedIn"
+            />
           </a>
         </div>
 

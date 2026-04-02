@@ -38,6 +38,8 @@
   transition: all 0.3s ease;
 }
 
+
+
 .startup-card strong {
   color: var(--neon-pink);
 }
@@ -246,6 +248,21 @@
     transform: translateY(-10px);
   }
 }
+
+/*BUTTONS*/
+
+/*Btn link to map*/
+
+.btn-link-to-map{
+  border-radius: 30px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 5px;
+  width: 160px;
+  align-self: center;
+  justify-content: center;
+
+}
+
 
 /*Reset button simple*/
 

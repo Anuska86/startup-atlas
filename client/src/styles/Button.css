@@ -1,0 +1,101 @@
+/*BASE*/
+
+.custom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/*Ripple shape*/
+
+.custom-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-btn:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(40);
+    opacity: 0;
+  }
+}
+
+/*VARIANT*/
+
+/*Primary*/
+
+.custom-btn.primary {
+  background-color: var(--neon-pink);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.custom-btn.primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(247, 37, 133, 0.2);
+}
+
+/*Secundary*/
+
+.custom-btn.secondary {
+  background-color: var(--electric-sapphire);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.custom-btn.secondary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
+}
+
+/*Icon*/
+
+.btn-icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+/*RESPONSIVE ADJUSTMENTS*/
+
+@media (max-width: 600px) {
+  .custom-btn {
+    padding: 14px 20px;
+    font-size: 0.9rem;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .btn-icon {
+    font-size: 1.1rem;
+  }
+}

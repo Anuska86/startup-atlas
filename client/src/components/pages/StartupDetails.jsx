@@ -1,5 +1,7 @@
 import React from "react";
-import "../styles/StartupDetails.css";
+import "../../styles/StartupDetails.css";
+import Button from "../common/Button.jsx";
+
 import { useParams, useNavigate } from "react-router-dom";
 import {
   BiArrowBack,
@@ -13,6 +15,7 @@ import {
   BiTargetLock,
   BiExclude,
   BiCodeBlock,
+  BiStats
 } from "react-icons/bi";
 
 function StartupDetails({ startups }) {
@@ -25,18 +28,26 @@ function StartupDetails({ startups }) {
     return (
       <div className="loader-div">
         <p>Loading startup intelligence...</p>
-        <button onClick={() => navigate("/list")} className="reset-btn-simple">
+        <Button
+          variant="secondary"
+          onClick={() => navigate("/list")}
+          icon={BiArrowBack}
+        >
           Back to List
-        </button>
+        </Button>
       </div>
     );
   }
 
   return (
     <div className="details-page-container">
-      <button className="back-nav-btn" onClick={() => navigate(-1)}>
-        <BiArrowBack /> Back to Atlas
-      </button>
+      <Button
+        className="back-nav-btn"
+        onClick={() => navigate(-1)}
+        icon={BiArrowBack}
+      >
+        Back to Atlas
+      </Button>
 
       <div className="details-main-card">
         {/* Top Header Section */}
@@ -129,7 +140,7 @@ function StartupDetails({ startups }) {
             )}
 
             <div className="info-box">
-              <h4>Industry Stats</h4>
+              <h4> <BiStats /> Industry Stats</h4>
               <ul>
                 <li>
                   <span>

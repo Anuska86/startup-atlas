@@ -1,6 +1,7 @@
-import "../styles/MapPage.css";
+import "../../styles/MapPage.css";
+import Button from "../common/Button.jsx";
 
-import { getCategoryColor } from "../utils/helpers.js";
+import { getCategoryColor } from "../../utils/helpers.js";
 
 import { useEffect, useState, useRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -149,7 +150,12 @@ function MapPage({ startups, theme, userCoords }) {
 
   const userIcon = L.divIcon({
     html: renderToStaticMarkup(
-      <div style={{ color: "#3b82f6", fontSize: "32px" }}>
+      <div
+        style={{
+          color: "var(--electric-sapphire)",
+          fontSize: "32px",
+        }}
+      >
         <BiUserCircle />
       </div>,
     ),
@@ -171,16 +177,13 @@ function MapPage({ startups, theme, userCoords }) {
     <div className="map-page-container">
       <div className="map-wrapper">
         <div className="map-internal-controls">
-          <button className="reset-view-btn" onClick={handleResetView}>
-            <BiRefresh
-              style={{
-                marginRight: "8px",
-                verticalAlign: "middle",
-                fontSize: "1.2rem",
-              }}
-            />
-            <span> Restore Initial View</span>
-          </button>
+          <Button
+            variant="secondary"
+            onClick={handleResetView}
+            icon={BiRefresh}
+          >
+            Restore Initial View
+          </Button>
         </div>
         <div className="map-legend">
           <h4>Industry Key</h4>
@@ -212,6 +215,21 @@ function MapPage({ startups, theme, userCoords }) {
             }
             attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
           />
+
+          {/* User's Location Marker */}
+          {userCoords && (
+            <Marker
+              position={[userCoords.lat, userCoords.lng]}
+              icon={userIcon}
+              zIndexOffset={1000}
+            >
+              <Popup>
+                <div style={{ textAlign: "center", fontWeight: "bold" }}>
+                  You are here
+                </div>
+              </Popup>
+            </Marker>
+          )}
 
           <MarkerClusterGroup chunkedLoading spiderfyOnMaxZoom={true}>
             {startups.map((startup) => (

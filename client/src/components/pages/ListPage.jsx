@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/ListPage.css";
+import "../../styles/ListPage.css";
 
 import {
   BiLinkExternal,
@@ -8,6 +8,7 @@ import {
   BiMapAlt,
 } from "react-icons/bi";
 import { useNavigate, Link } from "react-router-dom";
+import Button from "../common/Button.jsx";
 
 function ListPage({ startups, isLoading, onReset }) {
   const navigate = useNavigate();
@@ -50,17 +51,22 @@ function ListPage({ startups, isLoading, onReset }) {
                   : `${startup.city}, ${startup.country}`}
               </p>
             </div>
-            <Link
-              to="/map"
-              state={{
-                flyTo: [startup.lat, startup.lng],
-                startupId: startup.id,
+            <Button
+              className="btn-link-to-map"
+              variant="secondary"
+              icon={BiMapAlt}
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate("/map", {
+                  state: {
+                    flyTo: [startup.lat, startup.lng],
+                    startupId: startup.id,
+                  },
+                });
               }}
-              className="view-on-map-link"
-              onClick={(e) => e.stopPropagation()}
             >
-              <BiMapAlt size={22} /> View on Map
-            </Link>
+              View on Map
+            </Button>
 
             {startup.website && (
               <a
@@ -84,9 +90,14 @@ function ListPage({ startups, isLoading, onReset }) {
             Try adjusting your filters or search terms to find what you're
             looking for.
           </p>
-          <button className="reset-btn-simple" onClick={onReset}>
+          <Button
+            className="reset-btn-simple"
+            variant="secondary"
+            onClick={onReset}
+            aria-label="reset button"
+          >
             Reset All Filters
-          </button>
+          </Button>
         </div>
       )}
     </div>
