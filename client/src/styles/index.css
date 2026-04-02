@@ -27,6 +27,7 @@
   --input-bg: #1a1a1a;
   --border-color: rgba(255, 255, 255, 0.1);
   --intro-bg: rgba(255, 255, 255, 0.03);
+  --pure-white: #ffffff;
 }
 
 [data-theme="light"] {

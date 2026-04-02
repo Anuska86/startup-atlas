@@ -80,17 +80,17 @@
 
 .nav-link:hover {
   background: var(--sky-aqua);
-  color: var(--dark-bg);
+  color: var(--pure-white);
 }
 
 .nav-link.active {
   background-color: var(--sky-aqua);
-  color: var(--dark-bg);
+  color: var(--pure-white);
   border-color: var(--sky-aqua);
 }
 
 .nav-link.active {
-  stroke: var(--dark-bg);
+  stroke: var(--pure-white);
   filter: none;
 }
 
