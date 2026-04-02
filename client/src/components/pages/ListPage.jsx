@@ -57,6 +57,9 @@ function ListPage({ startups, isLoading, onReset }) {
               icon={BiMapAlt}
               onClick={(e) => {
                 e.stopPropagation();
+
+                window.scrollTo(0,0); 
+
                 navigate("/map", {
                   state: {
                     flyTo: [startup.lat, startup.lng],
