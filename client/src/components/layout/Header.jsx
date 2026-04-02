@@ -90,7 +90,7 @@ function Header({
 
         <div className="theme-btn">
           <Button
-            className="theme-btn-pill"
+            className="theme-toggle-action"
             variant="secondary"
             onClick={toggleTheme}
             icon={theme === "light" ? BiMoon : BiSun}
