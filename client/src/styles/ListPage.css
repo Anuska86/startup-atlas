@@ -38,8 +38,6 @@
   transition: all 0.3s ease;
 }
 
-
-
 .startup-card strong {
   color: var(--neon-pink);
 }
@@ -153,28 +151,6 @@
   transform: translateY(-1px);
 }
 
-/* Website Link Button */
-.visit-website-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px;
-  background: rgba(76, 201, 240, 0.1);
-  color: var(--sky-aqua);
-  border: 1px solid var(--sky-aqua);
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s ease;
-}
-
-.visit-website-btn:hover {
-  background: var(--sky-aqua);
-  color: var(--dark-bg);
-  box-shadow: 0 0 15px rgba(76, 201, 240, 0.4);
-}
-
 /*loader*/
 
 .loader-div {
@@ -253,16 +229,14 @@
 
 /*Btn link to map*/
 
-.btn-link-to-map{
+.btn-link-to-map {
   border-radius: 30px;
   border: 1px solid var(--border-color);
   margin-bottom: 5px;
   width: 160px;
   align-self: center;
   justify-content: center;
-
 }
-
 
 /*Reset button simple*/
 

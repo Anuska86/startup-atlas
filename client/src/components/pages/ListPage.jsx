@@ -71,18 +71,7 @@ function ListPage({ startups, isLoading, onReset }) {
               View on Map
             </Button>
 
-            {startup.website && (
-              <a
-                href={startup.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="visit-website-btn"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {" "}
-                Visit Website <BiLinkExternal />
-              </a>
-            )}
+            
           </div>
         ))
       ) : (

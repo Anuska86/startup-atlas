@@ -15,7 +15,8 @@ import {
   BiTargetLock,
   BiExclude,
   BiCodeBlock,
-  BiStats
+  BiStats,
+  BiLinkExternal,
 } from "react-icons/bi";
 
 function StartupDetails({ startups }) {
@@ -100,6 +101,19 @@ function StartupDetails({ startups }) {
                 <p className="long-desc-text">{startup.long_description}</p>
               </section>
             )}
+
+            <div className="details-website">
+              <a
+                href={startup.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="visit-website-btn"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {" "}
+                Visit Website <BiLinkExternal />
+              </a>
+            </div>
           </div>
 
           <div className="details-sidebar">
@@ -140,7 +154,10 @@ function StartupDetails({ startups }) {
             )}
 
             <div className="info-box">
-              <h4> <BiStats /> Industry Stats</h4>
+              <h4>
+                {" "}
+                <BiStats /> Industry Stats
+              </h4>
               <ul>
                 <li>
                   <span>
