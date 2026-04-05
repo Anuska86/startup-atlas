@@ -95,6 +95,25 @@
   filter: none;
 }
 
+/*Dropdown*/
+
+.dropdown-menu {
+  display: flex !important;
+  gap: 30px;
+}
+
+.dropdown-toggle-btn {
+  display: none !important;
+  border: 1px solid var(--sky-aqua);
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 15px;
+}
+
 /*Search & Location controls*/
 
 .header-controls {
@@ -479,6 +498,8 @@
 /* @media querys */
 
 @media (max-width: 768px) {
+  /*Header */
+
   .app-header {
     width: 100vw;
     padding: 1rem 15px;
@@ -489,7 +510,7 @@
 
   .header-top-row {
     position: relative !important;
-    padding: 30px 50px 50px 15px !important;
+    padding: 45px 15px 10px 15px !important;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -508,19 +529,65 @@
     max-width: 200px;
   }
 
+  /*View Nav*/
+
   .view-nav {
-    flex-wrap: wrap;
-    width: 100%;
+    display: flex;
     justify-content: center;
-    gap: 8px;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin: 0 auto;
   }
 
   .nav-link {
     padding: 10px 15px;
     font-size: 0.8rem;
-    flex: 1 1 auto;
+    flex: 0 1 auto;
+    width: auto;
     justify-content: center;
   }
+
+  /*Dropdown*/
+
+  .dropdown-toggle-btn {
+    display: flex !important;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    flex-direction: column !important;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 10px;
+    margin-top: 10px;
+    gap: 10px !important;
+    z-index: 1500;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-dropdown.open .dropdown-menu {
+    display: flex !important;
+  }
+
+  .dropdown-menu .nav-link {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /*Search container*/
 
   .search-container {
     flex-direction: column;
@@ -532,6 +599,8 @@
     width: 100%;
     box-sizing: border-box;
   }
+
+  /*Filter bar*/
 
   .filter-bar {
     flex-direction: column;

@@ -124,8 +124,8 @@ button:focus-visible {
     display: block !important;
     height: auto !important;
     position: absolute !important;
-    top: 25px !important;
-    right: 20px !important;
+    top: 5px !important;
+    right: 5px !important;
     margin: 0 !important;
     transform: none;
     z-index: 1200;

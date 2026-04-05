@@ -15,8 +15,10 @@ import {
   BiRocket,
   BiMoon,
   BiSun,
+  BiChevronDown,
+  BiMenu,
 } from "react-icons/bi";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function Header({
   theme,
@@ -40,7 +42,9 @@ function Header({
   proximityRadius,
 }) {
   const [tempLocation, setTempLocation] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
+  const dropdownRef = useRef(null);
   const location = useLocation();
 
   const handleSubmit = (e) => {
@@ -52,6 +56,24 @@ function Header({
     setUserCoords(null);
     setTempLocation("");
   };
+
+  //Handle Click Outside the dropdown (phone)
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
 
   return (
     <header className="app-header">
@@ -70,22 +92,34 @@ function Header({
           >
             <BiHomeAlt size={20} /> Home
           </NavLink>
-          <NavLink
-            to="/list"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            <BiListUl size={20} /> List View
-          </NavLink>
-          <NavLink
-            to="/map"
-            className={({ isActive }) =>
-              isActive ? "nav-link icon-link active" : "nav-link icon-link"
-            }
-          >
-            <BiMapAlt size={20} /> Map View
-          </NavLink>
+
+          <div className={`nav-dropdown ${menuOpen ? "open" : ""}`} ref={dropdownRef}>
+            <button
+              className="dropdown-toggle-btn nav-link"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <BiMenu size={20} /> Views <BiChevronDown />
+            </button>
+
+            <div className="dropdown-menu" onClick={() => setMenuOpen(false)}>
+              <NavLink
+                to="/list"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                <BiListUl size={20} /> List View
+              </NavLink>
+              <NavLink
+                to="/map"
+                className={({ isActive }) =>
+                  isActive ? "nav-link icon-link active" : "nav-link icon-link"
+                }
+              >
+                <BiMapAlt size={20} /> Map View
+              </NavLink>
+            </div>
+          </div>
         </nav>
 
         <div className="theme-btn">
