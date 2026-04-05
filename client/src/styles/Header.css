@@ -111,7 +111,7 @@
   cursor: pointer;
   align-items: center;
   gap: 5px;
-  padding: 8px 12px;
+  padding: 10px 15px;
 }
 
 /*Search & Location controls*/
@@ -510,7 +510,7 @@
 
   .header-top-row {
     position: relative !important;
-    padding: 30px 50px 50px 15px !important;
+    padding: 20px 15px !important;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -534,13 +534,17 @@
   .view-nav {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 10px;
+    width: 100%;
+    margin: 0 auto;
   }
 
   .nav-link {
     padding: 10px 15px;
     font-size: 0.8rem;
-    flex: 1 1 auto;
+    flex: 0 1 auto;
+    width: auto;
     justify-content: center;
   }
 
