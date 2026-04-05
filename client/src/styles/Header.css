@@ -510,7 +510,7 @@
 
   .header-top-row {
     position: relative !important;
-    padding: 20px 15px !important;
+    padding: 45px 15px 10px 15px !important;
     display: flex;
     flex-direction: column;
     gap: 15px;
