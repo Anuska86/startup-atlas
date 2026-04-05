@@ -104,6 +104,14 @@
 
 .dropdown-toggle-btn {
   display: none !important;
+  border: 1px solid var(--sky-aqua);
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
 }
 
 /*Search & Location controls*/
