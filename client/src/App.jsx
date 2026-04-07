@@ -152,13 +152,8 @@ function App() {
 
         if (error) throw error;
 
-        console.log("🚀 Supabase Success! Data found:", data);
         setStartups(data);
       } catch (error) {
-        console.warn(
-          "Supabase unreacheable.Using local data.js fallback",
-          error,
-        );
         setStartups(fallbackData);
       } finally {
         setIsLoading(false);
@@ -191,7 +186,6 @@ function App() {
     } catch (error) {
       //Vercel fallback Search: data.js
 
-      console.log("Supabase search failed, searching locally...");
       const filtered = fallbackData.filter(
         (s) =>
           s.industry.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -225,7 +219,6 @@ function App() {
 
       setStartups(data);
     } catch (error) {
-      console.error("Error resetting atlas:", error);
       setStartups(fallbackData);
     } finally {
       setIsLoading(false);
