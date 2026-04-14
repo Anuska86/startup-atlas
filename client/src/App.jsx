@@ -138,6 +138,19 @@ function App() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
+
+  //Scroll to top
+
+  useEffect(() => {
+ window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth' 
+  });
+}, [location.pathname]);
+
+
+//Toggle theme effect
   const toggleTheme = (newThemeOrEvent) => {
     setTheme((prev) => {
       const next = prev === "light" ? "dark" : "light";
