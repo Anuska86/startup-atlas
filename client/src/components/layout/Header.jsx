@@ -1,5 +1,7 @@
 import "../../styles/Header.css";
 import Button from "../common/Button.jsx";
+
+import { runThemeTransition } from "../../utils/themeTransition.js";
 import { StartupAtlasLogo } from "../common/Logo.jsx";
 
 import { NavLink, useLocation } from "react-router-dom";
@@ -46,6 +48,10 @@ function Header({
 
   const dropdownRef = useRef(null);
   const location = useLocation();
+
+  const onThemeToggle = (e) =>{
+    runThemeTransition(e,toggleTheme)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -126,7 +132,7 @@ function Header({
           <Button
             className="theme-toggle-action"
             variant="secondary"
-            onClick={toggleTheme}
+            onClick={onThemeToggle}
             icon={theme === "light" ? BiMoon : BiSun}
             aria-label="Toggle Theme"
           ></Button>

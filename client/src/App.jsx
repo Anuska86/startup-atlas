@@ -138,8 +138,13 @@ function App() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  const toggleTheme = (newThemeOrEvent) => {
+    setTheme((prev) => {
+      const next = prev === "light" ? "dark" : "light";
+
+      document.documentElement.setAttribute("data-theme", next);
+      return next;
+    });
   };
 
   //Initial Fetch: first supabase, then fallback data.js
