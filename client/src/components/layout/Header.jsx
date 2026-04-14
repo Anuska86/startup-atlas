@@ -45,6 +45,7 @@ function Header({
 }) {
   const [tempLocation, setTempLocation] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showMobileFilters, setShowMobileFilters] = useState(false); 
 
   const dropdownRef = useRef(null);
   const location = useLocation();
