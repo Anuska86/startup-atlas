@@ -180,16 +180,7 @@ function StartupDetails({ startups }) {
               </ul>
             </div>
 
-            {startup.website && (
-              <a
-                href={startup.website}
-                target="_blank"
-                rel="noreferrer"
-                className="detail-web-link"
-              >
-                Visit Official Site <BiGlobe />
-              </a>
-            )}
+          
           </div>
         </div>
       </div>
