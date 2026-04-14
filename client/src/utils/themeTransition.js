@@ -1,3 +1,5 @@
+import "../styles/ThemeTransition.css";
+
 export const runThemeTransition = (event, switchTheme) => {
   const x = event.clientX;
   const y = event.clientY;
