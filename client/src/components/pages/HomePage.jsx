@@ -72,17 +72,34 @@ function HomePage({ startups }) {
         <BiRocket className="hero-icon" />
         <h1>Explore the Global Startup Ecosystem</h1>
         <p>
-          Discover {totalStartups} innovative companies across {industries}{" "}
-          industries worldwide{" "}
+          The Startup Atlas tracks <strong>{totalStartups}</strong> innovative
+          companies across <strong>{industries}</strong> industries worldwide.
         </p>
 
-        <div className="home-actions">
-          <Link to="/map" className="home-btn primary">
-            <BiMapAlt size={26} /> Launch Interactive Map
-          </Link>
-          <Link to="/list" className="home-btn secondary">
-            <BiListUl size={26} /> Browse List
-          </Link>
+        <div className="home-description-actions">
+          <div className="action-card">
+            <BiListUl size={48} className="action-icon" />
+            <h3>Deep Discovery</h3>
+            <p>
+              Filter by industry, funding status, or MVP stage to find exactly
+              what you're looking for.
+            </p>
+            <Link to="/list" className="home-text-link">
+              Explore the List →
+            </Link>
+          </div>
+
+          <div className="action-card">
+            <BiMapAlt size={48} className="action-icon" />
+            <h3>Proximity Search</h3>
+            <p>
+              Visualize the ecosystem and find innovative enterprises near your
+              current location.
+            </p>
+            <Link to="/map" className="home-text-link">
+              View the Map →
+            </Link>
+          </div>
         </div>
       </section>
 

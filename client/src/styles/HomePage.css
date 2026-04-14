@@ -24,6 +24,7 @@
 }
 
 .hero-section h1 {
+  color: var(--sky-aqua);
   font-size: 3rem;
   background: linear-gradient(90deg, var(--sky-aqua), var(--neon-pink));
   -webkit-background-clip: text;
@@ -32,12 +33,97 @@
   margin-bottom: 20px;
 }
 
+.hero-section h3 {
+  color: var(--electric-sapphire);
+  margin: 15px 0 10px;
+  font-size: 1.4rem;
+}
+
 .hero-icon {
   font-size: 4rem;
   color: var(--neon-pink);
   filter: drop-shadow(0 0 10px var(--neon-pink));
   margin: 0 auto 20px auto;
   display: block;
+}
+
+.home-description-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.action-card {
+  background: var(--card-bg);
+  border: 1px solid var(--sky-aqua-alpha);
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 300px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.action-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--sky-aqua);
+}
+
+.action-icon {
+  padding: 12px;
+  background: rgba(76, 201, 240, 0.1);
+  border-radius: 50%;
+  color: var(--sky-aqua);
+  margin-bottom: 10px;
+}
+
+.home-text-link {
+  color: var(--sky-aqua);
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/*Deep Disvovery card*/
+
+.action-card:first-child .action-icon {
+  color: var(--neon-purple-light);
+  background: rgba(188, 89, 255, 0.1);
+}
+
+.action-card:first-child h3 {
+  color: var(--neon-purple-light);
+}
+
+.action-card:first-child .home-text-link {
+  color: var(--neon-purple-light);
+}
+
+.action-card:first-child .home-text-link:hover {
+  color: var(--pure-white);
+  text-decoration: underline;
+}
+
+/*Proximity Search card*/
+
+.action-card:last-child .action-icon {
+  color: var(--sky-aqua);
+  background: rgba(76, 201, 240, 0.1);
+}
+
+.action-card:last-child h3 {
+  color: var(--sky-aqua);
+}
+
+.action-card:last-child .home-text-link {
+  color: var(--sky-aqua);
+}
+
+.action-card:last-child .home-text-link:hover {
+  color: var(--pure-white);
+  text-decoration: underline;
 }
 
 /*Intro section*/
