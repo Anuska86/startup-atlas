@@ -6,6 +6,7 @@ import {
   BiCalendarAlt,
   BiGhost,
   BiMapAlt,
+  BiChevronRight,
 } from "react-icons/bi";
 import { useNavigate, Link } from "react-router-dom";
 import Button from "../common/Button.jsx";
@@ -58,7 +59,7 @@ function ListPage({ startups, isLoading, onReset }) {
               onClick={(e) => {
                 e.stopPropagation();
 
-                window.scrollTo(0,0); 
+                window.scrollTo(0, 0);
 
                 navigate("/map", {
                   state: {
@@ -71,7 +72,10 @@ function ListPage({ startups, isLoading, onReset }) {
               View on Map
             </Button>
 
-            
+            <div className="card-footer-hint">
+              <span>View Details</span>
+              <BiChevronRight size={25} />
+            </div>
           </div>
         ))
       ) : (
