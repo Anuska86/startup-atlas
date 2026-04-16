@@ -157,14 +157,27 @@ function Header({
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 />
+
                 {/* MOBILE FILTER TRIGGER */}
-                <button
-                  className="mobile-filter-trigger"
-                  onClick={() => setShowMobileFilters(true)}
-                >
-                  <BiMenu size={20} /> Filters{" "}
-                  {isFilterActive && <span className="active-dot"></span>}
-                </button>
+                <div className="search-action-row">
+                  <Button
+                    className="mobile-filter-trigger"
+                    variant="secondary"
+                    onClick={() => setShowMobileFilters(true)}
+                    icon={BiMenu}
+                  >
+                    Filters{" "}
+                    {isFilterActive && <span className="active-dot"></span>}
+                  </Button>
+                  <Button
+                    className="search-button-mobile"
+                    variant="primary"
+                    onClick={handleSearch}
+                    icon={BiSearch}
+                  >
+                    Search
+                  </Button>
+                </div>
 
                 <Button
                   className="desktop-search-btn"
