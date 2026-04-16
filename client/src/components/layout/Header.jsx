@@ -45,14 +45,14 @@ function Header({
 }) {
   const [tempLocation, setTempLocation] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showMobileFilters, setShowMobileFilters] = useState(false); 
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   const dropdownRef = useRef(null);
   const location = useLocation();
 
-  const onThemeToggle = (e) =>{
-    runThemeTransition(e,toggleTheme)
-  }
+  const onThemeToggle = (e) => {
+    runThemeTransition(e, toggleTheme);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -100,7 +100,10 @@ function Header({
             <BiHomeAlt size={20} /> Home
           </NavLink>
 
-          <div className={`nav-dropdown ${menuOpen ? "open" : ""}`} ref={dropdownRef}>
+          <div
+            className={`nav-dropdown ${menuOpen ? "open" : ""}`}
+            ref={dropdownRef}
+          >
             <button
               className="dropdown-toggle-btn nav-link"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -154,7 +157,17 @@ function Header({
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 />
+                {/* MOBILE FILTER TRIGGER */}
+                <button
+                  className="mobile-filter-trigger"
+                  onClick={() => setShowMobileFilters(true)}
+                >
+                  <BiMenu size={20} /> Filters{" "}
+                  {isFilterActive && <span className="active-dot"></span>}
+                </button>
+
                 <Button
+                  className="desktop-search-btn"
                   variant="primary"
                   onClick={handleSearch}
                   icon={BiSearch}
@@ -205,6 +218,7 @@ function Header({
               </div>
             </div>
 
+            {/* Results info */}
             {isFilterActive && (
               <div className="results-count-bar">
                 <div className="results-info">
@@ -229,96 +243,121 @@ function Header({
                 </Button>
               </div>
             )}
-
-            <div className="filter-bar">
-              {/* Industry Select */}
-              <div className="filter-group">
-                <span>Industry</span>
-                <select
-                  value={filters.industry}
-                  onChange={(e) =>
-                    setFilters({ ...filters, industry: e.target.value })
-                  }
+            <div
+              className={`filter-sidebar-overlay ${showMobileFilters ? "open" : ""}`}
+              onClick={() => setShowMobileFilters(false)}
+            >
+              <div className="filter-bar" onClick={(e) => e.stopPropagation()}>
+                <div
+                  className="sidebar-header"
+                  style={{
+                    padding: "10px 0",
+                    borderBottom: "1px solid var(--border-color)",
+                    marginBottom: "20px",
+                  }}
                 >
-                  <option value="All">All Industries</option>
-                  {uniqueIndustries
-                    .filter((ind) => ind !== "All")
-                    .map((ind, i) => (
-                      <option key={`ind-${ind}-${i}`} value={ind}>
-                        {ind}
-                      </option>
-                    ))}
-                </select>
-              </div>
+                  <h3 style={{ fontSize: "1.2rem", margin: 0 }}>Filters</h3>
+                  <button onClick={() => setShowMobileFilters(false)}>
+                    <BiX size={24} />
+                  </button>
+                </div>
 
-              {/* Location Select */}
-              <div className="filter-group">
-                <span>Location</span>
-                <select
-                  value={filters.country}
-                  onChange={(e) =>
-                    setFilters({ ...filters, country: e.target.value })
-                  }
+                {/* Industry Select */}
+                <div className="filter-group">
+                  <span>Industry</span>
+                  <select
+                    value={filters.industry}
+                    onChange={(e) =>
+                      setFilters({ ...filters, industry: e.target.value })
+                    }
+                  >
+                    <option value="All">All Industries</option>
+                    {uniqueIndustries
+                      .filter((ind) => ind !== "All")
+                      .map((ind, i) => (
+                        <option key={`ind-${ind}-${i}`} value={ind}>
+                          {ind}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+
+                {/* Location Select */}
+                <div className="filter-group">
+                  <span>Location</span>
+                  <select
+                    value={filters.country}
+                    onChange={(e) =>
+                      setFilters({ ...filters, country: e.target.value })
+                    }
+                  >
+                    <option value="All">All Countries</option>
+                    {uniqueCountries
+                      .filter((con) => con !== "All")
+                      .map((con, i) => (
+                        <option key={`con-${con}-${i}`} value={con}>
+                          {con}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+
+                {/* Category Select */}
+                <div className="filter-group">
+                  <span>Category</span>
+                  <select
+                    value={filters.category}
+                    onChange={(e) =>
+                      setFilters({ ...filters, category: e.target.value })
+                    }
+                  >
+                    <option value="All">All Categories</option>
+                    {uniqueCategories
+                      .filter((cat) => cat !== "All")
+                      .map((cat, i) => (
+                        <option key={`cat-${cat}-${i}`} value={cat}>
+                          {cat}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+
+                {/* Checkboxes */}
+                {/* Seeking Funding Checkbox */}
+                <label className="checkbox-label">
+                  <input
+                    id="seeking-funding"
+                    type="checkbox"
+                    checked={filters.is_seeking_funding}
+                    onChange={(e) =>
+                      setFilters({
+                        ...filters,
+                        is_seeking_funding: e.target.checked,
+                      })
+                    }
+                  />
+                  <BiDollarCircle size={20} /> Seeking Funding
+                </label>
+                {/* Has MVP Checkbox */}
+                <label className="checkbox-label">
+                  <input
+                    id="has-mvp"
+                    type="checkbox"
+                    checked={filters.has_mvp}
+                    onChange={(e) =>
+                      setFilters({ ...filters, has_mvp: e.target.checked })
+                    }
+                  />
+                  <BiRocket size={20} /> Has MVP
+                </label>
+                <Button
+                  variant="primary"
+                  className="apply-filters-btn"
+                  onClick={() => setShowMobileFilters(false)}
                 >
-                  <option value="All">All Countries</option>
-                  {uniqueCountries
-                    .filter((con) => con !== "All")
-                    .map((con, i) => (
-                      <option key={`con-${con}-${i}`} value={con}>
-                        {con}
-                      </option>
-                    ))}
-                </select>
+                  Apply Filters
+                </Button>
               </div>
-
-              {/* Category Select */}
-              <div className="filter-group">
-                <span>Category</span>
-                <select
-                  value={filters.category}
-                  onChange={(e) =>
-                    setFilters({ ...filters, category: e.target.value })
-                  }
-                >
-                  <option value="All">All Categories</option>
-                  {uniqueCategories
-                    .filter((cat) => cat !== "All")
-                    .map((cat, i) => (
-                      <option key={`cat-${cat}-${i}`} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
-                </select>
-              </div>
-
-              {/* Checkboxes */}
-              {/* Seeking Funding Checkbox */}
-              <label className="checkbox-label">
-                <input
-                  id="seeking-funding"
-                  type="checkbox"
-                  checked={filters.is_seeking_funding}
-                  onChange={(e) =>
-                    setFilters({
-                      ...filters,
-                      is_seeking_funding: e.target.checked,
-                    })
-                  }
-                />
-                <BiDollarCircle size={20} /> Seeking Funding
-              </label>
-              {/* Has MVP Checkbox */}
-              <label className="checkbox-label">
-                <input
-                  id="has-mvp"
-                  type="checkbox"
-                  checked={filters.has_mvp}
-                  onChange={(e) =>
-                    setFilters({ ...filters, has_mvp: e.target.checked })
-                  }
-                />
-                <BiRocket size={20} /> Has MVP
-              </label>
             </div>
           </div>
         )}
