@@ -261,14 +261,7 @@ function Header({
               onClick={() => setShowMobileFilters(false)}
             >
               <div className="filter-bar" onClick={(e) => e.stopPropagation()}>
-                <div
-                  className="sidebar-header"
-                  style={{
-                    padding: "10px 0",
-                    borderBottom: "1px solid var(--border-color)",
-                    marginBottom: "20px",
-                  }}
-                >
+                <div className="sidebar-header">
                   <h3 style={{ fontSize: "1.2rem", margin: 0 }}>Filters</h3>
                   <button onClick={() => setShowMobileFilters(false)}>
                     <BiX size={24} />

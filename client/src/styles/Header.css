@@ -318,6 +318,10 @@
   box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
 }
 
+.sidebar-header {
+  display: none;
+}
+
 .filter-group {
   display: flex;
   align-items: center;
@@ -739,6 +743,15 @@
     transition: right 0.3s ease-in-out;
     z-index: 10001;
     overflow-y: auto;
+  }
+
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
   }
 
   .filter-sidebar-overlay.open .filter-bar {
