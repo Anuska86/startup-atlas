@@ -35,7 +35,6 @@
   transform: translateY(-5px);
   border-color: var(--sky-aqua);
   box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
-  transition: all 0.3s ease;
 }
 
 .startup-card strong {
@@ -138,13 +137,17 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 4px;
   margin-top: 15px;
   font-size: 0.85rem;
   color: var(--neon-pink);
   font-weight: 500;
   opacity: 0.8;
   transition: all 0.2s ease;
+}
+
+.card-footer-hint svg {
+  display: block;
+  margin-top: 1px;
 }
 
 .startup-card:hover .card-footer-hint {
