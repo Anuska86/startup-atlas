@@ -33,19 +33,25 @@ function MapPage({ startups, theme, userCoords }) {
   useEffect(() => {
     if (!map) return;
 
-    // 1. Resize Observer watch the map's container
-   
-   const resizeObserver = new ResizeObserver(()=>{
- map.invalidateSize();
-   })
+    //DECLARATIONS
 
-   const container = map.getContainer();
+    let jumpTimer;
 
-   if (container) {
-    resizeObserver.observe(container)
-   }
-   
-   
+    //Resize Observer watch the map's container
+
+    const resizeObserver = new ResizeObserver(() => {
+      map.invalidateSize();
+    });
+
+    const container = map.getContainer();
+
+    if (container) {
+      resizeObserver.observe(container);
+    }
+
+    map.invalidateSize();
+
+    //LOGIC
 
     const flyToCoords = location.state?.flyTo;
     const targetId = location.state?.startupId;
@@ -78,7 +84,6 @@ function MapPage({ startups, theme, userCoords }) {
                 iconElement.classList.remove("jumping-marker-active");
               }, 2000);
             }
-          
           }
         });
 
@@ -107,12 +112,13 @@ function MapPage({ startups, theme, userCoords }) {
     } else if (startups.length === 0 && !flyToCoords) {
       map.setView(center, zoom);
     }
-  
-  return () =>{
-    resizeObserver.disconnect()
-  }
-  
-  
+
+    //EXIT
+
+    return () => {
+      resizeObserver.disconnect();
+      if (jumpTimer) clearTimeout(jumpTimer);
+    };
   }, [
     map,
     theme,
@@ -195,6 +201,7 @@ function MapPage({ startups, theme, userCoords }) {
       <div className="map-wrapper">
         <div className="map-internal-controls">
           <Button
+            className="restore-map-view-btn"
             variant="secondary"
             onClick={handleResetView}
             icon={BiRefresh}
@@ -222,6 +229,15 @@ function MapPage({ startups, theme, userCoords }) {
           zoom={zoom}
           ref={setMap}
           style={{ height: "100%", width: "100%" }} // Ensure it fills the wrapper
+          worldCopyJump={true}
+          minZoom={2}
+          fadeAnimation={true}
+          zoomAnimation={true}
+          maxBounds={[
+            [-85.05112878, -180],
+            [85.05112878, 180],
+          ]}
+          maxBoundsViscosity={1.0}
         >
           <TileLayer
             key={theme}
@@ -231,6 +247,10 @@ function MapPage({ startups, theme, userCoords }) {
                 : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
             }
             attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
+            keepBuffer={2}
+            maxNativeZoom={19}
+            maxZoom={20}
+            updateWhenIdle={false}
           />
 
           {/* User's Location Marker */}
