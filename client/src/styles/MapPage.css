@@ -336,11 +336,21 @@
   }
 
   .map-internal-controls {
+    width: 100%;
+    pointer-events: none;
     left: 10px;
     top: 10px;
   }
 
   .custom-btn.secondary.restore-map-view-btn {
     padding: 4px 8px;
+    max-width: fit-content;
+    width: auto;
+    pointer-events: auto;
+    position: absolute;
+    right: 35px;
+    top: 10px;
+    left: auto;
+    white-space: nowrap;
   }
 }
