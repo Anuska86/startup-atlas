@@ -31,10 +31,21 @@ function MapPage({ startups, theme, userCoords }) {
   const zoom = 3;
 
   useEffect(() => {
-    if (!map || !map.getContainer()) return;
+    if (!map) return;
 
-    // 1. Force Leaflet to recalculate its container size
-    map.invalidateSize();
+    // 1. Resize Observer watch the map's container
+   
+   const resizeObserver = new ResizeObserver(()=>{
+ map.invalidateSize();
+   })
+
+   const container = map.getContainer();
+
+   if (container) {
+    resizeObserver.observe(container)
+   }
+   
+   
 
     const flyToCoords = location.state?.flyTo;
     const targetId = location.state?.startupId;
@@ -67,7 +78,7 @@ function MapPage({ startups, theme, userCoords }) {
                 iconElement.classList.remove("jumping-marker-active");
               }, 2000);
             }
-            e;
+          
           }
         });
 
@@ -96,6 +107,12 @@ function MapPage({ startups, theme, userCoords }) {
     } else if (startups.length === 0 && !flyToCoords) {
       map.setView(center, zoom);
     }
+  
+  return () =>{
+    resizeObserver.disconnect()
+  }
+  
+  
   }, [
     map,
     theme,

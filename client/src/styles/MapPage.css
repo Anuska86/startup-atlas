@@ -2,6 +2,7 @@
 .map-page-container {
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 80px);
 }
 
 /*THE WRAPPER*/
@@ -11,10 +12,11 @@
   border: 2px solid var(--indigo-bloom);
   border-radius: 15px;
   position: relative;
+  flex-grow: 1;
+  padding: 20px;
   z-index: 1;
   width: calc(100% - 40px);
   margin: 10px auto;
-  height: 75vh;
   overflow: hidden;
   box-shadow: 0 0 25px rgba(114, 9, 183, 0.4);
   background-color: var(--dark-bg);
@@ -294,4 +296,25 @@
 .legend-item .icon {
   font-size: 1.2rem;
   color: #4cc9f0;
+}
+
+
+
+/*RESPONSIVE */
+
+@media (max-width: 600px) {
+  .map-wrapper {
+    margin: 5px; 
+    width: calc(100% - 10px);
+    padding: 10px; 
+  }
+
+  .map-legend {
+    display: none; 
+  }
+
+  .map-internal-controls {
+    left: 10px; 
+    top: 10px;
+  }
 }
