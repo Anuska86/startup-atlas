@@ -1,4 +1,6 @@
 import "./styles/App.css";
+import axios from "axios";
+
 import { startups as fallbackData } from "./data/data.js";
 import { supabase } from "./supabaseClient.js";
 
@@ -138,19 +140,17 @@ function App() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-
   //Scroll to top
 
   useEffect(() => {
- window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: 'smooth' 
-  });
-}, [location.pathname]);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, [location.pathname]);
 
-
-//Toggle theme effect
+  //Toggle theme effect
   const toggleTheme = (newThemeOrEvent) => {
     setTheme((prev) => {
       const next = prev === "light" ? "dark" : "light";
@@ -286,22 +286,31 @@ function App() {
       return;
     }
     try {
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(locationName)}&format=json&limit=1`,
-        { headers: { "User-Agent": "StartupAtlas/1.0" } },
+      const response = await axios.get(
+        "https://nominatim.openstreetmap.org/search",
+        {
+          params: {
+            q: locationName,
+            format: "json",
+            limit: 1,
+          },
+          headers: {
+            "User-Agent": "StartupAtlas/1.0",
+          },
+        },
       );
-      const data = await response.json();
 
-      if (data && data.length > 0) {
+      if (response.data && response.data.length > 0) {
         setUserCoords({
-          lat: parseFloat(data[0].lat),
-          lng: parseFloat(data[0].lon),
+          lat: parseFloat(response.data[0].lat),
+          lng: parseFloat(response.data[0].lon),
         });
       } else {
         alert("Location not found");
       }
     } catch (error) {
-      console.error("Geocoding error:", error);
+      console.error("Geocoding error:", error.response?.data || error.message);
+      alert("There was an error finding that location.");
     }
   };
 
