@@ -178,9 +178,6 @@ function App() {
       } catch (error) {
         console.warn("Primary database failed, using fallback logic.");
 
-        const backup = await axios.get("https://backup-api.com/startups");
-
-        // setStartups(backup.data);
         setStartups(fallbackData);
       } finally {
         setIsLoading(false);
