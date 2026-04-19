@@ -14,6 +14,10 @@ import Footer from "./components/layout/Footer.jsx";
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
+//Axios defaults
+axios.defaults.headers.common["User-Agent"] = "StartupAtlas/1.0";
+axios.defaults.timeout = 5000;
+
 //Haversine Formula (calculates the distance between two sets of coordinates)
 
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -160,7 +164,7 @@ function App() {
     });
   };
 
-  //Initial Fetch: first supabase, then fallback data.js
+  //Initial get data: first supabase, then fallback data.js
 
   useEffect(() => {
     const getInitialData = async () => {
@@ -172,6 +176,11 @@ function App() {
 
         setStartups(data);
       } catch (error) {
+        console.warn("Primary database failed, using fallback logic.");
+
+        const backup = await axios.get("https://backup-api.com/startups");
+
+        // setStartups(backup.data);
         setStartups(fallbackData);
       } finally {
         setIsLoading(false);
@@ -293,9 +302,6 @@ function App() {
             q: locationName,
             format: "json",
             limit: 1,
-          },
-          headers: {
-            "User-Agent": "StartupAtlas/1.0",
           },
         },
       );
