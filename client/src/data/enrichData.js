@@ -1,8 +1,9 @@
+import "dotenv/config";
 import { createClient } from "@supabase/supabase-js";
 import axios from "axios";
 
-const SUPABASE_URL = VITE_SUPABASE_URL;
-const SUPABASE_KEY = SUPABASE_SERVICE_ROLE_KEY;
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -12,7 +13,7 @@ async function geocodeStartups() {
     .from("startups_new")
     .select("id, all_locations")
     .is("lat", null)
-    .limit(100); // Let's do 100 at a time to be safe
+    .limit(4000);
 
   if (error) {
     console.error("Error fetching data:", error);
@@ -25,6 +26,11 @@ async function geocodeStartups() {
     try {
       // 2. Ask the Map API for coordinates
       // We use the first location in the string
+
+      if (!startup.all_locations) {
+        console.log(`⏩ Skipping ID ${startup.id}: Location is empty.`);
+        continue;
+      }
       const query = startup.all_locations.split(",")[0];
       const response = await axios.get(
         `https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`,
