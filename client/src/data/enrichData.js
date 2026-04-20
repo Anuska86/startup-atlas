@@ -13,7 +13,7 @@ async function geocodeStartups() {
     .from("startups_new")
     .select("id, all_locations")
     .is("lat", null)
-    .limit(4000);
+    .limit(6000);
 
   if (error) {
     console.error("Error fetching data:", error);
@@ -24,14 +24,24 @@ async function geocodeStartups() {
 
   for (const startup of startups) {
     try {
-      // 2. Ask the Map API for coordinates
-      // We use the first location in the string
-
       if (!startup.all_locations) {
         console.log(`⏩ Skipping ID ${startup.id}: Location is empty.`);
         continue;
       }
-      const query = startup.all_locations.split(",")[0];
+      let query = startup.all_locations.split(",")[0].trim(); //Grab the first city
+
+      if (
+        query.toLowercase() === "remote" &&
+        startup.all_locations.includes(",")
+      ) {
+        query = startup.all_locations.split(",")[1].trim(); //If the first word is remote try the second word
+      }
+
+      if (query.toLowercase() === "remote" || !query) {
+        console.log(`⏩ Skipping ID ${startup.id}: No specific city found.`);
+        continue;
+      }
+
       const response = await axios.get(
         `https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`,
         {

@@ -51,6 +51,13 @@ function StartupDetails({ startups }) {
     ? startup.launched_at.substring(0, 4)
     : "N/A";
   const isSeekingFunding = startup.stage === "Early";
+  const tagsList = startup.tags
+    ? startup.tags
+        .replace(/[\[\]']/g, "")
+        .split(",")
+        .map((t) => t.trim())
+        .filter((t) => t !== "")
+    : [];
 
   return (
     <div className="details-page-container">
@@ -143,15 +150,15 @@ function StartupDetails({ startups }) {
             )}
 
             {/* Tech Stack  */}
-            {startup.tech_stack && startup.tech_stack.length > 0 && (
+            {tagsList.length > 0 && (
               <div className="info-box tech-box">
                 <h4>
-                  <BiCodeBlock /> Core Tech
+                  <BiCodeBlock /> Keywords & Stack
                 </h4>
                 <div className="tech-badge-container">
-                  {startup.tech_stack.map((tech, index) => (
+                  {tagsList.map((tag, index) => (
                     <span key={index} className="tech-tag">
-                      {tech}
+                      {tag}
                     </span>
                   ))}
                 </div>
