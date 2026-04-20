@@ -31,13 +31,13 @@ async function geocodeStartups() {
       let query = startup.all_locations.split(",")[0].trim(); //Grab the first city
 
       if (
-        query.toLowercase() === "remote" &&
+        query.toLowerCase() === "remote" &&
         startup.all_locations.includes(",")
       ) {
         query = startup.all_locations.split(",")[1].trim(); //If the first word is remote try the second word
       }
 
-      if (query.toLowercase() === "remote" || !query) {
+      if (query.toLowerCase() === "remote" || !query) {
         console.log(`⏩ Skipping ID ${startup.id}: No specific city found.`);
         continue;
       }
