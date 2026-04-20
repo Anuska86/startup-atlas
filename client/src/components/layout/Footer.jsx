@@ -37,8 +37,8 @@ function Footer() {
         <div className="footer-project-info">
           <span className="footer-badge">Portfolio Project</span>
           <p className="footer-note">
-            <BiInfoCircle size={18} /> Data shown is simulated for demonstration
-            purposes. Built as a technical showcase.
+            <BiInfoCircle size={18} /> Data sourced from Kaggle & Y Combinator.
+            Built as a technical showcase.
           </p>
         </div>
 
