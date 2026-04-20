@@ -18,6 +18,20 @@ function ListPage({ startups, isLoading, onReset }) {
     return <div className="loader-div">Searching the Atlas...</div>;
   }
 
+  const city = startup.all_locations
+    ? startup.all_locations.split(",")[0]
+    : "Unknown City";
+  const country = startup.regions
+    ? startup.regions
+        .replace(/[\[\]']/g, "")
+        .split(",")[0]
+        .trim()
+    : "Global";
+  const foundedYear = startup.launched_at
+    ? startup.launched_at.substring(0, 4)
+    : "N/A";
+  const isSeekingFunding = startup.stage === "Early";
+
   return (
     <div className="card-container">
       {startups.length > 0 ? (
@@ -28,7 +42,7 @@ function ListPage({ startups, isLoading, onReset }) {
             onClick={() => navigate(`/startup/${startup.id}`)}
           >
             <div className="card-right-info">
-              {startup.is_seeking_funding && (
+              {isSeekingFunding && (
                 <div className="funding-badge">Seeking Funding </div>
               )}
             </div>
@@ -38,7 +52,7 @@ function ListPage({ startups, isLoading, onReset }) {
             </div>
             <div className="founded-year">
               <BiCalendarAlt size={18} />
-              Founded : {startup.founded}
+              Founded : {foundedYear}
             </div>
 
             <div className="card-details">
@@ -47,9 +61,7 @@ function ListPage({ startups, isLoading, onReset }) {
               </p>
               <p>
                 <strong>Location:</strong>{" "}
-                {startup.city === startup.country
-                  ? startup.country
-                  : `${startup.city}, ${startup.country}`}
+                {city === country ? country : `${city}, ${country}`}
               </p>
             </div>
             <Button
