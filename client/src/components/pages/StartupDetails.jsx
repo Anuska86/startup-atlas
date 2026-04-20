@@ -40,6 +40,18 @@ function StartupDetails({ startups }) {
     );
   }
 
+  const city = startup.all_locations ? startup.all_locations.split(",")[0] : "";
+  const country = startup.regions
+    ? startup.regions
+        .replace(/[\[\]']/g, "")
+        .split(",")[0]
+        .trim()
+    : "Global";
+  const foundedYear = startup.launched_at
+    ? startup.launched_at.substring(0, 4)
+    : "N/A";
+  const isSeekingFunding = startup.stage === "Early";
+
   return (
     <div className="details-page-container">
       <Button
@@ -56,21 +68,21 @@ function StartupDetails({ startups }) {
           <div className="title-area">
             <h1>{startup.name}</h1>
             <div className="details-badges">
-              {startup.is_seeking_funding && (
+              {isSeekingFunding && (
                 <span className="funding-pill">Seeking Funding</span>
               )}
               {startup.has_mvp && <span className="mvp-pill">MVP Ready</span>}
+              <span className="stage-pill">{startup.stage} Stage</span>
             </div>
           </div>
           <div className="details-meta">
             <span>
               <BiMap className="meta-icon map-pin-color" />{" "}
-              {startup.city && `${startup.city}, `}
-              {startup.country}
+              {city && `${city}, `} {country}
             </span>
             <span>
               <BiCalendarAlt className="meta-icon calendar-color" />
-              Founded: {startup.founded}
+              Founded: {foundedYear}
             </span>
           </div>
         </div>
@@ -81,24 +93,17 @@ function StartupDetails({ startups }) {
             {/* 1. Main Mission & Vision */}
             <section className="info-block">
               <h3>Mission & Vision</h3>
-              <p>{startup.description || "Gathering mission data..."}</p>
+              <p>{startup.one_liner || "Gathering mission data..."}</p>
             </section>
-
-            {/* Problem Solved */}
-            {startup.problem_solved && (
-              <section className="info-block problem-section">
-                <h3>
-                  <BiExclude /> The Problem
-                </h3>
-                <p>{startup.problem_solved}</p>
-              </section>
-            )}
 
             {/* Deep Dive / Long Description */}
             {startup.long_description && (
               <section className="info-block deep-dive-section">
                 <h3>Detailed Analysis</h3>
-                <p className="long-desc-text">{startup.long_description}</p>
+                <p className="long-desc-text">
+                  {startup.long_description ||
+                    "Detailed profile data is currently being synthesized for this startup."}
+                </p>
               </section>
             )}
 
@@ -120,7 +125,7 @@ function StartupDetails({ startups }) {
             {/* Leadership Section */}
             <section className="info-section sidebar-box">
               <h3>
-                <BiUserVoice /> Leadership
+                <BiUserVoice /> Founders
               </h3>
               <p className="founders-text">
                 {startup.founders || "Information being updated..."}
@@ -167,20 +172,24 @@ function StartupDetails({ startups }) {
                 </li>
                 <li>
                   <span>
-                    <BiRocket /> <strong>Stage:</strong>
+                    <BiRocket /> <strong>Status:</strong>
+                  </span>
+                  {startup.status}
+                </li>
+                <li>
+                  <span>
+                    <BiUserVoice /> <strong>Team Size:</strong>
                   </span>{" "}
-                  {startup.has_mvp ? "Post-MVP" : "Pre-MVP"}
+                  {startup.team_size || "N/A"}
                 </li>
                 <li>
                   <span>
                     <BiDollarCircle /> <strong>Investment:</strong>
                   </span>{" "}
-                  {startup.is_seeking_funding ? "Open" : "Closed"}
+                  {isSeekingFunding ? "Open" : "Closed"}
                 </li>
               </ul>
             </div>
-
-          
           </div>
         </div>
       </div>

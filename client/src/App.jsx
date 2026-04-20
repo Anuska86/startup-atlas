@@ -60,22 +60,21 @@ function App() {
     has_mvp: false,
   });
 
-  const uniqueIndustries = [
-    "All",
-    ...new Set(
-      startups
-        .map((s) => s.industry)
-        .filter((value) => value && value.trim() !== ""),
-    ),
-  ].sort();
   const uniqueCountries = [
     "All",
     ...new Set(
       startups
-        .map((s) => s.country)
-        .filter((value) => value && value.trim() !== ""),
+        .map((s) => {
+          if (!startup.regions) return null;
+          return startup.regions
+            .replace(/[\[\]']/g, "")
+            .split(",")[0]
+            .trim();
+        })
+        .filter(Boolean),
     ),
   ].sort();
+
   const uniqueCategories = [
     "All",
     ...new Set(
@@ -85,7 +84,11 @@ function App() {
     ),
   ].sort();
 
+  //Filter Logic
+
   const filteredStartups = startups.filter((startup) => {
+    //Industry
+
     const matchSearch =
       (startup.name?.toLowerCase() || "").includes(searchTerm.toLowerCase()) ||
       (startup.industry?.toLowerCase() || "").includes(
@@ -95,16 +98,30 @@ function App() {
     const matchIndustry =
       filters.industry === "All" || startup.industry === filters.industry;
 
+    //Country
+    const currentCountry = startup.regions
+      ? startup.regions
+          .replace(/[\[\]']/g, "")
+          .split(",")[0]
+          .trim()
+      : "";
+
     const matchCountry =
       filters.country === "All" || startup.country === filters.country;
 
-    const matchCategory =
-      filters.category === "All" || startup.category === filters.category;
+    //Seeking Funding
+
+    const isSeekingFunding = startup.stage === "Early";
 
     const matchFunding =
-      filters.is_seeking_funding === false ? true : startup.is_seeking_funding;
+      filters.is_seeking_funding === false ? true : isSeekingFunding;
 
-    const matchMVP = filters.has_mvp === false ? true : startup.has_mvp;
+    //MVP
+
+    const matchMVP =
+      filters.has_mvp === false ? true : startup.has_mvp === true;
+
+    //Proximity Logic
 
     const matchLocation =
       !userCoords ||
@@ -202,18 +219,19 @@ function App() {
 
     try {
       const { data, error } = (await supabase.from("startups").select("*")).or(
-        `name.ilike.%${searchTerm}%,industry.ilike.%${searchTerm}%`,
+        `name.ilike.%${searchTerm}%,industry.ilike.%${searchTerm}%,one_liner.ilike.%${searchTerm}%`,
       );
 
       if (error) throw error;
       setStartups(data);
     } catch (error) {
       //Vercel fallback Search: data.js
-
+      console.warn("Supabase search failed, using fallback.");
       const filtered = fallbackData.filter(
         (s) =>
           s.industry.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          s.name.toLowerCase().includes(searchTerm.toLowerCase()),
+          s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          (s.one_liner?.toLowerCase() || "").includes(searchTerm.toLowerCase()),
       );
       setStartups(filtered);
     } finally {
