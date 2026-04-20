@@ -38,7 +38,15 @@ function HomePage({ startups }) {
 
   //totals
   const totalCountries = new Set(
-    startups.map((startup) => startup.country).filter((country) => country),
+    startups
+      .map((startup) => {
+        if (!startup.regions) return null;
+        return startup.regions
+          .replace(/[\[\]']/g, "")
+          .split(",")[0]
+          .trim();
+      })
+      .filter(Boolean),
   ).size;
 
   const totalIndustries = new Set(
@@ -46,7 +54,7 @@ function HomePage({ startups }) {
   ).size;
 
   const totalEmployees = startups.reduce(
-    (sum, s) => sum + (Number(s.employees) || 0),
+    (sum, s) => sum + (Number(s.team_size) || 0),
     0,
   );
   //chartData
