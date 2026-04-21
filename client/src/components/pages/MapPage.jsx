@@ -2,7 +2,7 @@ import "../../styles/MapPage.css";
 import Button from "../common/Button.jsx";
 
 import { getCategoryColor } from "../../utils/helpers.js";
-import { createCustomIcon } from "../../utils/iconUtils.js";
+import { createCustomIcon } from "../../utils/iconUtils.jsx";
 
 import { useEffect, useState, useRef, useMemo, memo } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
