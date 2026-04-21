@@ -37,11 +37,13 @@ function App() {
       : "dark",
   );
 
+  //DATE CLEANING
+
   //Filters
   const [filters, setFilters] = useState({
-    industry: "All",
-    country: "All",
-    category: "All",
+    industry: "All Industries",
+    country: "All Countries",
+    category: "All Categories",
     is_seeking_funding: false,
     has_mvp: false,
   });
@@ -93,7 +95,7 @@ function App() {
     [startups],
   );
 
-  //Filter Logic
+  //FILTER LOGIC
 
   const filteredStartups = startups.filter((startup) => {
     //Industry
@@ -171,6 +173,8 @@ function App() {
     filters.has_mvp !== false ||
     userCoords !== null;
 
+  //SETUP EFFECTS
+
   //Screen mode
 
   useEffect(() => {
@@ -231,27 +235,13 @@ function App() {
   const handleReset = async () => {
     setSearchTerm("");
     setFilters({
-      industry: "All",
-      country: "All",
-      category: "All",
+      industry: "All Industries",
+      country: "All Countries",
+      category: "All Categories",
       is_seeking_funding: false,
       has_mvp: false,
     });
     setUserCoords(null);
-
-    setIsLoading(true);
-
-    try {
-      const { data, error } = await supabase.from("startups").select("*");
-
-      if (error) throw new Error();
-
-      setStartups(data);
-    } catch (error) {
-      setStartups(fallbackData);
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   //Checking if some data is filtering
