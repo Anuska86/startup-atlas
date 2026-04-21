@@ -2,8 +2,9 @@ import "../../styles/MapPage.css";
 import Button from "../common/Button.jsx";
 
 import { getCategoryColor } from "../../utils/helpers.js";
+import { createCustomIcon } from "../../utils/iconUtils.js";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo, memo } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { useLocation } from "react-router-dom";
 
@@ -20,6 +21,56 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
+
+//Marker Helper
+
+const MemoizedMarker = memo(({ startup }) => {
+  // This only runs if the startup data changes
+  const icon = useMemo(
+    () => createCustomIcon(startup),
+    [startup.category, startup.industry],
+  );
+
+  return (
+    <Marker
+      position={[startup.lat, startup.lng]}
+      icon={icon}
+      eventHandlers={{
+        add: (e) => {
+          e.target.options.id = startup.id;
+        },
+      }}
+    >
+      <Popup>
+        <div className="map-popup">
+          <h3>{startup.name}</h3>
+          <p>
+            <strong>{startup.industry}</strong>
+          </p>
+          <p>
+            {startup.city}, {startup.country}
+          </p>
+          {/*Category and MVP Tags */}
+          <div className="popup-tags">
+            {Array.isArray(startup.tags) ? (
+              startup.tags.map((tag) => (
+                <span key={tag} className="startup-tag">
+                  {tag}
+                </span>
+              ))
+            ) : (
+              <span className="startup-tag">{startup.tags}</span>
+            )}
+            {startup.has_mvp && <span className="startup-tag mvp">MVP</span>}
+          </div>
+          <a href={startup.website} target="_blank" rel="noreferrer">
+            Visit Website
+          </a>
+        </div>
+      </Popup>
+    </Marker>
+  );
+});
 
 function MapPage({ startups, theme, userCoords }) {
   const [map, setMap] = useState(null); //Actual Leaflet
@@ -128,47 +179,6 @@ function MapPage({ startups, theme, userCoords }) {
     userCoords,
   ]);
 
-  //Custom Icon for each industry
-  const createCustomIcon = (startup) => {
-    let SelectedIcon = BiChip;
-    const industry = startup.industry?.toLowerCase() || "";
-
-    if (industry.includes("energy") || industry.includes("agriculture")) {
-      SelectedIcon = BiLeaf;
-    } else if (industry.includes("fin") || industry.includes("saas")) {
-      SelectedIcon = BiLineChart;
-    } else if (industry.includes("health")) {
-      SelectedIcon = BiHeart;
-    } else if (industry.includes("ai") || industry.includes("quantum")) {
-      SelectedIcon = BiChip;
-    } else {
-      SelectedIcon = BiChip; // Default
-    }
-
-    const iconMarkup = renderToStaticMarkup(
-      <div
-        style={{
-          color: getCategoryColor(startup.category),
-          fontSize: "24px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          filter: "drop-shadow(0 0 2px rgba(0,0,0,0.5))",
-        }}
-      >
-        <SelectedIcon />
-      </div>,
-    );
-
-    return L.divIcon({
-      html: iconMarkup,
-      className: "industry-icon-marker",
-      iconSize: [30, 30],
-      iconAnchor: [15, 15],
-      popupAnchor: [0, -25],
-    });
-  };
-
   //User icon
 
   const userIcon = L.divIcon({
@@ -270,38 +280,7 @@ function MapPage({ startups, theme, userCoords }) {
 
           <MarkerClusterGroup chunkedLoading spiderfyOnMaxZoom={true}>
             {startups.map((startup) => (
-              <Marker
-                key={startup.id}
-                id={startup.id}
-                position={[startup.lat, startup.lng]}
-                icon={createCustomIcon(startup)}
-              >
-                <Popup>
-                  <div className="map-popup">
-                    <h3>{startup.name}</h3>
-                    <p>
-                      <strong>{startup.industry}</strong>
-                    </p>
-                    <p>
-                      {startup.city}, {startup.country}
-                    </p>
-                    {/* Growth and MVP Tags */}
-                    <div className="popup-tags">
-                      {startup.category && (
-                        <span className="startup-tag growth">
-                          {startup.category}
-                        </span>
-                      )}
-                      {startup.has_mvp && (
-                        <span className="startup-tag mvp">MVP</span>
-                      )}
-                    </div>
-                    <a href={startup.website} target="_blank" rel="noreferrer">
-                      Visit Website
-                    </a>
-                  </div>
-                </Popup>
-              </Marker>
+              <MemoizedMarker key={startup.id} startup={startup} />
             ))}
           </MarkerClusterGroup>
         </MapContainer>
