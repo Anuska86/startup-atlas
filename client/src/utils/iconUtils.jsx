@@ -8,7 +8,7 @@ import {
   BiStore,
   BiCodeAlt,
   BiMusic,
-  BiHeadset,
+  BiJoystick,
   BiCartAlt,
   BiGlobe,
 } from "react-icons/bi";
@@ -35,7 +35,7 @@ export const createCustomIcon = (startup) => {
     tags.includes("vr") ||
     tags.includes("game")
   ) {
-    SelectedIcon = BiHeadset;
+    SelectedIcon = BiJoystick;
   } else if (
     tags.includes("grocery") ||
     tags.includes("ecommerce") ||
