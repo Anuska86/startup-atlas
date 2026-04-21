@@ -250,19 +250,21 @@
 
 /* General industry icons */
 .industry-icon-marker {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(15, 15, 25, 0.8);
+  backdrop-filter: blur(4px);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 2px solid var(--indigo-bloom);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  transition: margin-top 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .industry-icon-marker:hover {
-  transform: scale(1.2);
+  transform: scale(1.2) rotate(5deg);
   border-color: var(--neon-pink);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /*Jumping icons*/
@@ -300,7 +302,14 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
   color: var(--text-color);
+  opacity: 0.95;
+  transition: opacity 0.3s ease;
 }
+
+.map-legend:hover {
+  opacity: 1;
+}
+
 .map-legend h4 {
   margin: 0 0 10px 0;
   font-size: 0.9rem;
@@ -320,6 +329,35 @@
 .legend-item .icon {
   font-size: 1.2rem;
   color: #4cc9f0;
+}
+
+/* Unique colors for legend items */
+.legend-item .icon.energy {
+  color: #4caf50;
+}
+.legend-item .icon.fin {
+  color: #4cc9f0;
+}
+.legend-item .icon.health {
+  color: #f72585;
+}
+.legend-item .icon.tech {
+  color: #7209b7;
+}
+.legend-item .icon.dev {
+  color: #3a0ca3;
+}
+.legend-item .icon.commerce {
+  color: #f8961e;
+}
+.legend-item .icon.entertainment {
+  color: #ff006e;
+}
+.legend-item .icon.gaming {
+  color: #00f5d4;
+}
+.legend-item .icon.enterprise {
+  color: #4361ee;
 }
 
 /*RESPONSIVE */
