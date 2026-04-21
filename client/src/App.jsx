@@ -238,35 +238,7 @@ function App() {
 
   const handleSearch = async (e) => {
     if (e) e.preventDefault();
-
-    //If search is empty, then get all the data
-    if (!searchTerm) {
-      handleReset();
-      return;
-    }
-
-    //Search name OR industry for the search term
-
-    try {
-      const { data, error } = (await supabase.from("startups").select("*")).or(
-        `name.ilike.%${searchTerm}%,industry.ilike.%${searchTerm}%,one_liner.ilike.%${searchTerm}%`,
-      );
-
-      if (error) throw error;
-      setStartups(data);
-    } catch (error) {
-      //Vercel fallback Search: data.js
-      console.warn("Supabase search failed, using fallback.");
-      const filtered = fallbackData.filter(
-        (s) =>
-          s.industry.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          (s.one_liner?.toLowerCase() || "").includes(searchTerm.toLowerCase()),
-      );
-      setStartups(filtered);
-    } finally {
-      setIsLoading(false);
-    }
+    console.log("Local search triggered for:", searchTerm);
   };
 
   //Reset the search bar
