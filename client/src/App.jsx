@@ -4,6 +4,7 @@ import { useMemo } from "react";
 
 import { startups as fallbackData } from "./data/data.js";
 import { supabase } from "./supabaseClient.js";
+import { calculateDistance } from "./utils/geoUtils.js";
 
 import HomePage from "./components/pages/HomePage.jsx";
 import MapPage from "./components/pages/MapPage.jsx";
@@ -18,22 +19,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 //Axios defaults
 axios.defaults.headers.common["User-Agent"] = "StartupAtlas/1.0";
 axios.defaults.timeout = 5000;
-
-//Haversine Formula (calculates the distance between two sets of coordinates)
-
-const calculateDistance = (lat1, lon1, lat2, lon2) => {
-  const R = 6371; // Earth's radius in km
-  const dLat = (lat2 - lat1) * (Math.PI / 180);
-  const dLon = (lon2 - lon1) * (Math.PI / 180);
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(lat1 * (Math.PI / 180)) *
-      Math.cos(lat2 * (Math.PI / 180)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
-};
 
 function App() {
   const [startups, setStartups] = useState([]);
