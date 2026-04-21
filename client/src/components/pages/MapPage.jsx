@@ -233,6 +233,21 @@ function MapPage({ startups, theme, userCoords }) {
           <div className="legend-item">
             <BiChip className="icon tech" /> AI, Quantum & Tech
           </div>
+          <div className="legend-item">
+            <BiCodeAlt className="icon dev" /> DevTools & Software
+          </div>
+          <div className="legend-item">
+            <BiCartAlt className="icon commerce" /> E-commerce & Retail
+          </div>
+          <div className="legend-item">
+            <BiMusic className="icon entertainment" /> Music & Media
+          </div>
+          <div className="legend-item">
+            <BiHeadset className="icon gaming" /> AR, VR & Gaming
+          </div>
+          <div className="legend-item">
+            <BiGlobe className="icon enterprise" /> Enterprise & Logistics
+          </div>
         </div>
         <MapContainer
           center={center}
