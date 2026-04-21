@@ -123,7 +123,7 @@ function App() {
 
     //Category
 
-    const matchesCategory =
+    const matchCategory =
       filters.category === "All Categories" ||
       (startup.tags && startup.tags.includes(filters.category));
 
