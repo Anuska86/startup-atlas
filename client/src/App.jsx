@@ -1,5 +1,6 @@
 import "./styles/App.css";
 import axios from "axios";
+import { useMemo } from "react";
 
 import { startups as fallbackData } from "./data/data.js";
 import { supabase } from "./supabaseClient.js";
@@ -60,29 +61,52 @@ function App() {
     has_mvp: false,
   });
 
-  const uniqueCountries = [
-    "All",
-    ...new Set(
-      startups
-        .map((s) => {
-          if (!startup.regions) return null;
-          return startup.regions
-            .replace(/[\[\]']/g, "")
-            .split(",")[0]
-            .trim();
-        })
-        .filter(Boolean),
-    ),
-  ].sort();
+  const uniqueCountries = useMemo(
+    () =>
+      [
+        "All Countries",
+        ...new Set(
+          startups
+            .map((startup) => {
+              if (!startup.regions) return null;
+              return startup.regions
+                .replace(/[\[\]']/g, "")
+                .split(",")[0]
+                .trim();
+            })
+            .filter(Boolean),
+        ),
+      ].sort(),
+    [startups],
+  );
 
-  const uniqueCategories = [
-    "All",
-    ...new Set(
-      startups
-        .map((s) => s.category)
-        .filter((value) => value && value.trim() !== ""),
-    ),
-  ].sort();
+  const uniqueIndustries = useMemo(
+    () => [
+      "All Industries",
+      ...new Set(startups.map((startup) => startup.industry).filter(Boolean)),
+    ],
+    [startups],
+  );
+
+  const uniqueCategories = useMemo(
+    () => [
+      "All Categories",
+      ...new Set(
+        startups
+          .flatMap((startup) => {
+            if (typeof startup.tags === "string") {
+              return startup.tags
+                .replace(/[\[\]']/g, "")
+                .split(",")
+                .map((tag) => tag.trim());
+            }
+            return startup.tags || [];
+          })
+          .filter((tag) => tag != ""),
+      ),
+    ],
+    [startups],
+  );
 
   //Filter Logic
 
@@ -96,7 +120,8 @@ function App() {
       );
 
     const matchIndustry =
-      filters.industry === "All" || startup.industry === filters.industry;
+      filters.industry === "All Industries" ||
+      startup.industry === filters.industry;
 
     //Country
     const currentCountry = startup.regions
@@ -107,7 +132,13 @@ function App() {
       : "";
 
     const matchCountry =
-      filters.country === "All" || startup.country === filters.country;
+      filters.country === "All Countries" || currentCountry === filters.country;
+
+    //Category
+
+    const matchesCategory =
+      filters.category === "All Categories" ||
+      (startup.tags && startup.tags.includes(filters.category));
 
     //Seeking Funding
 
@@ -207,7 +238,6 @@ function App() {
 
   const handleSearch = async (e) => {
     if (e) e.preventDefault();
-    setIsLoading(true);
 
     //If search is empty, then get all the data
     if (!searchTerm) {
