@@ -18,78 +18,85 @@ function ListPage({ startups, isLoading, onReset }) {
     return <div className="loader-div">Searching the Atlas...</div>;
   }
 
-  const city = startup.all_locations
-    ? startup.all_locations.split(",")[0]
-    : "Unknown City";
-  const country = startup.regions
-    ? startup.regions
-        .replace(/[\[\]']/g, "")
-        .split(",")[0]
-        .trim()
-    : "Global";
-  const foundedYear = startup.launched_at
-    ? startup.launched_at.substring(0, 4)
-    : "N/A";
-  const isSeekingFunding = startup.stage === "Early";
-
   return (
     <div className="card-container">
       {startups.length > 0 ? (
-        startups.map((startup) => (
-          <div
-            key={startup.id}
-            className="startup-card clickable"
-            onClick={() => navigate(`/startup/${startup.id}`)}
-          >
-            <div className="card-right-info">
-              {isSeekingFunding && (
-                <div className="funding-badge">Seeking Funding </div>
-              )}
-            </div>
+        startups.map((startup) => {
+          const city = startup.all_locations
+            ? startup.all_locations.split(",")[0]
+            : "Unknown City";
 
-            <div className="card-header">
-              <h2>{startup.name}</h2>
-            </div>
-            <div className="founded-year">
-              <BiCalendarAlt size={18} />
-              Founded : {foundedYear}
-            </div>
+          const country = Array.isArray(startup.regions)
+            ? startup.regions[0]
+            : startup.regions
+              ? startup.regions
+                  .replace(/[\[\]']/g, "")
+                  .split(",")[0]
+                  .trim()
+              : "Global";
 
-            <div className="card-details">
-              <p>
-                <strong>Industry:</strong> {startup.industry}
-              </p>
-              <p>
-                <strong>Location:</strong>{" "}
-                {city === country ? country : `${city}, ${country}`}
-              </p>
-            </div>
-            <Button
-              className="btn-link-to-map"
-              variant="secondary"
-              icon={BiMapAlt}
-              onClick={(e) => {
-                e.stopPropagation();
+          const foundedYear = startup.launched_at
+            ? startup.launched_at.substring(0, 4)
+            : "N/A";
 
-                window.scrollTo(0, 0);
+          const isSeekingFunding = startup.stage === "Early";
 
-                navigate("/map", {
-                  state: {
-                    flyTo: [startup.lat, startup.lng],
-                    startupId: startup.id,
-                  },
-                });
-              }}
+          return (
+            <div
+              key={startup.id}
+              className="startup-card clickable"
+              onClick={() => navigate(`/startup/${startup.id}`)}
             >
-              View on Map
-            </Button>
+              <div className="card-right-info">
+                {isSeekingFunding && (
+                  <div className="funding-badge">Seeking Funding </div>
+                )}
+              </div>
 
-            <div className="card-footer-hint">
-              <span>View Details</span>
-              <BiChevronRight size={25} />
+              <div className="card-header">
+                <h2>{startup.name}</h2>
+              </div>
+              <div className="founded-year">
+                <BiCalendarAlt size={18} />
+                Founded : {foundedYear}
+              </div>
+
+              <div className="card-details">
+                <p>
+                  <strong>Industry:</strong> {startup.industry}
+                </p>
+                <p>
+                  <strong>Location:</strong>{" "}
+                  {city === country ? country : `${city}, ${country}`}
+                </p>
+              </div>
+              <Button
+                className="btn-link-to-map"
+                variant="secondary"
+                icon={BiMapAlt}
+                onClick={(e) => {
+                  e.stopPropagation();
+
+                  window.scrollTo(0, 0);
+
+                  navigate("/map", {
+                    state: {
+                      flyTo: [startup.lat, startup.lng],
+                      startupId: startup.id,
+                    },
+                  });
+                }}
+              >
+                View on Map
+              </Button>
+
+              <div className="card-footer-hint">
+                <span>View Details</span>
+                <BiChevronRight size={25} />
+              </div>
             </div>
-          </div>
-        ))
+          );
+        })
       ) : (
         <div className="no-results-container">
           <BiGhost size={75} className="no-results-icon" />
