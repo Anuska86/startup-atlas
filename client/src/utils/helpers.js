@@ -1,9 +1,13 @@
 //Returns a specific hex color based on the startup's growth category
 
 export const getCategoryColor = (category) => {
-  switch (category) {
+  const normalizedCategory = category?.trim();
+
+  switch (normalizedCategory) {
+    case "Early":
     case "Early Stage":
       return "#4ade80";
+    case "Growth":
     case "Growth Stage":
       return "#3b82f6";
     case "Scale-up":
@@ -12,6 +16,7 @@ export const getCategoryColor = (category) => {
       return "#4cc9f0";
 
     default:
+      return "#94a3b8";
   }
 };
 
