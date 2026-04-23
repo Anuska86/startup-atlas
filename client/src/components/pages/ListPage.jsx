@@ -72,10 +72,11 @@ function ListPage({ startups, isLoading, onReset }) {
                 </p>
               </div>
 
-              {startup.all_locations?.toLowerCase().includes("remote") ? (
+              {startup.all_locations?.toLowerCase().includes("remote") ||
+              city === "Unknown City" ? (
                 <div className="remote-location-pill">
                   <BiGlobe size={16} />
-                  Full Remote
+                  Full Remote / Global
                 </div>
               ) : (
                 <Button

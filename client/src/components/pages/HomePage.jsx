@@ -199,7 +199,7 @@ function HomePage({ startups }) {
           </div>
           <div className="stat-card">
             <h3>Global</h3>
-            <p>{totalCountries} + Countries</p>
+            <p>{totalCountries}+ Countries</p>
           </div>
           <div className="stat-card">
             <h3>Community</h3>
