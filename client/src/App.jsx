@@ -184,12 +184,13 @@ function App() {
   //Are checkbox active
 
   const isFilterActive =
-    filters.industry !== "All" ||
-    filters.country !== "All" ||
-    filters.category !== "All" ||
+    filters.industry !== "All Industries" ||
+    filters.country !== "All Countries" ||
+    filters.category !== "All Categories" ||
     filters.is_seeking_funding !== false ||
     filters.has_mvp !== false ||
-    userCoords !== null;
+    userCoords !== null ||
+    searchTerm !== "";
 
   //SETUP EFFECTS
 
@@ -346,7 +347,9 @@ function App() {
         uniqueIndustries={uniqueIndustries}
         uniqueCountries={uniqueCountries}
         uniqueCategories={uniqueCategories}
-        filteredCount={filteredStartups.length}
+        filteredCount={
+          isFilterActive ? filteredStartups.length : globalStats.total_startups
+        }
         isFiltering={isFiltering}
         isFilterActive={isFilterActive}
         filteredStartups={filteredStartups}

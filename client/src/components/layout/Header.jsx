@@ -149,14 +149,15 @@ function Header({
           <div className="header-controls">
             <div className="search-and-location-row">
               <div className="search-container">
-                <input
-                  id="search-input"
-                  type="text"
-                  placeholder="Search by industry (e.g.AI)..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                />
+                {searchTerm && (
+                  <Button
+                    variant="secondary"
+                    onClick={() => setSearchTerm("")}
+                    icon={BiX}
+                  >
+                    Clear
+                  </Button>
+                )}
 
                 {/* MOBILE FILTER TRIGGER */}
                 <div className="search-action-row">
@@ -232,20 +233,22 @@ function Header({
             </div>
 
             {/* Results info */}
-            {isFilterActive && (
-              <div className="results-count-bar">
-                <div className="results-info">
-                  <p>
-                    Found <strong>{filteredCount}</strong>{" "}
-                    {filteredCount === 1 ? "startup" : "startups"}
-                  </p>
 
-                  {userCoords && (
-                    <span className="proximity-badge">
-                      Within {proximityRadius}km
-                    </span>
-                  )}
-                </div>
+            <div className="results-count-bar">
+              <div className="results-info">
+                <p>
+                  Found <strong>{filteredCount.toLocaleString()}</strong>{" "}
+                  {filteredCount === 1 ? "startup" : "startups"}
+                </p>
+
+                {userCoords && (
+                  <span className="proximity-badge">
+                    Within {proximityRadius}km
+                  </span>
+                )}
+              </div>
+
+              {isFilterActive && (
                 <Button
                   className="reset-all-filters-btn"
                   variant="secondary"
@@ -254,8 +257,9 @@ function Header({
                 >
                   Reset All Filters
                 </Button>
-              </div>
-            )}
+              )}
+            </div>
+
             <div
               className={`filter-sidebar-overlay ${showMobileFilters ? "open" : ""}`}
               onClick={() => setShowMobileFilters(false)}
