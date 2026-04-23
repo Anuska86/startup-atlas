@@ -52,20 +52,19 @@ const MemoizedMarker = memo(({ startup }) => {
           <p>
             <strong>{startup.industry}</strong>
           </p>
-          <p>
-            {startup.city}, {startup.country}
-          </p>
+          <p>{startup.all_locations || "Location TBD"}</p>
+
           {/*Category and MVP Tags */}
           <div className="popup-tags">
-            {Array.isArray(startup.tags) ? (
-              startup.tags.map((tag) => (
-                <span key={tag} className="startup-tag">
-                  {tag}
-                </span>
-              ))
-            ) : (
-              <span className="startup-tag">{startup.tags}</span>
-            )}
+            {startup.tags &&
+              startup.tags
+                .replace(/[\[\]']/g, "")
+                .split(",")
+                .map((tag) => (
+                  <span key={tag} className="startup-tag">
+                    {tag.trim()}
+                  </span>
+                ))}
             {startup.has_mvp && <span className="startup-tag mvp">MVP</span>}
           </div>
           <a href={startup.website} target="_blank" rel="noreferrer">
