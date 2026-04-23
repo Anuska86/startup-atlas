@@ -29,34 +29,16 @@ const ChartSkeleton = () => (
   </div>
 );
 
-function HomePage({ startups, totalDbCount }) {
-  const totalStartups = totalDbCount || startups.length;
+function HomePage({ startups, globalStats }) {
+  const totalStartups = globalStats.total_startups || startups.length;
+  const totalIndustries = globalStats.total_industries || 0;
+  const totalCountries = globalStats.total_countries || 0;
+  const totalEmployees = globalStats.total_employees || 0;
+
   const isLoading = startups.length === 0;
 
-  const industries = [...new Set(startups.map((startup) => startup.industry))]
-    .length;
+  const industriesCount = totalIndustries;
 
-  //totals
-  const totalCountries = new Set(
-    startups
-      .map((startup) => {
-        if (!startup.regions) return null;
-        return startup.regions
-          .replace(/[\[\]']/g, "")
-          .split(",")[0]
-          .trim();
-      })
-      .filter(Boolean),
-  ).size;
-
-  const totalIndustries = new Set(
-    startups.map((s) => s.industry).filter((i) => i),
-  ).size;
-
-  const totalEmployees = startups.reduce(
-    (sum, s) => sum + (Number(s.team_size) || 0),
-    0,
-  );
   //chartData
   const chartData = useMemo(() => {
     const counts = startups.reduce((acc, startup) => {
@@ -82,7 +64,7 @@ function HomePage({ startups, totalDbCount }) {
         <p>
           The Startup Atlas tracks{" "}
           <strong>{totalStartups.toLocaleString()}</strong> innovative companies
-          across <strong>{industries}</strong> industries worldwide.
+          across <strong>{industriesCount}</strong> industries worldwide.
         </p>
 
         <div className="home-description-actions">

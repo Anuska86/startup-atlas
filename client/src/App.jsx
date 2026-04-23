@@ -25,7 +25,12 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [userCoords, setUserCoords] = useState(null);
-  const [dbCount, setDbCount] = useState(0);
+  const [globalStats, setGlobalStats] = useState({
+    total_startups: 0,
+    total_countries: 0,
+    total_industries: 0,
+    total_employees: 0,
+  });
 
   const location = useLocation();
 
@@ -40,12 +45,16 @@ function App() {
 
   //DATE CLEANING
 
-  const fetchStats = async () => {
-    const { count, error } = await supabase
-      .from("startups")
-      .select("*", { count: "exact", head: true });
+  //Fetch real data numbers
 
-    if (!error) setDbCount(count);
+  const fetchStats = async () => {
+    const { data, error } = await supabase.rpc("get_global_stats");
+
+    if (!error && data) {
+      setGlobalStats(data);
+    } else {
+      console.error("Error fetching global stats:", error);
+    }
   };
 
   //Filters
@@ -354,7 +363,7 @@ function App() {
 
           <Route
             path="/"
-            element={<HomePage startups={startups} totalDbCount={dbCount} />}
+            element={<HomePage startups={startups} globalStats={globalStats} />}
           ></Route>
 
           {/* Startups List Route */}
