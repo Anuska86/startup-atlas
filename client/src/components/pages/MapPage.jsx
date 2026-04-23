@@ -15,6 +15,11 @@ import {
   BiHeart,
   BiRefresh,
   BiUserCircle,
+  BiCodeAlt,
+  BiCartAlt,
+  BiMusic,
+  BiSupport,
+  BiGlobe,
 } from "react-icons/bi";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -243,7 +248,7 @@ function MapPage({ startups, theme, userCoords }) {
             <BiMusic className="icon entertainment" /> Music & Media
           </div>
           <div className="legend-item">
-            <BiHeadset className="icon gaming" /> AR, VR & Gaming
+            <BiSupport className="icon gaming" /> AR, VR & Gaming
           </div>
           <div className="legend-item">
             <BiGlobe className="icon enterprise" /> Enterprise & Logistics
