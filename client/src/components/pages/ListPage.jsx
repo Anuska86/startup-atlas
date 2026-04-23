@@ -7,6 +7,7 @@ import {
   BiGhost,
   BiMapAlt,
   BiChevronRight,
+  BiGlobe,
 } from "react-icons/bi";
 import { useNavigate, Link } from "react-router-dom";
 import Button from "../common/Button.jsx";
@@ -22,9 +23,9 @@ function ListPage({ startups, isLoading, onReset }) {
     <div className="card-container">
       {startups.length > 0 ? (
         startups.map((startup) => {
-          const city = startup.all_locations
-            ? startup.all_locations.split(",")[0]
-            : "Unknown City";
+          const city = startup.all_locations?.toLowerCase().includes("remote")
+            ? "Digital Nomad"
+            : startup.all_locations?.split(",")[0] || "Unknown City";
 
           const country = Array.isArray(startup.regions)
             ? startup.regions[0]
@@ -70,25 +71,33 @@ function ListPage({ startups, isLoading, onReset }) {
                   {city === country ? country : `${city}, ${country}`}
                 </p>
               </div>
-              <Button
-                className="btn-link-to-map"
-                variant="secondary"
-                icon={BiMapAlt}
-                onClick={(e) => {
-                  e.stopPropagation();
 
-                  window.scrollTo(0, 0);
+              {startup.all_locations?.toLowerCase().includes("remote") ? (
+                <div className="remote-location-pill">
+                  <BiGlobe size={16} />
+                  Full Remote
+                </div>
+              ) : (
+                <Button
+                  className="btn-link-to-map"
+                  variant="secondary"
+                  icon={BiMapAlt}
+                  onClick={(e) => {
+                    e.stopPropagation();
 
-                  navigate("/map", {
-                    state: {
-                      flyTo: [startup.lat, startup.lng],
-                      startupId: startup.id,
-                    },
-                  });
-                }}
-              >
-                View on Map
-              </Button>
+                    window.scrollTo(0, 0);
+
+                    navigate("/map", {
+                      state: {
+                        flyTo: [startup.lat, startup.lng],
+                        startupId: startup.id,
+                      },
+                    });
+                  }}
+                >
+                  View on Map
+                </Button>
+              )}
 
               <div className="card-footer-hint">
                 <span>View Details</span>
