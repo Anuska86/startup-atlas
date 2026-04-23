@@ -299,9 +299,11 @@ function MapPage({ startups, theme, userCoords }) {
           )}
 
           <MarkerClusterGroup chunkedLoading spiderfyOnMaxZoom={true}>
-            {startups.map((startup) => (
-              <MemoizedMarker key={startup.id} startup={startup} />
-            ))}
+            {startups
+              .filter((startup) => startup.lat !== null && startup.lng !== null) //OUT NULLS
+              .map((startup) => (
+                <MemoizedMarker key={startup.id} startup={startup} />
+              ))}
           </MarkerClusterGroup>
         </MapContainer>
       </div>

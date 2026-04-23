@@ -5,13 +5,16 @@ import {
   BiLeaf,
   BiLineChart,
   BiHeart,
-  BiStore,
+  BiRefresh,
+  BiUserCircle,
   BiCodeAlt,
-  BiMusic,
-  BiJoystick,
   BiCartAlt,
+  BiMusic,
+  BiSupport,
   BiGlobe,
+  BiStore,
 } from "react-icons/bi";
+
 import { getCategoryColor } from "./helpers.js";
 
 export const createCustomIcon = (startup) => {
@@ -20,8 +23,10 @@ export const createCustomIcon = (startup) => {
   const industry = startup.industry?.toLowerCase() || "";
 
   const tags = Array.isArray(startup.tags)
-    ? startup.tags.join("").toLowerCase()
-    : startup.tags?.toLowerCase() || "";
+    ? startup.tags.join(" ").toLowerCase()
+    : typeof startup.tags === "string"
+      ? startup.tags.toLowerCase()
+      : "";
 
   let SelectedIcon = BiChip; //Default icon
 
@@ -35,7 +40,7 @@ export const createCustomIcon = (startup) => {
     tags.includes("vr") ||
     tags.includes("game")
   ) {
-    SelectedIcon = BiJoystick;
+    SelectedIcon = BiSupport;
   } else if (
     tags.includes("grocery") ||
     tags.includes("ecommerce") ||
@@ -68,7 +73,7 @@ export const createCustomIcon = (startup) => {
   const iconMarkup = renderToStaticMarkup(
     <div
       style={{
-        color: getCategoryColor(startup.category),
+        color: getCategoryColor(startup.stage || startup.category),
         fontSize: "24px",
         display: "flex",
         filter: "drop-shadow(0 0 2px rgba(0,0,0,0.5))",
