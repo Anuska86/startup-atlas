@@ -111,7 +111,13 @@ function MapPage({ startups, theme, userCoords }) {
     const flyToCoords = location.state?.flyTo;
     const targetId = location.state?.startupId;
 
-    if (flyToCoords && !hasFlown.current) {
+    const isValidCoord =
+      flyToCoords &&
+      !isNaN(flyToCoords[0]) &&
+      !isNaN(flyToCoords[1]) &&
+      flyToCoords[0] !== null;
+
+    if (flyToCoords && isValidCoord && !hasFlown.current) {
       // If we have a specific destination, go there
 
       map.flyTo(flyToCoords, 14, {
@@ -165,6 +171,11 @@ function MapPage({ startups, theme, userCoords }) {
       const bounds = L.latLngBounds(startups.map((s) => [s.lat, s.lng]));
       map.fitBounds(bounds, { padding: [50, 50] });
     } else if (startups.length === 0 && !flyToCoords) {
+      map.setView(center, zoom);
+    } else if (flyToCoords && !isValidCoord) {
+      console.warn(
+        "Location state provided invalid coordinates. Skipping flight.",
+      );
       map.setView(center, zoom);
     }
 
