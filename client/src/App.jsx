@@ -25,6 +25,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [userCoords, setUserCoords] = useState(null);
+  const [dbCount, setDbCount] = useState(0);
 
   const location = useLocation();
 
@@ -38,6 +39,14 @@ function App() {
   );
 
   //DATE CLEANING
+
+  const fetchStats = async () => {
+    const { count, error } = await supabase
+      .from("startups")
+      .select("*", { count: "exact", head: true });
+
+    if (!error) setDbCount(count);
+  };
 
   //Filters
   const [filters, setFilters] = useState({
@@ -207,6 +216,8 @@ function App() {
     const getInitialData = async () => {
       setIsLoading(true);
       try {
+        fetchStats();
+
         const { data, error } = await supabase.from("startups").select("*");
 
         if (error) throw error;
@@ -341,7 +352,10 @@ function App() {
         <Routes>
           {/* Home Route */}
 
-          <Route path="/" element={<HomePage startups={startups} />}></Route>
+          <Route
+            path="/"
+            element={<HomePage startups={startups} totalDbCount={dbCount} />}
+          ></Route>
 
           {/* Startups List Route */}
           <Route

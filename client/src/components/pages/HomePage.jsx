@@ -29,8 +29,8 @@ const ChartSkeleton = () => (
   </div>
 );
 
-function HomePage({ startups }) {
-  const totalStartups = startups.length;
+function HomePage({ startups, totalDbCount }) {
+  const totalStartups = totalDbCount || startups.length;
   const isLoading = startups.length === 0;
 
   const industries = [...new Set(startups.map((startup) => startup.industry))]
@@ -80,8 +80,9 @@ function HomePage({ startups }) {
         <BiRocket className="hero-icon" />
         <h1>Explore the Global Startup Ecosystem</h1>
         <p>
-          The Startup Atlas tracks <strong>{totalStartups}</strong> innovative
-          companies across <strong>{industries}</strong> industries worldwide.
+          The Startup Atlas tracks{" "}
+          <strong>{totalStartups.toLocaleString()}</strong> innovative companies
+          across <strong>{industries}</strong> industries worldwide.
         </p>
 
         <div className="home-description-actions">
@@ -191,7 +192,7 @@ function HomePage({ startups }) {
         <div className="stats-grid">
           <div className="stat-card">
             <h3>Companies Tracked</h3>
-            <p>{totalStartups}</p>
+            <p>{totalStartups.toLocaleString()}</p>
           </div>
           <div className="stat-card">
             <h3>Sectors</h3>
