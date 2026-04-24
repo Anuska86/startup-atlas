@@ -10,8 +10,11 @@ export const runThemeTransition = (event, switchTheme) => {
     switchTheme();
   });
 
+  /*
+
   // This ensures the animation doesn't start until the DOM is updated
   transition.ready.then(() => {
     console.log("Transition is ready and running");
   });
+*/
 };
