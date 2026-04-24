@@ -2,6 +2,7 @@ import "./styles/App.css";
 import axios from "axios";
 import { useMemo } from "react";
 
+import { useTheme } from "./contexts/ThemeContext.jsx";
 import { startups as fallbackData } from "./data/data.js";
 import { supabase } from "./supabaseClient.js";
 import { calculateDistance } from "./utils/geoUtils.js";
@@ -48,11 +49,7 @@ function App() {
   const PROXIMITY_RADIUS = 50;
 
   //Theme
-  const [theme, setTheme] = useState(
-    window.matchMedia("(prefers-color-scheme: light)").matches
-      ? "light"
-      : "dark",
-  );
+  const { theme, toggleTheme } = useTheme();
 
   //DATE CLEANING
 
@@ -205,31 +202,15 @@ function App() {
 
   //SETUP EFFECTS
 
-  //Screen mode
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
   //Scroll to top
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "smooth",
+      behavior: "instant",
     });
   }, [location.pathname]);
-
-  //Toggle theme effect
-  const toggleTheme = (newThemeOrEvent) => {
-    setTheme((prev) => {
-      const next = prev === "light" ? "dark" : "light";
-
-      document.documentElement.setAttribute("data-theme", next);
-      return next;
-    });
-  };
 
   //Initial get data: first supabase, then fallback data.js
 
@@ -347,8 +328,6 @@ function App() {
   return (
     <div className="app-div">
       <Header
-        theme={theme}
-        toggleTheme={toggleTheme}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         handleSearch={handleSearch}
@@ -396,18 +375,14 @@ function App() {
           <Route
             path="/map"
             element={
-              <MapPage
-                startups={filteredStartups}
-                theme={theme}
-                userCoords={userCoords}
-              />
+              <MapPage startups={filteredStartups} userCoords={userCoords} />
             }
           />
 
           {/*Startup Details*/}
           <Route
             path="/startup/:id"
-            element={<StartupDetails startups={startups} theme={theme} />}
+            element={<StartupDetails startups={startups} />}
           />
         </Routes>
       </main>
