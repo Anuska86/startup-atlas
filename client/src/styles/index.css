@@ -115,6 +115,23 @@ button:focus-visible {
   box-shadow: 0 4px 15px rgba(247, 37, 133, 0.4);
 }
 
+/*A11Y*/
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--indigo-bloom);
+  color: white;
+  padding: 8px;
+  z-index: 2000;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 /*media querys*/
 
 @media (max-width: 768px) {
