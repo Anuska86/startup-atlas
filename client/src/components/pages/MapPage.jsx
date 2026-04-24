@@ -237,34 +237,46 @@ function MapPage({ startups, userCoords }) {
             Restore Initial View
           </Button>
         </div>
-        <div className="map-legend">
-          <h4>Industry Key</h4>
+        <div
+          className="map-legend"
+          role="region"
+          aria-labelledby="legend-title"
+        >
+          <h4 id="legend-title">Industry Key</h4>
           <div className="legend-item">
-            <BiLeaf className="icon energy" /> Energy & Agriculture
+            <BiLeaf className="icon energy" aria-hidden="true" /> Energy &
+            Agriculture
           </div>
           <div className="legend-item">
-            <BiLineChart className="icon fin" /> FinTech & SaaS
+            <BiLineChart className="icon fin" aria-hidden="true" /> FinTech &
+            SaaS
           </div>
           <div className="legend-item">
-            <BiHeart className="icon health" /> HealthTech
+            <BiHeart className="icon health" aria-hidden="true" /> HealthTech
           </div>
           <div className="legend-item">
-            <BiChip className="icon tech" /> AI, Quantum & Tech
+            <BiChip className="icon tech" aria-hidden="true" /> AI, Quantum &
+            Tech
           </div>
           <div className="legend-item">
-            <BiCodeAlt className="icon dev" /> DevTools & Software
+            <BiCodeAlt className="icon dev" aria-hidden="true" /> DevTools &
+            Software
           </div>
           <div className="legend-item">
-            <BiCartAlt className="icon commerce" /> E-commerce & Retail
+            <BiCartAlt className="icon commerce" aria-hidden="true" />{" "}
+            E-commerce & Retail
           </div>
           <div className="legend-item">
-            <BiMusic className="icon entertainment" /> Music & Media
+            <BiMusic className="icon entertainment" aria-hidden="true" /> Music
+            & Media
           </div>
           <div className="legend-item">
-            <BiSupport className="icon gaming" /> AR, VR & Gaming
+            <BiSupport className="icon gaming" aria-hidden="true" /> AR, VR &
+            Gaming
           </div>
           <div className="legend-item">
-            <BiGlobe className="icon enterprise" /> Enterprise & Logistics
+            <BiGlobe className="icon enterprise" aria-hidden="true" />{" "}
+            Enterprise & Logistics
           </div>
         </div>
         <MapContainer
@@ -281,6 +293,7 @@ function MapPage({ startups, userCoords }) {
             [85.05112878, 180],
           ]}
           maxBoundsViscosity={1.0}
+          aria-label="Interactive map showing startup locations"
         >
           <TileLayer
             key={theme}
