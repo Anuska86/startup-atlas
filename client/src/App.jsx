@@ -20,6 +20,17 @@ import { Routes, Route, useLocation } from "react-router-dom";
 axios.defaults.headers.common["User-Agent"] = "StartupAtlas/1.0";
 axios.defaults.timeout = 5000;
 
+//Console.logs in production/main
+
+const isProduction = import.meta.env.MODE === "production";
+
+if (isProduction) {
+  console.log = () => {};
+  console.info = () => {};
+  console.debug = () => {};
+  console.warn = () => {};
+}
+
 function App() {
   const [startups, setStartups] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
