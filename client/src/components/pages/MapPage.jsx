@@ -1,5 +1,6 @@
 import "../../styles/MapPage.css";
 import Button from "../common/Button.jsx";
+import { useTheme } from "../../contexts/ThemeContext.jsx";
 
 import { getCategoryColor } from "../../utils/helpers.js";
 import { createCustomIcon } from "../../utils/iconUtils.jsx";
@@ -76,8 +77,10 @@ const MemoizedMarker = memo(({ startup }) => {
   );
 });
 
-function MapPage({ startups, theme, userCoords }) {
+function MapPage({ startups, userCoords }) {
   const [map, setMap] = useState(null); //Actual Leaflet
+
+  const { theme } = useTheme();
 
   const location = useLocation();
   const hasFlown = useRef(false);

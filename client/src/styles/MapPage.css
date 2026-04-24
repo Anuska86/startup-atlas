@@ -49,6 +49,7 @@
   border-radius: 12px;
   background-color: transparent !important;
   will-change: transform;
+  transition: filter 0.5s ease-in-out;
 }
 
 .leaflet-pane {
