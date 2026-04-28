@@ -90,37 +90,42 @@ function App() {
                 .split(",")[0]
                 .trim();
             })
-            .filter(Boolean),
+            .filter((c) => c && c !== "Unspecified"),
         ),
       ].sort(),
     [startups],
   );
 
   const uniqueIndustries = useMemo(
-    () => [
-      "All Industries",
-      ...new Set(startups.map((startup) => startup.industry).filter(Boolean)),
-    ],
+    () =>
+      [
+        "All Industries",
+        ...new Set(
+          startups
+            .map((s) => s.industry)
+            .filter((i) => i && i !== "Unspecified"),
+        ),
+      ].sort(),
     [startups],
   );
-
   const uniqueCategories = useMemo(
-    () => [
-      "All Categories",
-      ...new Set(
-        startups
-          .flatMap((startup) => {
-            if (typeof startup.tags === "string") {
-              return startup.tags
-                .replace(/[\[\]']/g, "")
-                .split(",")
-                .map((tag) => tag.trim());
-            }
-            return startup.tags || [];
-          })
-          .filter((tag) => tag != ""),
-      ),
-    ],
+    () =>
+      [
+        "All Categories",
+        ...new Set(
+          startups
+            .flatMap((startup) => {
+              if (typeof startup.tags === "string") {
+                return startup.tags
+                  .replace(/[\[\]']/g, "")
+                  .split(",")
+                  .map((tag) => tag.trim());
+              }
+              return startup.tags || [];
+            })
+            .filter((tag) => tag && tag !== "" && tag !== "Unspecified"),
+        ),
+      ].sort(),
     [startups],
   );
 
