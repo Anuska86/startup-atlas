@@ -98,7 +98,11 @@ function MapPage({ startups, userCoords }) {
     //Resize Observer watch the map's container
 
     const resizeObserver = new ResizeObserver(() => {
-      map.invalidateSize();
+      //The map container still exist?
+
+      if (map && map.getContainer()) {
+        map.invalidateSize();
+      }
     });
 
     const container = map.getContainer();
@@ -123,7 +127,7 @@ function MapPage({ startups, userCoords }) {
     if (flyToCoords && isValidCoord && !hasFlown.current) {
       // If we have a specific destination, go there
 
-      map.flyTo(flyToCoords, 14, {
+      map.flyTo(flyToCoords, 18, {
         animate: true,
         duration: 1.5,
       });
@@ -132,21 +136,32 @@ function MapPage({ startups, userCoords }) {
         let markerFound = false;
 
         map.eachLayer((layer) => {
-          // Check if this layer is the marker we want
+          // Check if this layer is the Cluster Group
 
-          if (layer instanceof L.Marker && layer.options.id === targetId) {
-            markerFound = true;
-            layer.openPopup();
-            const iconElement = layer.getElement(); //Get the DOM element
+          if (layer.getLayers) {
+            const childMarkers = layer.getLayers();
+            const targetMarker = childMarkers.find(
+              (marker) => marker.options.id === targetId,
+            );
 
-            if (iconElement) {
-              iconElement.classList.add("jumping-marker-active");
+            if (targetMarker) {
+              markerFound = true;
 
-              //Remove class after jumps
+              //Cluster expands + zoom to the target marker
+              layer.zoomToShowLayer(targetMarker, () => {
+                targetMarker.openPopup();
+                const iconElement = targetMarker.getElement(); //Get the DOM element
 
-              setTimeout(() => {
-                iconElement.classList.remove("jumping-marker-active");
-              }, 2000);
+                if (iconElement) {
+                  iconElement.classList.add("jumping-marker-active");
+
+                  //Remove class after jumps
+
+                  setTimeout(() => {
+                    iconElement.classList.remove("jumping-marker-active");
+                  }, 2000);
+                }
+              });
             }
           }
         });
