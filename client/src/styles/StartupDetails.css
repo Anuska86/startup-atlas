@@ -5,6 +5,7 @@
   margin: 40px auto;
   padding: 0 20px;
   animation: slideUp 0.5s ease-out;
+  font-size: 16px;
 }
 
 /*Main Card*/
@@ -99,6 +100,17 @@
   color: var(--text-secondary);
   line-height: 1.8;
   font-weight: 500;
+}
+
+.long-desc-text {
+  color: var(--text-color); 
+  line-height: 1.6;
+  font-size: 1.1rem;
+  opacity: 0.9; 
+}
+
+.info-block p {
+  color: var(--text-color);
 }
 
 /*Details meta icons*/

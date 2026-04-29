@@ -104,15 +104,14 @@ function StartupDetails({ startups }) {
             </section>
 
             {/* Deep Dive / Long Description */}
-            {startup.long_description && (
-              <section className="info-block deep-dive-section">
-                <h3>Detailed Analysis</h3>
-                <p className="long-desc-text">
-                  {startup.long_description ||
-                    "Detailed profile data is currently being synthesized for this startup."}
-                </p>
-              </section>
-            )}
+            <section className="info-block deep-dive-section">
+              <h3>Detailed Analysis</h3>
+              <p className="long-desc-text">
+                {startup.long_description && startup.long_description.trim()
+                  ? startup.long_description
+                  : "Right now we don't have further information about this startup. Check back soon as we continuously update our database with detailed insights!"}
+              </p>
+            </section>
 
             <div className="details-website">
               <a
