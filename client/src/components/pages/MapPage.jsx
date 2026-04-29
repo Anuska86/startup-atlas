@@ -138,7 +138,7 @@ function MapPage({ startups, userCoords }) {
         map.eachLayer((layer) => {
           // Check if this layer is the Cluster Group
 
-          if (layer.getLayers) {
+          if (layer.zoomToShowLayer) {
             const childMarkers = layer.getLayers();
             const targetMarker = childMarkers.find(
               (marker) => marker.options.id === targetId,
@@ -169,7 +169,7 @@ function MapPage({ startups, userCoords }) {
         if (!markerFound) {
           //console.error("6. Error: No marker found with ID:", targetId);
         }
-      }, 1700); //Wait for flight (1.5s)
+      }, 1800); //Wait for flight (1.5s)
 
       hasFlown.current = true; //DONE
 
@@ -339,7 +339,11 @@ function MapPage({ startups, userCoords }) {
             </Marker>
           )}
 
-          <MarkerClusterGroup chunkedLoading spiderfyOnMaxZoom={true}>
+          <MarkerClusterGroup
+            chunkedLoading
+            spiderfyOnMaxZoom={true}
+            disableClusteringAtZoom={17}
+          >
             {startups
               .filter((startup) => startup.lat !== null && startup.lng !== null) //OUT NULLS
               .map((startup) => (
