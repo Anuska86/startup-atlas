@@ -100,8 +100,12 @@ function MapPage({ startups, userCoords }) {
     const resizeObserver = new ResizeObserver(() => {
       //The map container still exist?
 
-      if (map && map.getContainer()) {
-        map.invalidateSize();
+      if (map && typeof map.getContainer === "function" && map.getContainer()) {
+        try {
+          map.invalidateSize();
+        } catch (error) {
+          console.debug("Map resize skipped during unmount");
+        }
       }
     });
 
