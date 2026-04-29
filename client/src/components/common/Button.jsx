@@ -11,7 +11,7 @@ const Button = ({
   return (
     <button
       className={`custom-btn ${variant} ${className}`}
-      onClick={onClick}
+      onClick={(e) => onClick(e)}
       {...props}
     >
       {Icon && <Icon className="btn-icon" />}

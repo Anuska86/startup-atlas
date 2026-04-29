@@ -10,7 +10,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 async function geocodeStartups() {
   // 1. Grab rows where lat is still NULL
   const { data: startups, error } = await supabase
-    .from("startups_new")
+    .from("startups")
     .select("id, all_locations")
     .is("lat", null)
     .limit(6000);
@@ -54,7 +54,7 @@ async function geocodeStartups() {
 
         // 3. Update the database
         const { error: updateError } = await supabase
-          .from("startups_new")
+          .from("startups")
           .update({ lat: parseFloat(lat), lng: parseFloat(lon) })
           .eq("id", startup.id);
 

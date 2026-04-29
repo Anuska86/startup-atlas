@@ -1,4 +1,4 @@
-@import './ThemeTransition.css';
+@import "./ThemeTransition.css";
 
 /* GLOBAL RESET */
 * {
@@ -52,9 +52,6 @@ body {
   min-height: 100vh;
   background-color: var(--main-bg);
   color: var(--text-color);
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
 }
@@ -116,6 +113,23 @@ button:focus-visible {
   filter: brightness(1.1);
   transform: translateY(-1px);
   box-shadow: 0 4px 15px rgba(247, 37, 133, 0.4);
+}
+
+/*A11Y*/
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--indigo-bloom);
+  color: white;
+  padding: 8px;
+  z-index: 2000;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
 }
 
 /*media querys*/

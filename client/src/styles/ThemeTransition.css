@@ -1,13 +1,31 @@
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-new(root) {
-  z-index: 9999;
-}
-
+/* Prevent the old screen from disappearing too early */
 ::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  /* Starts as a tiny dot at top-right (40px 0px in a 40x40 SVG) */
+  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><defs><filter id="blur"><feGaussianBlur stdDeviation="2"/></filter></defs><circle cx="40" cy="0" r="20" fill="white" filter="url(%23blur)"/></svg>')
+    top right / 0 no-repeat;
+
+  mask-origin: content-box;
+  animation: scale-reveal 1.2s both;
+  transform-origin: top right;
+  will-change: mask-size;
   z-index: 1;
+}
+
+@keyframes scale-reveal {
+  from {
+    mask-size: 0vmax;
+  }
+  to {
+    /* 400vmax ensures it covers the diagonal to the bottom-left */
+    mask-size: 450vmax;
+  }
+}
+
+::view-transition-group(root) {
+  animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 }

@@ -1,5 +1,6 @@
 import "../../styles/MapPage.css";
 import Button from "../common/Button.jsx";
+import { useTheme } from "../../contexts/ThemeContext.jsx";
 
 import { getCategoryColor } from "../../utils/helpers.js";
 import { createCustomIcon } from "../../utils/iconUtils.jsx";
@@ -76,8 +77,10 @@ const MemoizedMarker = memo(({ startup }) => {
   );
 });
 
-function MapPage({ startups, theme, userCoords }) {
+function MapPage({ startups, userCoords }) {
   const [map, setMap] = useState(null); //Actual Leaflet
+
+  const { theme } = useTheme();
 
   const location = useLocation();
   const hasFlown = useRef(false);
@@ -95,7 +98,15 @@ function MapPage({ startups, theme, userCoords }) {
     //Resize Observer watch the map's container
 
     const resizeObserver = new ResizeObserver(() => {
-      map.invalidateSize();
+      //The map container still exist?
+
+      if (map && typeof map.getContainer === "function" && map.getContainer()) {
+        try {
+          map.invalidateSize();
+        } catch (error) {
+          console.debug("Map resize skipped during unmount");
+        }
+      }
     });
 
     const container = map.getContainer();
@@ -120,7 +131,7 @@ function MapPage({ startups, theme, userCoords }) {
     if (flyToCoords && isValidCoord && !hasFlown.current) {
       // If we have a specific destination, go there
 
-      map.flyTo(flyToCoords, 14, {
+      map.flyTo(flyToCoords, 18, {
         animate: true,
         duration: 1.5,
       });
@@ -129,21 +140,32 @@ function MapPage({ startups, theme, userCoords }) {
         let markerFound = false;
 
         map.eachLayer((layer) => {
-          // Check if this layer is the marker we want
+          // Check if this layer is the Cluster Group
 
-          if (layer instanceof L.Marker && layer.options.id === targetId) {
-            markerFound = true;
-            layer.openPopup();
-            const iconElement = layer.getElement(); //Get the DOM element
+          if (layer.zoomToShowLayer) {
+            const childMarkers = layer.getLayers();
+            const targetMarker = childMarkers.find(
+              (marker) => marker.options.id === targetId,
+            );
 
-            if (iconElement) {
-              iconElement.classList.add("jumping-marker-active");
+            if (targetMarker) {
+              markerFound = true;
 
-              //Remove class after jumps
+              //Cluster expands + zoom to the target marker
+              layer.zoomToShowLayer(targetMarker, () => {
+                targetMarker.openPopup();
+                const iconElement = targetMarker.getElement(); //Get the DOM element
 
-              setTimeout(() => {
-                iconElement.classList.remove("jumping-marker-active");
-              }, 2000);
+                if (iconElement) {
+                  iconElement.classList.add("jumping-marker-active");
+
+                  //Remove class after jumps
+
+                  setTimeout(() => {
+                    iconElement.classList.remove("jumping-marker-active");
+                  }, 2000);
+                }
+              });
             }
           }
         });
@@ -151,7 +173,7 @@ function MapPage({ startups, theme, userCoords }) {
         if (!markerFound) {
           //console.error("6. Error: No marker found with ID:", targetId);
         }
-      }, 1700); //Wait for flight (1.5s)
+      }, 1800); //Wait for flight (1.5s)
 
       hasFlown.current = true; //DONE
 
@@ -234,34 +256,46 @@ function MapPage({ startups, theme, userCoords }) {
             Restore Initial View
           </Button>
         </div>
-        <div className="map-legend">
-          <h4>Industry Key</h4>
+        <div
+          className="map-legend"
+          role="region"
+          aria-labelledby="legend-title"
+        >
+          <h4 id="legend-title">Industry Key</h4>
           <div className="legend-item">
-            <BiLeaf className="icon energy" /> Energy & Agriculture
+            <BiLeaf className="icon energy" aria-hidden="true" /> Energy &
+            Agriculture
           </div>
           <div className="legend-item">
-            <BiLineChart className="icon fin" /> FinTech & SaaS
+            <BiLineChart className="icon fin" aria-hidden="true" /> FinTech &
+            SaaS
           </div>
           <div className="legend-item">
-            <BiHeart className="icon health" /> HealthTech
+            <BiHeart className="icon health" aria-hidden="true" /> HealthTech
           </div>
           <div className="legend-item">
-            <BiChip className="icon tech" /> AI, Quantum & Tech
+            <BiChip className="icon tech" aria-hidden="true" /> AI, Quantum &
+            Tech
           </div>
           <div className="legend-item">
-            <BiCodeAlt className="icon dev" /> DevTools & Software
+            <BiCodeAlt className="icon dev" aria-hidden="true" /> DevTools &
+            Software
           </div>
           <div className="legend-item">
-            <BiCartAlt className="icon commerce" /> E-commerce & Retail
+            <BiCartAlt className="icon commerce" aria-hidden="true" />{" "}
+            E-commerce & Retail
           </div>
           <div className="legend-item">
-            <BiMusic className="icon entertainment" /> Music & Media
+            <BiMusic className="icon entertainment" aria-hidden="true" /> Music
+            & Media
           </div>
           <div className="legend-item">
-            <BiSupport className="icon gaming" /> AR, VR & Gaming
+            <BiSupport className="icon gaming" aria-hidden="true" /> AR, VR &
+            Gaming
           </div>
           <div className="legend-item">
-            <BiGlobe className="icon enterprise" /> Enterprise & Logistics
+            <BiGlobe className="icon enterprise" aria-hidden="true" />{" "}
+            Enterprise & Logistics
           </div>
         </div>
         <MapContainer
@@ -278,6 +312,7 @@ function MapPage({ startups, theme, userCoords }) {
             [85.05112878, 180],
           ]}
           maxBoundsViscosity={1.0}
+          aria-label="Interactive map showing startup locations"
         >
           <TileLayer
             key={theme}
@@ -308,7 +343,11 @@ function MapPage({ startups, theme, userCoords }) {
             </Marker>
           )}
 
-          <MarkerClusterGroup chunkedLoading spiderfyOnMaxZoom={true}>
+          <MarkerClusterGroup
+            chunkedLoading
+            spiderfyOnMaxZoom={true}
+            disableClusteringAtZoom={17}
+          >
             {startups
               .filter((startup) => startup.lat !== null && startup.lng !== null) //OUT NULLS
               .map((startup) => (

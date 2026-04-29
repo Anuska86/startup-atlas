@@ -1,6 +1,7 @@
 import "../../styles/Header.css";
 import Button from "../common/Button.jsx";
 
+import { useTheme } from "../../contexts/ThemeContext.jsx";
 import { runThemeTransition } from "../../utils/themeTransition.js";
 import { StartupAtlasLogo } from "../common/Logo.jsx";
 
@@ -23,8 +24,6 @@ import {
 import { useState, useEffect, useRef } from "react";
 
 function Header({
-  theme,
-  toggleTheme,
   searchTerm,
   setSearchTerm,
   handleSearch,
@@ -50,7 +49,10 @@ function Header({
   const dropdownRef = useRef(null);
   const location = useLocation();
 
-  const onThemeToggle = (e) => {
+  //Theme
+  const { theme, toggleTheme } = useTheme();
+
+  const handleThemeChange = (e) => {
     runThemeTransition(e, toggleTheme);
   };
 
@@ -136,7 +138,7 @@ function Header({
           <Button
             className="theme-toggle-action"
             variant="secondary"
-            onClick={onThemeToggle}
+            onClick={handleThemeChange}
             icon={theme === "light" ? BiMoon : BiSun}
             aria-label="Toggle Theme"
           ></Button>
