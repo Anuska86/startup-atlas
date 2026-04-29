@@ -268,11 +268,35 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+@keyframes marker-glow {
+  0% {
+    box-shadow: 0 0 0 0px var(--sky-aqua);
+    filter: drop-shadow(0 0 2px var(--sky-aqua));
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(76, 201, 240, 0);
+    filter: drop-shadow(0 0 15px var(--sky-aqua));
+  }
+  100% {
+    box-shadow: 0 0 0 0px rgba(76, 201, 240, 0);
+    filter: drop-shadow(0 0 2px var(--sky-aqua));
+  }
+}
+
 /*Jumping icons*/
 
 .jumping-marker-active {
-  animation: marker-jump 0.5s ease-in-out 3 !important;
-  z-index: 9999 !important;
+  animation:
+    marker-jump 0.5s ease infinite,
+    marker-glow 1.5s ease-out infinite !important;
+  z-index: 1000 !important;
+  border-radius: 50%;
+}
+
+.jumping-marker-active svg {
+  fill: var(--pure-white) !important;
+  transform: scale(1.3); /* Make it 30% larger while jumping */
+  transition: transform 0.3s ease;
 }
 
 @keyframes marker-jump {
