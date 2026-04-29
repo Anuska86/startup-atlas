@@ -25,6 +25,11 @@ function StartupDetails({ startups }) {
 
   const startup = startups.find((startup) => startup.id == id);
 
+  const capitalize = (str) => {
+    if (!str) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   if (!startup) {
     return (
       <div className="loader-div">
@@ -100,7 +105,9 @@ function StartupDetails({ startups }) {
             {/* 1. Main Mission & Vision */}
             <section className="info-block">
               <h3>Mission & Vision</h3>
-              <p>{startup.one_liner || "Gathering mission data..."}</p>
+              <p>
+                {capitalize(startup.one_liner) || "Gathering mission data..."}
+              </p>
             </section>
 
             {/* Deep Dive / Long Description */}
@@ -108,7 +115,7 @@ function StartupDetails({ startups }) {
               <h3>Detailed Analysis</h3>
               <p className="long-desc-text">
                 {startup.long_description && startup.long_description.trim()
-                  ? startup.long_description
+                  ? capitalize(startup.long_description)
                   : "Right now we don't have further information about this startup. Check back soon as we continuously update our database with detailed insights!"}
               </p>
             </section>
