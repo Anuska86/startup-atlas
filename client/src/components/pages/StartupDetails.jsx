@@ -45,20 +45,39 @@ function StartupDetails({ startups }) {
     );
   }
 
-  const city = startup.all_locations ? startup.all_locations.split(",")[0] : "";
+  //City
+
+  const city = startup.all_locations
+    ? startup.all_locations
+        .split(",")[0]
+        .replace(/[{}[\]"']/g, "")
+        .trim()
+    : "";
+
+  //Country
+
   const country = startup.regions
     ? startup.regions
-        .replace(/[\[\]']/g, "")
+        .replace(/[{}[\]"']/g, "")
         .split(",")[0]
         .trim()
     : "Global";
+
+  //Founded Year
+
   const foundedYear = startup.launched_at
     ? startup.launched_at.substring(0, 4)
     : "N/A";
-  const isSeekingFunding = startup.stage === "Early";
+
+  //Seeking founding
+  const isSeekingFunding =
+    startup.stage === "Early" || startup.stage === "Growth";
+
+  //Tag, keywords
+
   const tagsList = startup.tags
     ? startup.tags
-        .replace(/[\[\]']/g, "")
+        .replace(/[{}[\]"']/g, "")
         .split(",")
         .map((t) => t.trim())
         .filter((t) => t !== "")
