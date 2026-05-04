@@ -13,6 +13,13 @@ import { useNavigate, Link } from "react-router-dom";
 import Button from "../common/Button.jsx";
 
 function ListPage({ startups, isLoading, onReset }) {
+  // DEBUG: Check if Quantum Mads is even in the array being passed down
+  console.log("Total startups received by ListPage:", startups.length);
+  console.log(
+    "Is Quantum Mads in this prop?",
+    startups.find((s) => s.name?.includes("Quantum")),
+  );
+
   const navigate = useNavigate();
 
   if (isLoading) {

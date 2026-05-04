@@ -221,16 +221,34 @@ function App() {
   //Initial get data: first supabase, then fallback data.js
 
   useEffect(() => {
-    const getInitialData = async () => {
+    const fetchData = async () => {
       setIsLoading(true);
       try {
         fetchStats();
 
-        const { data, error } = await supabase.from("startups").select("*");
+        //query
+
+        let query = supabase.from("startups").select("*");
+
+        //Searching in all the startups
+
+        if (searchTerm) {
+          query = query.ilike("name", `%~{searchTerm}%`);
+        }
+
+        if (filters.industry !== "All Industries") {
+          query = query.eq("industry", filters.industry);
+        }
+
+        //Fetching the data order by ID
+
+        const { data, error } = await query
+          .order("id", { ascending: false })
+          .limit(200);
 
         if (error) throw error;
 
-        setStartups(data);
+        setStartups(data || []);
       } catch (error) {
         console.warn("Primary database failed, using fallback logic.");
 
@@ -239,8 +257,8 @@ function App() {
         setIsLoading(false);
       }
     };
-    getInitialData();
-  }, []);
+    fetchData();
+  }, [searchTerm, filters]);
 
   //Handle the search: fist supabase, else fallback data
 
