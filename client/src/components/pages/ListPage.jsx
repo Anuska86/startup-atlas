@@ -13,13 +13,6 @@ import { useNavigate, Link } from "react-router-dom";
 import Button from "../common/Button.jsx";
 
 function ListPage({ startups, isLoading, onReset }) {
-  // DEBUG: Check if Quantum Mads is even in the array being passed down
-  console.log("Total startups received by ListPage:", startups.length);
-  console.log(
-    "Is Quantum Mads in this prop?",
-    startups.find((s) => s.name?.includes("Quantum")),
-  );
-
   const navigate = useNavigate();
 
   if (isLoading) {
@@ -30,23 +23,24 @@ function ListPage({ startups, isLoading, onReset }) {
     <div className="card-container">
       {startups.length > 0 ? (
         startups.map((startup) => {
+          //City
           const city = startup.all_locations?.toLowerCase().includes("remote")
             ? "Digital Nomad"
             : startup.all_locations?.split(",")[0] || "Unknown City";
+          //Country
+          const country = startup.regions
+            ? startup.regions
+                .replace(/[{}[\]"']/g, "")
+                .split(",")[0]
+                .trim()
+            : "Global";
 
-          const country = Array.isArray(startup.regions)
-            ? startup.regions[0]
-            : startup.regions
-              ? startup.regions
-                  .replace(/[\[\]']/g, "")
-                  .split(",")[0]
-                  .trim()
-              : "Global";
-
+          //Founded Year
           const foundedYear = startup.launched_at
             ? startup.launched_at.substring(0, 4)
             : "N/A";
 
+          //Is seeking funding
           const isSeekingFunding = startup.stage === "Early";
 
           return (
@@ -75,7 +69,7 @@ function ListPage({ startups, isLoading, onReset }) {
                 </p>
                 <p>
                   <strong>Location:</strong>{" "}
-                  {city === country ? country : `${city}, ${country}`}
+                  {city === country || !country ? city : `${city}, ${country}`}
                 </p>
               </div>
 

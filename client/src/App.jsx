@@ -233,7 +233,7 @@ function App() {
         //Searching in all the startups
 
         if (searchTerm) {
-          query = query.ilike("name", `%~{searchTerm}%`);
+          query = query.ilike("name", `%{searchTerm}%`);
         }
 
         if (filters.industry !== "All Industries") {
@@ -248,10 +248,13 @@ function App() {
 
         if (error) throw error;
 
-        setStartups(data || []);
+        if (data && data.length > 0) {
+          setStartups(data || []);
+        } else {
+          setStartups(fallbackData);
+        }
       } catch (error) {
         console.warn("Primary database failed, using fallback logic.");
-
         setStartups(fallbackData);
       } finally {
         setIsLoading(false);
