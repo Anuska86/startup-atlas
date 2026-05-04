@@ -74,24 +74,25 @@ function App() {
     has_mvp: false,
   });
 
-  const uniqueCountries = useMemo(
-    () =>
-      [
-        "All Countries",
-        ...new Set(
-          startups
-            .map((startup) => {
-              if (!startup.regions) return null;
-              return startup.regions
-                .replace(/[\[\]']/g, "")
-                .split(",")[0]
-                .trim();
-            })
-            .filter((c) => c && c !== "Unspecified"),
-        ),
-      ].sort(),
-    [startups],
-  );
+  const uniqueCountries = useMemo(() => {
+    //Clean list of countries
+
+    const rawCountryList = startups
+      .map((startup) => {
+        if (!startup.regions) return null;
+
+        return startup.regions
+          .replace(/[{}[\]"']/g, "")
+          .split(",")[0]
+          .trim();
+      })
+      .filter((c) => c && c !== "Unspecified" && c !== "Remote");
+
+    // Get unique values and sort them ALPHABETICALLY
+    const sortedCountries = [...new Set(rawCountryList)].sort();
+
+    return ["Remote", ...sortedCountries];
+  }, [startups]);
 
   const uniqueIndustries = useMemo(
     () =>
@@ -115,7 +116,7 @@ function App() {
             .flatMap((startup) => {
               if (typeof startup.tags === "string") {
                 return startup.tags
-                  .replace(/[\[\]']/g, "")
+                  .replace(/[{}[\]"']/g, "")
                   .split(",")
                   .map((tag) => tag.trim());
               }
@@ -145,7 +146,7 @@ function App() {
     //Country
     const currentCountry = startup.regions
       ? startup.regions
-          .replace(/[\[\]']/g, "")
+          .replace(/[{}[\]"']/g, "")
           .split(",")[0]
           .trim()
       : "";
@@ -288,9 +289,9 @@ function App() {
 
   const isFiltering =
     searchTerm !== "" ||
-    filters.industry !== "All" ||
-    filters.country !== "All" ||
-    filters.category !== "All" ||
+    filters.industry !== "All Industries" ||
+    filters.country !== "All Countries" ||
+    filters.category !== "All Categories" ||
     filters.is_seeking_funding !== false ||
     filters.has_mvp !== false;
 

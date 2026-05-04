@@ -283,9 +283,9 @@ function Header({
                       setFilters({ ...filters, industry: e.target.value })
                     }
                   >
-                    <option value="All">All Industries</option>
+                    <option value="All Industries">All Industries</option>
                     {uniqueIndustries
-                      .filter((ind) => ind !== "All")
+                      .filter((ind) => ind !== "All Industries")
                       .map((ind, i) => (
                         <option key={`ind-${ind}-${i}`} value={ind}>
                           {ind}
@@ -303,9 +303,9 @@ function Header({
                       setFilters({ ...filters, country: e.target.value })
                     }
                   >
-                    <option value="All">All Countries</option>
+                    <option value="All Countries">All Countries</option>
                     {uniqueCountries
-                      .filter((con) => con !== "All")
+                      .filter((con) => con !== "All Countries")
                       .map((con, i) => (
                         <option key={`con-${con}-${i}`} value={con}>
                           {con}
