@@ -43,6 +43,11 @@ function ListPage({ startups, isLoading, onReset }) {
           //Is seeking funding
           const isSeekingFunding = startup.stage === "Early";
 
+          //Is Remote
+          const isRemote =
+            startup.all_locations?.toLowerCase().includes("remote") ||
+            city === "Unknown City";
+
           return (
             <div
               key={startup.id}
@@ -67,39 +72,45 @@ function ListPage({ startups, isLoading, onReset }) {
                 <p>
                   <strong>Industry:</strong> {startup.industry}
                 </p>
-                <p>
-                  <strong>Location:</strong>{" "}
-                  {city === country || !country ? city : `${city}, ${country}`}
-                </p>
+
+                {/* Shows this if NOT a remote/unknow situation */}
+
+                {!isRemote && (
+                  <p>
+                    <strong>Location:</strong>{" "}
+                    {city === country || !country
+                      ? city
+                      : `${city}, ${country}`}
+                  </p>
+                )}
+
+                {isRemote ? (
+                  <div className="remote-location-pill">
+                    <BiGlobe size={16} />
+                    Full Remote / Global
+                  </div>
+                ) : (
+                  <Button
+                    className="btn-link-to-map"
+                    variant="secondary"
+                    icon={BiMapAlt}
+                    onClick={(e) => {
+                      e.stopPropagation();
+
+                      window.scrollTo(0, 0);
+
+                      navigate("/map", {
+                        state: {
+                          flyTo: [startup.lat, startup.lng],
+                          startupId: startup.id,
+                        },
+                      });
+                    }}
+                  >
+                    View on Map
+                  </Button>
+                )}
               </div>
-
-              {startup.all_locations?.toLowerCase().includes("remote") ||
-              city === "Unknown City" ? (
-                <div className="remote-location-pill">
-                  <BiGlobe size={16} />
-                  Full Remote / Global
-                </div>
-              ) : (
-                <Button
-                  className="btn-link-to-map"
-                  variant="secondary"
-                  icon={BiMapAlt}
-                  onClick={(e) => {
-                    e.stopPropagation();
-
-                    window.scrollTo(0, 0);
-
-                    navigate("/map", {
-                      state: {
-                        flyTo: [startup.lat, startup.lng],
-                        startupId: startup.id,
-                      },
-                    });
-                  }}
-                >
-                  View on Map
-                </Button>
-              )}
 
               <div className="card-footer-hint">
                 <span>View Details</span>
