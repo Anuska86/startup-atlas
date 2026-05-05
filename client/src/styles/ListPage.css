@@ -134,7 +134,7 @@
 /*Remote location pill*/
 
 .remote-location-pill {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 8px;
   background: rgba(148, 163, 184, 0.1);
@@ -145,7 +145,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   width: fit-content;
-  margin-top: 10px;
+  margin: 10px auto 0 auto;
   cursor: default;
 }
 
@@ -269,9 +269,10 @@
 /*Btn link to map*/
 
 .btn-link-to-map {
+  display: flex;
   border-radius: 30px;
   border: 1px solid var(--border-color);
-  margin-bottom: 5px;
+  margin: 22px auto 5px auto;
   width: 160px;
   align-self: center;
   justify-content: center;
