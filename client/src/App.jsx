@@ -241,11 +241,15 @@ function App() {
           query = query.eq("industry", filters.industry);
         }
 
+        if (filters.country !== "All Countries") {
+          query = query.eq("regions", "ilike", `%~{filters.country}%`);
+        }
+
         //Fetching the data order by ID
 
         const { data, error } = await query
           .order("id", { ascending: false })
-          .limit(200);
+          .limit(1000);
 
         if (error) throw error;
 
