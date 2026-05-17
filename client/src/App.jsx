@@ -106,7 +106,6 @@ function App() {
       ].sort(),
     [startups],
   );
-
   const uniqueCategories = useMemo(
     () =>
       [
