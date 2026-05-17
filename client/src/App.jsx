@@ -74,24 +74,25 @@ function App() {
     has_mvp: false,
   });
 
-  const uniqueCountries = useMemo(
-    () =>
-      [
-        "All Countries",
-        ...new Set(
-          startups
-            .map((startup) => {
-              if (!startup.regions) return null;
-              return startup.regions
-                .replace(/[\[\]']/g, "")
-                .split(",")[0]
-                .trim();
-            })
-            .filter((c) => c && c !== "Unspecified"),
-        ),
-      ].sort(),
-    [startups],
-  );
+  const uniqueCountries = useMemo(() => {
+    //Clean list of countries
+
+    const rawCountryList = startups
+      .map((startup) => {
+        if (!startup.regions) return null;
+
+        return startup.regions
+          .replace(/[{}[\]"']/g, "")
+          .split(",")[0]
+          .trim();
+      })
+      .filter((c) => c && c !== "Unspecified" && c !== "Remote");
+
+    // Get unique values and sort them ALPHABETICALLY
+    const sortedCountries = [...new Set(rawCountryList)].sort();
+
+    return ["Remote", ...sortedCountries];
+  }, [startups]);
 
   const uniqueIndustries = useMemo(
     () =>
@@ -114,7 +115,7 @@ function App() {
             .flatMap((startup) => {
               if (typeof startup.tags === "string") {
                 return startup.tags
-                  .replace(/[\[\]']/g, "")
+                  .replace(/[{}[\]"']/g, "")
                   .split(",")
                   .map((tag) => tag.trim());
               }
@@ -144,7 +145,7 @@ function App() {
     //Country
     const currentCountry = startup.regions
       ? startup.regions
-          .replace(/[\[\]']/g, "")
+          .replace(/[{}[\]"']/g, "")
           .split(",")[0]
           .trim()
       : "";
@@ -220,26 +221,51 @@ function App() {
   //Initial get data: first supabase, then fallback data.js
 
   useEffect(() => {
-    const getInitialData = async () => {
+    const fetchData = async () => {
       setIsLoading(true);
       try {
         fetchStats();
 
-        const { data, error } = await supabase.from("startups").select("*");
+        //query
+
+        let query = supabase.from("startups").select("*");
+
+        //Searching in all the startups
+
+        if (searchTerm) {
+          query = query.ilike("name", `%{searchTerm}%`);
+        }
+
+        if (filters.industry !== "All Industries") {
+          query = query.eq("industry", filters.industry);
+        }
+
+        if (filters.country !== "All Countries") {
+          query = query.eq("regions", "ilike", `%~{filters.country}%`);
+        }
+
+        //Fetching the data order by ID
+
+        const { data, error } = await query
+          .order("id", { ascending: false })
+          .limit(1000);
 
         if (error) throw error;
 
-        setStartups(data);
+        if (data && data.length > 0) {
+          setStartups(data || []);
+        } else {
+          setStartups(fallbackData);
+        }
       } catch (error) {
         console.warn("Primary database failed, using fallback logic.");
-
         setStartups(fallbackData);
       } finally {
         setIsLoading(false);
       }
     };
-    getInitialData();
-  }, []);
+    fetchData();
+  }, [searchTerm, filters]);
 
   //Handle the search: fist supabase, else fallback data
 
@@ -266,9 +292,9 @@ function App() {
 
   const isFiltering =
     searchTerm !== "" ||
-    filters.industry !== "All" ||
-    filters.country !== "All" ||
-    filters.category !== "All" ||
+    filters.industry !== "All Industries" ||
+    filters.country !== "All Countries" ||
+    filters.category !== "All Categories" ||
     filters.is_seeking_funding !== false ||
     filters.has_mvp !== false;
 
